@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, Image } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
 
 import imagem from '../../assets/Job.png';
 
 export default function EmpregoList(props) {
 
     return ( 
-        <View style={styles.containerEmpr}>
+        <TouchableOpacity style={styles.containerEmpr}>
             <ImageBackground style={styles.imagemFundo}>
                 <Image 
                     source={imagem}
@@ -17,7 +17,7 @@ export default function EmpregoList(props) {
                 <Text style={styles.Texto}>{props.emprego}</Text>
                 <Text style={styles.Texto}>{props.local}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

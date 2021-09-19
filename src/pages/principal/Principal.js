@@ -20,15 +20,6 @@ export default function({ navigation }) {
             });
     }); 
     
-    
-
-    /*
-    <FlatList
-                data={Dados}
-                renderItem={({item}) => <EmpregoList nome={item.nome} local="" emprego="teste"/>}
-                keyExtractor={item._id}
-            /> 
-    */
     return(
         <View style={Styles.container}>
 
@@ -41,7 +32,16 @@ export default function({ navigation }) {
                 </TextInput> 
                 <Image source={iconPesquisa} style={Styles.imagem}/>                 
             </View>
-            
+            <FlatList
+                showsVerticalScrollIndicator={false}
+                data={Dados}
+                keyExtractor={(item, Dados) => Dados.toString()}
+                renderItem={({item}) => {
+                    return (
+                        <EmpregoList nome={item.nome} local="" emprego="teste"/>
+                    )
+                }}
+            />
         </View>
     );
 
