@@ -1,10 +1,9 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert} from 'react-native';
-import { Formik, useFormik, Form } from 'formik';
-import api from '../../services/api';
-import Yup from 'yup';
-import ValidateCadastro from '../../Componentes/schema/CadastroSchema';
+import { Formik } from 'formik';
 
+import api from '../../services/api';
+import ValidateCadastro from '../../Componentes/schema/CadastroSchema';
 import Logo from '../../../assets/ico.png';
 
 export default function({ navigation }) { 
@@ -19,9 +18,8 @@ export default function({ navigation }) {
     
             <Formik
                 initialValues={{ nome: '', email: '', senha: '', senha2: '', error: '' }}
-                validateOnChange
                 validationSchema={ValidateCadastro}
-                onSubmit={(values, { setSubmitting, setErrors }) => {
+                onSubmit={(values, { setErrors }) => {
                     let nome = values.nome;
                     let email = values.email;
                     let senha = values.senha;
@@ -33,10 +31,8 @@ export default function({ navigation }) {
                         alert('Usuario cadastrado com sucesso!');
                         navigation.navigate('loginProfissional');
                     })
-                    .catch(error => {
-                        setSubmitting(false);                       
+                    .catch(error => {                      
                         setErrors(error.response.data);
-                        console.log(error.response.data);
                     });
                 }}
             >

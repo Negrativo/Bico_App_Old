@@ -58,7 +58,7 @@ export default styles = StyleSheet.create({
     scrollView: {
         marginHorizontal: 20,
         flex: 1,
-        marginTop: 20
+        marginTop: 10
     },
     barraPesquisa: {
         backgroundColor: '#1199C5',
@@ -80,5 +80,5 @@ export default styles = StyleSheet.create({
         justifyContent: "flex-end",
         flexDirection: "row",
         marginTop: 50
-    }
+    },
 })

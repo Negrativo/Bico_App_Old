@@ -2,9 +2,18 @@ import {StyleSheet} from 'react-native';
 
 export default styles = StyleSheet.create({
     logo: {
-        marginBottom: 75,
+        marginBottom: 50,
+        marginTop: 10,
         width:  200,
         height:  200
+    },
+
+    formLogin: {
+        backgroundColor: '#DDE0E1',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 30,
+        opacity: 0.90
     },
 
     container: {
@@ -28,7 +37,8 @@ export default styles = StyleSheet.create({
         height: 30,
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 10
+        marginBottom: 10,
+        marginTop: 10
     },
 
     label: {
@@ -46,8 +56,12 @@ export default styles = StyleSheet.create({
         width: 300,
         height: 50,
         justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 80
+        alignItems: 'center'
+    },
+
+    buttonContainer: {
+        marginTop: 60,
+        marginBottom: 5,
     },
 
     labelCadastro: {
@@ -128,5 +142,19 @@ export default styles = StyleSheet.create({
         height: 60,
         justifyContent: 'center',
         alignItems: 'center'
+    }, 
+
+    errors: {
+        color: 'red',
+        justifyContent: 'center',
+        textAlign: 'center'
+    },
+
+    labelBorder: {
+        height: 20,
+        justifyContent: 'center',
+        textAlign: 'center',
+        marginTop: 10,
+        marginBottom: 10
     }
 });
