@@ -18,12 +18,12 @@ export default styles = StyleSheet.create({
 
     container: {
         backgroundColor: '#DDE0E1',
-        flex: 1,
+        flex: 2,
         justifyContent: 'center'
     },
 
     input: {
-        backgroundColor: '#1199C5',
+        backgroundColor: '#00000F',
         borderWidth: 0.2,
         borderRadius: 50,
         width: 300,
@@ -50,7 +50,7 @@ export default styles = StyleSheet.create({
     },
 
     button:{
-        backgroundColor: '#1199C5',
+        backgroundColor: '#00000F',
         borderWidth: 0.2,
         borderRadius: 50,
         width: 300,
@@ -81,7 +81,7 @@ export default styles = StyleSheet.create({
     },
 
     labelEntrar: {
-        color: "#00000F"
+        color: "#FFFFFF"
     },
 
     image: {
