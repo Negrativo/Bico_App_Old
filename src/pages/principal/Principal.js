@@ -7,7 +7,8 @@ import iconPesquisa from '../../../assets/pesquisar.png'
 import api from '../../services/api';
 
 export default function({ navigation }) {
-    const[Dados, setDados] = useState('')
+    const[Dados, setDados] = useState('');
+    const[state, setState] = useState('');
 
     useEffect(() => {
         api.get('/principal/lista', {})
@@ -31,7 +32,8 @@ export default function({ navigation }) {
                 </TextInput> 
                 <Image source={iconPesquisa} style={Styles.imagem}/>                 
             </View>
-            <FlatList
+            {state === '' &&
+                <FlatList
                 showsVerticalScrollIndicator={false}
                 data={Dados}
                 keyExtractor={(item, Dados) => Dados.toString()}
@@ -39,8 +41,10 @@ export default function({ navigation }) {
                     return (
                         <EmpregoList nome={item.nome} local="" emprego="teste"/>
                     )
-                }}
-            />
+            }}
+        />
+            }
+            
         </View>
     );
 
