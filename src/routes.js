@@ -12,7 +12,7 @@ import loginProfissional from './pages/inicio/loginProfissional';
 import Principal from './pages/principal/Principal';
 import Favoritos from './pages/principal/Favoritos';
 import Pesquisa from './pages/principal/Pesquisa';
-import Perfil from './pages/Cadastro/Perfil'
+import Perfil from './pages/Perfil/Perfil';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -26,9 +26,9 @@ export default function Routes() {
                         component={Principal} 
                         options={{
                             tabBarLabel: 'Principal',
-                            tabBarColor: "#007FA7",
+                            tabBarColor: "#000000",
                             tabBarIcon: ({ color }) => (
-                                <MaterialCommunityIcons name="home" color={"#000000"} size={26} />
+                                <MaterialCommunityIcons name="home" color={"#EDEDED"} size={26} />
                             ),
                         }
                     } />
@@ -37,9 +37,9 @@ export default function Routes() {
                         component={Pesquisa}
                         options={{
                             tabBarLabel: 'Pesquisa',
-                            tabBarColor: "#007FA7",
+                            tabBarColor: "#000000",
                             tabBarIcon: ({ color }) => (
-                                <MaterialCommunityIcons name="magnify" color={"#000000"} size={29} />
+                                <MaterialCommunityIcons name="magnify" color={"#EDEDED"} size={29} />
                             ),
                         }} 
                     />
@@ -48,9 +48,9 @@ export default function Routes() {
                         component={Favoritos}
                         options={{
                             tabBarLabel: 'Favoritos',
-                            tabBarColor: "#007FA7",
+                            tabBarColor: "#000000",
                             tabBarIcon: ({ color }) => (
-                                <MaterialCommunityIcons name="heart" color={"#000000"} size={26} />
+                                <MaterialCommunityIcons name="heart" color={"#EDEDED"} size={26} />
                             ),
                         }} 
                     />
@@ -59,9 +59,9 @@ export default function Routes() {
                         component={Perfil} 
                         options={{
                             tabBarLabel: 'Perfil',
-                            tabBarColor: "#007FA7",
+                            tabBarColor: "#000000",
                             tabBarIcon: ({ color }) => (
-                                <MaterialCommunityIcons name="account" color={"#000000"} size={26} />
+                                <MaterialCommunityIcons name="account" color={"#EDEDED"} size={26} />
                             ),
                         }} 
                     />
@@ -92,7 +92,7 @@ export default function Routes() {
                 options={{
                     headerStyle: {
                         height: 70,
-                        backgroundColor: "#1199C5"
+                        backgroundColor: "#EDEDED"
                     }
                 }}
             />

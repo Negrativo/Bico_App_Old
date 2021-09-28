@@ -7,14 +7,13 @@ import ValidateCadastro from '../../Componentes/schema/CadastroSchema';
 import Logo from '../../../assets/ico.png';
 
 export default function({ navigation }) { 
-
     return (
         <View style={styles.container}>
-            
+
             <Image 
                 source={Logo}
                 style={styles.logo}
-            />
+            />  
     
             <Formik
                 initialValues={{ nome: '', email: '', senha: '', senha2: '', error: '' }}
@@ -114,7 +113,7 @@ export default function({ navigation }) {
 
                         { props.errors.error && <Text style={styles.errorCadastro}>{props.errors.error}</Text> }
                         <TouchableOpacity style={styles.button} type="submit" onPress={props.handleSubmit}>
-                            <Text>CADASTRAR</Text>
+                            <Text style={styles.cadastrar}>CADASTRAR</Text>
                         </TouchableOpacity>                        
                     </View>
                 )}
@@ -125,15 +124,15 @@ export default function({ navigation }) {
                     <Text style={styles.labelBold}>TERMOS DE USO</Text>
                 </TouchableOpacity>
             </Text>
-
-        </View>
+        </View>     
     );
 }
 
 const styles = StyleSheet.create({
     logo: {      
         width:  200,
-        height:  100
+        height:  100,
+        marginTop: 20
     },
 
     container: {
@@ -142,15 +141,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    
+    cadastrar: {
+        color: 'white'
+    },
 
     input: {
-        backgroundColor: '#1199C5',
+        backgroundColor: '#00000F',
         borderWidth: 0.2,
         borderRadius: 50,
         width: 300,
         height: 50,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        color: 'white'
     },
 
     form: {
@@ -169,7 +173,7 @@ const styles = StyleSheet.create({
     },
 
     button:{
-        backgroundColor: '#1199C5',
+        backgroundColor: '#00000F',
         borderWidth: 0.2,
         borderRadius: 50,
         width: 300,
@@ -185,7 +189,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 10,
-        paddingLeft: 10
+        paddingLeft: 10,
+        marginBottom: 20
     },
 
     labelBold: {
