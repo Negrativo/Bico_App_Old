@@ -97,7 +97,7 @@ export default function Routes() {
                 }}
             />
             <Stack.Screen 
-                name="Principal" 
+                name="Home" 
                 children={createBottomTabs}
                 options={{
                     headerLeft: ()=> null,

@@ -26,7 +26,7 @@ export default function loginProfissional({ navigation }){
                         email, senha
                     })
                     .then(res => {
-                        navigation.navigate('Principal');
+                        navigation.navigate('Home');
                     })
                     .catch(error => {
                         console.log(error);                      
