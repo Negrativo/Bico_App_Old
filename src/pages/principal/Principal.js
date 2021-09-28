@@ -13,7 +13,6 @@ export default function({ navigation }) {
         api.get('/principal/lista', {})
             .then(response => {
                 setDados(response.data);
-                //console.log(Dados);
             })
             .catch(error => {
                 console.log(error);

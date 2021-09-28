@@ -48,7 +48,7 @@ export default function loginProfissional({ navigation }){
                                 textAlign="center"
                                 textContentType='emailAddress'
                                 placeholder="E-mail"
-                                placeholderTextColor="#D9DBDC"
+                                placeholderTextColor="#FFFFFF"
                                 keyboardType="email-address"
                                 autoCompleteType="email"
                                 autoCapitalize="none"

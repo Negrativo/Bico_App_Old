@@ -1,65 +1,64 @@
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, Image } from 'react-native';
-import {  SafeAreaView } from 'react-native-safe-area-context';
+import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
 
 import imagem from '../../assets/Job.png';
 
-export default function FavoritoList(props) {
+export default function EmpregoList(props) {
 
-    return (
-        
-        <SafeAreaView style={styles.containerEmpr}>
+    return ( 
+        <View style={styles.containerEmpr}>
             <ImageBackground style={styles.imagemFundo}>
                 <Image 
                     source={imagem}
-                    style={styles.imagem}
                 />
             </ImageBackground>
-            <View style={styles.styleFundo}>
-                <Text style={styles.Texto}>{props.nome}</Text>
-                <Text style={styles.Texto}>{props.emprego}</Text>
+            <View style={styles.detalhesContainer}>
+                <TouchableOpacity style={styles.styleFundo}>
+                    <Text style={styles.Texto}>{props.nome}</Text>
+                    <Text style={styles.Texto}>{props.emprego}</Text>
+                    <Text style={styles.Texto}>{props.local}</Text>
+                </TouchableOpacity>
             </View>
-        </SafeAreaView> 
+        </View>
     )
 }
-
+2
 
 const styles = StyleSheet.create({
     containerEmpr: {
-        backgroundColor: '#CDDFFA',
-        alignItems: 'center',
-        marginTop: 10,
+        backgroundColor: '#CFCFCF',
+        width: 370,
+        flexDirection: 'row',
         marginBottom: 10,
-        flexDirection: "row",
-        justifyContent: "flex-start",
-        width: 350,
-        height: 80
+        marginTop: 10,
+        shadowColor: 'black'
+    },
+
+    detalhesContainer: {
+        backgroundColor: '#CFCFCF',
+        flexDirection: 'row',
+        shadowColor: 'black',
+        flex: 6
     },
 
     imagemFundo: {
         resizeMode: "cover",
         justifyContent: "center",
         alignItems: 'center',
-        backgroundColor: '#1087AC',
-        flex: 1
-    },
-
-    imagem: {
-        resizeMode: "cover",
-        justifyContent: "center",
-        alignItems: 'center',
+        backgroundColor: '#434343',
+        flex: 3,
+        width: 50,
+        height: 100
     },
 
     styleFundo: {
-        marginLeft: 14,
-        marginRight: 10,
-        flexDirection: 'row',
-        flex: 3
+        justifyContent: 'space-around',
+        flex: 2
     },
 
     Texto: {
         fontSize: 20,
-        marginRight: 10
+        marginLeft: 10
     }
 
 });

@@ -17,7 +17,7 @@ export default styles = StyleSheet.create({
         alignItems: 'center'
     },
     barraPesquisa: {
-        backgroundColor: '#1199C5',
+        backgroundColor: '#434343',
         width: 290 
     },
     imagem: {
@@ -28,7 +28,7 @@ export default styles = StyleSheet.create({
         right: 10
     },
     formBarraPesquisa: {
-        backgroundColor: '#1199C5',
+        backgroundColor: '#434343',
         borderWidth: 0.2,
         borderRadius: 50,
         width: 350,
@@ -50,19 +50,13 @@ export default styles = StyleSheet.create({
     formGrupoRecomendacao: {
         justifyContent: "flex-start",
         flexDirection: "row",
-        width: 360,
-        height: 50,
-        marginBottom: -15
-
+        marginLeft: 15,
+        marginRight: 15
     },
     scrollView: {
         marginHorizontal: 20,
         flex: 1,
-        marginTop: 10
-    },
-    barraPesquisa: {
-        backgroundColor: '#1199C5',
-        width: 290 
+        marginTop: 30
     },
     imagem: {
         resizeMode: "cover",
@@ -71,14 +65,7 @@ export default styles = StyleSheet.create({
         height: 40,
         right: 10
     },
-    formBarraPesquisa: {
-        backgroundColor: '#1199C5',
-        borderWidth: 0.2,
-        borderRadius: 50,
-        width: 350,
-        height: 40,
-        justifyContent: "flex-end",
-        flexDirection: "row",
-        marginTop: 50
-    },
+    grupoCargosPesquisa: {
+        padding: 10,        
+    }
 })
