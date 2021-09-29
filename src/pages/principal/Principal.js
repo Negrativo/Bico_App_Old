@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, ScrollView, TextInput, FlatList} from 'react-native';
+import { View, Image, TextInput, FlatList, TouchableOpacity} from 'react-native';
 
 import EmpregoList from '../../Componentes/EmpregoList';
+import DetalhesPrincipal from '../../Componentes/DetalhesPrincipal';
 import Styles from '../../Styles/StylesAbasPrincipais';
 import iconPesquisa from '../../../assets/pesquisar.png'
 import api from '../../services/api';
 
 export default function({ navigation }) {
     const[Dados, setDados] = useState('');
-    const[state, setState] = useState('');
+    const[Detalhes, setDetalhes] = useState(false);
 
     useEffect(() => {
         api.get('/principal/lista', {})
@@ -19,10 +20,9 @@ export default function({ navigation }) {
                 console.log(error);
             });
     }); 
-    
+
     return(
         <View style={Styles.container}>
-
             <View style={Styles.formBarraPesquisa}>
                 <TextInput 
                     style={Styles.barraPesquisa}
@@ -32,18 +32,25 @@ export default function({ navigation }) {
                 </TextInput> 
                 <Image source={iconPesquisa} style={Styles.imagem}/>                 
             </View>
-            {state === '' &&
-                <FlatList
-                showsVerticalScrollIndicator={false}
-                data={Dados}
-                keyExtractor={(item, Dados) => Dados.toString()}
-                renderItem={({item}) => {
-                    return (
-                        <EmpregoList nome={item.nome} local="" emprego="teste"/>
-                    )
-            }}
-        />
-            }
+            <View>
+                {Detalhes == false &&
+                    <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={Dados}
+                    keyExtractor={(item, Dados) => Dados.toString()}
+                    renderItem={({item}) => {
+                        return (
+                            <TouchableOpacity>
+                                <EmpregoList onPress={() => setDetalhes(!Detalhes)} nome={item.nome} local="" emprego="teste"/>
+                            </TouchableOpacity>          
+                        )
+                    }}
+                />
+                }
+                {Detalhes == true &&
+                    <DetalhesPrincipal onPress={() => setDetalhes(!Detalhes)}/>
+                }
+            </View>    
             
         </View>
     );

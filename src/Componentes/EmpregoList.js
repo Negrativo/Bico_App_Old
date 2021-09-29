@@ -13,7 +13,7 @@ export default function EmpregoList(props) {
                 />
             </ImageBackground>
             <View style={styles.detalhesContainer}>
-                <TouchableOpacity style={styles.styleFundo}>
+                <TouchableOpacity onPress={props.onPress} style={styles.styleFundo}>
                     <Text style={styles.Texto}>{props.nome}</Text>
                     <Text style={styles.Texto}>{props.emprego}</Text>
                     <Text style={styles.Texto}>{props.local}</Text>
