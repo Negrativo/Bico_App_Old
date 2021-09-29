@@ -35,7 +35,7 @@ export default styles = StyleSheet.create({
         height: 40,
         justifyContent: "flex-end",
         flexDirection: "row",
-        marginTop: 50,
+        marginTop: 5,
         marginBottom: 10
     },
     formRecomendacao: {
