@@ -7,21 +7,24 @@ export default function EmpregoList(props) {
 
     return ( 
         <View style={styles.containerEmpr}>
+
             <View style={styles.barraSuperior} >
                 <TouchableOpacity onPress={props.onPress}>
                     <Text style={styles.Texto}>X</Text>
                 </TouchableOpacity>
             </View>
-
             <ImageBackground style={styles.imagemFundo}>
                 <Image 
                     source={imagem}
                 />
             </ImageBackground>
-
-
-            
-        
+            <View style={styles.detalhesContainer}>
+                <TouchableOpacity style={styles.styleFundo}>
+                    <Text style={styles.Texto}>{props.nome}</Text>
+                    <Text style={styles.Texto}>{props.emprego}</Text>
+                    <Text style={styles.Texto}>{props.local}</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -29,12 +32,19 @@ export default function EmpregoList(props) {
 
 const styles = StyleSheet.create({
     containerEmpr: {
-        backgroundColor: '#CFCFCF',
-        width: 380,
-        height: 600,
-        flexDirection: 'column',
+        backgroundColor: '#FFFFFF',
+        width: 370,
+        flexDirection: 'row',
         marginBottom: 10,
+        marginTop: 10,
         shadowColor: 'black'
+    },
+
+    detalhesContainer: {
+        backgroundColor: '#CFCFCF',
+        flexDirection: 'row',
+        shadowColor: 'black',
+        flex: 6
     },
 
     imagemFundo: {
@@ -42,6 +52,14 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: 'center',
         backgroundColor: '#434343',
+        flex: 3,
+        width: 50,
+        height: 150
+    },
+
+    styleFundo: {
+        justifyContent: 'space-around',
+        flex: 2,
         width: 50,
         height: 50
     },

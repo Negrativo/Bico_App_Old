@@ -34,7 +34,8 @@ export default function({ navigation }) {
 
             <View style={Styles.formGrupoRecomendacao}>
                 <FlatList
-                    horizontal={true}
+                    horizontal={false}
+                    numColumns={2}
                     showsVerticalScrollIndicator={false}
                     data={Dados}
                     keyExtractor={(item, Dados) => Dados.toString()}

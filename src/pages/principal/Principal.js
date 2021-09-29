@@ -50,7 +50,7 @@ export default function({ navigation }) {
                 {Detalhes == true &&
                     <DetalhesPrincipal onPress={() => setDetalhes(!Detalhes)}/>
                 }
-            </View>            
+            </View>    
             
         </View>
     );
