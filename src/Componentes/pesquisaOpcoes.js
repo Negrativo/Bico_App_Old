@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         marginHorizontal: 5,
         alignItems: 'center',
-        marginBottom: 10
+        marginBottom: 5
     },
 
     text: {
