@@ -26,7 +26,7 @@ export default function({ navigation }) {
         let _id = _idSelecionado;
         
         console.log(_id);
-        api.get(`/usuario/dadosSelecionado`, { _id })
+        api.get(`/usuario/dadosSelecionado/${_id}`)
             .then(response => {
                 setDetalhes(response.data);
             })

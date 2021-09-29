@@ -21,7 +21,7 @@ export default function Detalhes(props) {
                 </ImageBackground>
 
                 <View>
-                    <Text style={styles.TextoPerfil}>Nome Completo {props.nome}</Text>
+                    <Text style={styles.TextoPerfil}>{props.nome}</Text>
                     <Text style={styles.TextoPerfil}>Experiencias {props.emprego}</Text>
                     <Text style={styles.TextoPerfil}>Nota {props.local}</Text>                 
                 </View>
