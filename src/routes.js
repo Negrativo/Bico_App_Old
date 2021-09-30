@@ -6,7 +6,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 
 
-import Cadastro from './pages/inicio/Cadastro';
+import CadastroInicial from './pages/inicio/CadastroInicial';
+import CadastroFinal from './pages/inicio/CadastroFinal';
 import loginProfissional from './pages/inicio/loginProfissional';
 //import ModoLogin from './pages/inicio/ModoLogin';
 import Principal from './pages/principal/Principal';
@@ -79,7 +80,7 @@ export default function Routes() {
     return (
         <Stack.Navigator>
             <Stack.Screen 
-                name="loginProfissional" 
+                name="LoginProfissional" 
                 component={loginProfissional}
                 options={{
                     headerLeft: ()=> null,
@@ -88,7 +89,7 @@ export default function Routes() {
             />
             <Stack.Screen 
                 name="Cadastro" 
-                component={Cadastro} 
+                component={CadastroInicial} 
                 options={{
                     headerStyle: {
                         height: 70,
@@ -103,6 +104,16 @@ export default function Routes() {
                     headerLeft: ()=> null,
                     headerShown: false
                 }}                
+            />
+            <Stack.Screen 
+                name="Finalização de cadastro" 
+                component={CadastroFinal} 
+                options={{
+                    headerStyle: {
+                        height: 70,
+                        backgroundColor: "#EDEDED"
+                    }
+                }}
             />
         </Stack.Navigator>
     )

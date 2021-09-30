@@ -27,8 +27,7 @@ export default function({ navigation }) {
                         nome, email, senha
                     })
                     .then(res => {
-                        alert('Usuario cadastrado com sucesso!');
-                        navigation.navigate('loginProfissional');
+                        navigation.navigate('Finalização de cadastro');
                     })
                     .catch(error => {                      
                         setErrors(error.response.data);
