@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 
 import api from '../../services/api';
 import ValidateCadastro from '../../Componentes/schema/CadastroSchema';
-import Logo from '../../../assets/ico.png';
+import Logo from '../../../assets/icos.gif';
 
 export default function({ navigation }) { 
     return (
@@ -129,13 +129,13 @@ export default function({ navigation }) {
 
 const styles = StyleSheet.create({
     logo: {      
-        width:  200,
-        height:  100,
-        marginTop: 20
+        width:  300,
+        height:  150,
+        marginTop: 40
     },
 
     container: {
-        backgroundColor: '#DDE0E1',
+        backgroundColor: '#FFFFFF',
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'

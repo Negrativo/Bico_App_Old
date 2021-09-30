@@ -6,7 +6,7 @@ import styles from '../../Styles/StylesInicio';
 import ValidateLogin from '../../Componentes/schema/LoginSchema';
 import api from '../../services/api';
 import fundo from '../../../assets/fundo_login.jpeg';
-import ico from '../../../assets/ico.png'
+import ico from '../../../assets/icos.gif';
 
 export default function loginProfissional({ navigation }){
 
