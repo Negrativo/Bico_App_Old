@@ -80,7 +80,7 @@ export default function Routes() {
     return (
         <Stack.Navigator>
             <Stack.Screen 
-                name="LoginProfissional" 
+                name="Login" 
                 component={loginProfissional}
                 options={{
                     headerLeft: ()=> null,

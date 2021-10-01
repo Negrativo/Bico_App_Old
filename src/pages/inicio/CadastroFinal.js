@@ -8,6 +8,7 @@ import OpcoesComponets from '../../Componentes/pesquisaOpcoes';
 
 export default function({ navigation }) {
     const[Dados, setDados] = useState('')
+    const[fotoPerfil, setFoto] = useState(null);
 
     useEffect(() => {
         api.get('/pesquisa/cargos', {})
@@ -46,7 +47,7 @@ export default function({ navigation }) {
                                 <Image></Image>
                             </ImageBackground>
                             <TouchableOpacity style={styles.bottomFoto}>
-                                <Text style={styles.textFoto}>Selecionar foto</Text>
+                                <Input type="file" style={styles.textFoto} onChange={event => setFoto(event.target.value)}>Selecionar foto</Input>
                             </TouchableOpacity>
                         </View>
                         <View>
