@@ -21,7 +21,6 @@ export default function({ navigation }) {
 
     return(
         <View style={Styles.containerPesquisa}>
-
             <View style={Styles.formBarraPesquisa}>
                 <TextInput 
                     style={Styles.barraPesquisa}
