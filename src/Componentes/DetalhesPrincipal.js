@@ -23,8 +23,8 @@ export default function Detalhes(props) {
 
                 <View>
                     <Text style={styles.TextoPerfil}>{props.nome}</Text>
-                    <Text style={styles.TextoPerfil}>Avaliação: {props.local}</Text>
-                    <Text style={styles.TextoPerfil}>Experiencias {props.emprego}</Text>   
+                    <Text style={styles.TextoPerfil}>Avaliação: {props.avalicao}</Text>
+                    <Text style={styles.TextoPerfil}>Experiencias {props.empregos}</Text>   
                     <OpcoesComponets cargo={"Restaurante"}/>
                     <OpcoesComponets cargo={"Motorista"}/>
                     <OpcoesComponets cargo={"Ver todos"}/>
