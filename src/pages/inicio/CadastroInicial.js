@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert} from 'react-native';
 import { Formik } from 'formik';
 
@@ -6,7 +6,13 @@ import api from '../../services/api';
 import ValidateCadastro from '../../Componentes/schema/CadastroSchema';
 import Logo from '../../../assets/icos.gif';
 
-export default function({ navigation }) { 
+export default function({ navigation }) {
+    const[Dados, setDados] = useState('');
+
+    async function formataDados(data) {
+        console.log(data);
+    }
+    
     return (
         <View style={styles.container}>
 
@@ -27,10 +33,13 @@ export default function({ navigation }) {
                         nome, email, senha
                     })
                     .then(res => {
-                        navigation.navigate('Finalização de cadastro');
+                        //Setar os dados do recem cadastrado no banco para usar como referencia para completar cadastro
+                        //setDados(res.data);
+                        //formataDados(Dados);
+                        navigation.navigate('Finalização de cadastro', { _id: res.response });           
                     })
                     .catch(error => {                      
-                        setErrors(error.response.data);
+                        console.log(error);
                     });
                 }}
             >

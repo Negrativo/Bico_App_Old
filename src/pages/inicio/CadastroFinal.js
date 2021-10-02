@@ -1,14 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TextInput, Input, TouchableOpacity, ImageBackground, FlatList} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 import { Formik } from 'formik';
 
 import api from '../../services/api';
 import ValidateCadastro from '../../Componentes/schema/CadastroSchema';
 import OpcoesComponets from '../../Componentes/pesquisaOpcoes';
 
-export default function({ navigation }) {
+export default function({ route, navigation }) {
     const[Dados, setDados] = useState('')
-    const[fotoPerfil, setFoto] = useState(null);
+    const[FotoPerfil, setFoto] = useState('');
+    const { _id } = route.params;
+
+    const createFormData = (photo, body = {}) => {
+        const data = new FormData();
+      
+        data.append('photo', {
+          name: photo.uri,
+          type: photo.type,
+          uri: Platform.OS === 'ios' ? photo.uri.replace('file://', '') : photo.uri,
+        });
+      
+        Object.keys(body).forEach((key) => {
+          data.append(key, body[key]);
+        });
+        console.log(data);
+        return data;
+    };
+
+    async function permissao() {
+        if (Platform.OS !== 'web') {
+            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (status !== 'granted') {
+            alert('É necessario permissão para selecionar!');
+            }
+        }
+    }
+
 
     useEffect(() => {
         api.get('/pesquisa/cargos', {})
@@ -19,6 +47,32 @@ export default function({ navigation }) {
                 console.log(error);
             });
     }); 
+
+    async function cadastrar() {
+        api.post('/cadastro/conclusao', { _id  })
+        .then(res => {
+            alert('Cadastro completo!');
+            navigation.navigate('Home');
+        })
+        .catch(error => {
+            console.log(error);                      
+        });    
+    }
+    
+    async function openGaleria() {
+        if (permissao()) {
+            let result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                aspect: [4, 3],
+                quality: 1,
+            });
+      
+            if (!result.cancelled) {
+                setFoto(result.uri);            
+            }
+        }        
+    };
 
     return (
         <View style={styles.container}>    
@@ -43,11 +97,15 @@ export default function({ navigation }) {
                 {(props) => (
                     <View style={styles.container}>
                         <View style={styles.formFotoPerfil}>
-                            <ImageBackground style={styles.fotoPerfil}>
-                                <Image></Image>
+                            <ImageBackground style={styles.backgroudFotoPerfil}>
+                                <View>
+                                {   FotoPerfil !== '' &&
+                                    <Image source={{uri:FotoPerfil}} style={styles.fotoPerfil}/> 
+                                }
+                                </View>
                             </ImageBackground>
-                            <TouchableOpacity style={styles.bottomFoto}>
-                                <Input type="file" style={styles.textFoto} onChange={event => setFoto(event.target.value)}>Selecionar foto</Input>
+                            <TouchableOpacity onPress={openGaleria} style={styles.bottomFoto}>
+                                <Text style={styles.textFoto}>Selecionar foto</Text>
                             </TouchableOpacity>
                         </View>
                         <View>
@@ -78,7 +136,7 @@ export default function({ navigation }) {
                                     />
                             </View>                                            
                         </View>
-                        <TouchableOpacity style={styles.buttonCadastro}>
+                        <TouchableOpacity onPress={cadastrar} style={styles.buttonCadastro}>
                             <Text style={styles.textCadastrar}>FINALIZAR CADASTRO</Text>
                         </TouchableOpacity>                                
                     </View>
@@ -118,13 +176,20 @@ const styles = StyleSheet.create({
         margin: 5,
     },
 
+    formCategorias: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 150,
+        margin: 20
+    },
+
     inputDescricao: {
         color: "#FFFFFF",
         textAlignVertical: 'top',
         margin: 20
     },
 
-    fotoPerfil: {
+    backgroudFotoPerfil: {
         backgroundColor: '#C4C4C4',
         resizeMode: "cover",
         width: 150,
@@ -134,6 +199,15 @@ const styles = StyleSheet.create({
         margin: 10
     },
 
+    fotoPerfil: {
+        backgroundColor: '#C4C4C4',
+        resizeMode: "cover",
+        width: 150,
+        height: 150,
+        borderWidth: 0.5,
+        borderRadius: 80,
+    },
+    
     bottomFoto: {
         backgroundColor: "#000000",
         alignItems: 'center',
@@ -152,13 +226,6 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: "bold",
         margin: 5
-    },
-
-    formCategorias: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 150,
-        margin: 20
     },
 
     buttonCadastro:{
