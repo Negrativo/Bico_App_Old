@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, TextInput, FlatList, TouchableOpacity} from 'react-native';
+import { View, Image, TextInput, FlatList, TouchableOpacity, SafeAreaView} from 'react-native';
 
 import EmpregoList from '../../Componentes/EmpregoList';
 import DetalhesPrincipal from '../../Componentes/DetalhesPrincipal';
@@ -8,8 +8,9 @@ import iconPesquisa from '../../../assets/pesquisar.png'
 import api from '../../services/api';
 
 export default function({ navigation }) {
-    const[Dados, setDados] = useState('');
-    const[Detalhes, setDetalhes] = useState(false);
+    const[dadosLista, setDados] = useState('');
+    const[detalhes, mostraDetalhes] = useState(false);
+    const[detalhesSelecionado, setDetalhes] = useState('');
 
     useEffect(() => {
         api.get('/principal/lista', {})
@@ -21,8 +22,23 @@ export default function({ navigation }) {
             });
     }); 
 
+    function apresentaDetalhes(_idSelecionado) {        
+        let _id = _idSelecionado;
+        
+        console.log(_id);
+        api.get(`/usuario/dadosSelecionado/${_id}`)
+            .then(response => {
+                setDetalhes(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+        mostraDetalhes(!detalhes);
+    }
+
     return(
-        <View style={Styles.container}>
+        <SafeAreaView style={Styles.container}>
             <View style={Styles.formBarraPesquisa}>
                 <TextInput 
                     style={Styles.barraPesquisa}
@@ -33,26 +49,26 @@ export default function({ navigation }) {
                 <Image source={iconPesquisa} style={Styles.imagem}/>                 
             </View>
             <View>
-                {Detalhes == false &&
+                {detalhes == false &&
                     <FlatList
                     showsVerticalScrollIndicator={false}
-                    data={Dados}
-                    keyExtractor={(item, Dados) => Dados.toString()}
+                    data={dadosLista}
+                    keyExtractor={(item, dadosLista) => dadosLista.toString()}
                     renderItem={({item}) => {
                         return (
                             <TouchableOpacity>
-                                <EmpregoList onPress={() => setDetalhes(!Detalhes)} nome={item.nome} local="" emprego="teste"/>
+                                <EmpregoList onPress={() => apresentaDetalhes(item._id)} nome={item.nome} local="" emprego="teste"/>
                             </TouchableOpacity>          
                         )
                     }}
                 />
                 }
-                {Detalhes == true &&
-                    <DetalhesPrincipal onPress={() => setDetalhes(!Detalhes)}/>
+                {detalhes == true &&
+                    <DetalhesPrincipal sair={() => mostraDetalhes(!detalhes)} nome={detalhesSelecionado.nome} />
                 }
             </View>    
             
-        </View>
+        </SafeAreaView>
     );
 
 }

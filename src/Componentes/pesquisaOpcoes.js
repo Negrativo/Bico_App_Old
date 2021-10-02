@@ -13,14 +13,15 @@ export default function EmpregoList(props) {
 
 const styles = StyleSheet.create({
     formRecomendacao: {
-        backgroundColor: '#434343',
+        backgroundColor: '#000000',
         width: 170,
         height: 25,
         borderWidth: 0.2,
         borderRadius: 15,
         marginHorizontal: 5,
         alignItems: 'center',
-        marginBottom: 10
+        justifyContent: 'center',
+        marginBottom: 5
     },
 
     text: {
