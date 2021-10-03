@@ -4,7 +4,7 @@ import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, ImageBackgr
 import api from '../../services/api';
 import FavoritoList from '../../Componentes/FavoritoList';
 
-export default function({ navigation }) {
+export default function({ route, navigation }) {
     const[Dados, setDados] = useState('')
     const[fotoPerfil, setFoto] = useState(null);
 

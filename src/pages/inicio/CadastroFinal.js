@@ -139,8 +139,8 @@ export default function({ route, navigation }) {
                                     multiline={true}
                                     placeholder={"Descrição profissional"}
                                     placeholderTextColor={"#FFFFFF"}                                
-                                    maxLength={200}
-                                    onSubmit={descricao => setDescricao(descricao)}
+                                    value={Descricao}
+                                    onChangeText={setDescricao}
                                     />
                             </View>                                            
                         </View>

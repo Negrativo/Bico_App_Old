@@ -98,14 +98,6 @@ export default function Routes() {
                 }}
             />
             <Stack.Screen 
-                name="Home" 
-                children={createBottomTabs}
-                options={{
-                    headerLeft: ()=> null,
-                    headerShown: false
-                }}                
-            />
-            <Stack.Screen 
                 name="Finalização de cadastro" 
                 component={CadastroFinal} 
                 options={{
@@ -115,6 +107,14 @@ export default function Routes() {
                     }
                 }}
             />
+            <Stack.Screen 
+                name="Home" 
+                children={createBottomTabs}
+                options={{
+                    headerLeft: ()=> null,
+                    headerShown: false
+                }}                
+            />            
         </Stack.Navigator>
     )
 }

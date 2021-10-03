@@ -10,7 +10,7 @@ import api from '../../services/api';
 export default function({ navigation }) {
     const[dadosLista, setDados] = useState('');
     const[detalhes, mostraDetalhes] = useState(false);
-    const[detalhesSelecionado, setDetalhes] = useState('');
+    const[selecionado, setDetalhes] = useState('');
 
     useEffect(() => {
         api.get('/principal/lista', {})
@@ -22,18 +22,16 @@ export default function({ navigation }) {
             });
     }); 
 
-    function apresentaDetalhes(_idSelecionado) {        
-        let _id = _idSelecionado;
-        
-        console.log(_id);
-        api.get(`/usuario/dadosSelecionado/${_id}`)
+    function apresentaDetalhes(_idSelecionado) {               
+        const userSelecionado = { _id : _idSelecionado };
+        api.post(`/usuario/dadosSelecionado`, userSelecionado)
             .then(response => {
                 setDetalhes(response.data);
             })
             .catch(error => {
                 console.log(error);
             });
-
+        console.log(selecionado);
         mostraDetalhes(!detalhes);
     }
 
@@ -57,14 +55,25 @@ export default function({ navigation }) {
                     renderItem={({item}) => {
                         return (
                             <TouchableOpacity>
-                                <EmpregoList onPress={() => apresentaDetalhes(item._id)} foto={item.fotoPerfil} nome={item.nome} local="" emprego="teste"/>
+                                <EmpregoList 
+                                    onPress={() => apresentaDetalhes(item._id)} 
+                                    foto={item.fotoPerfil} 
+                                    nome={item.nome} 
+                                    local="" 
+                                    emprego="teste"/>
                             </TouchableOpacity>          
                         )
                     }}
                 />
                 }
                 {detalhes == true &&
-                    <DetalhesPrincipal sair={() => mostraDetalhes(!detalhes)} nome={detalhesSelecionado.nome} />
+                    <DetalhesPrincipal 
+                        sair={() => mostraDetalhes(!detalhes)} 
+                        nome={selecionado.nome} 
+                        foto={selecionado.fotoPerfil}
+                        avalicao={selecionado.avaliacao}
+                        empregos={selecionado.empregos}
+                        descricao={selecionado.descricao} />
                 }
             </View>    
             

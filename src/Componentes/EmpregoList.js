@@ -8,14 +8,12 @@ export default function EmpregoList(props) {
         <View style={styles.containerEmpr}>
             <ImageBackground style={styles.imagemFundo}>
                 <Image 
-                    source={{ uri: props.foto}} style={styles.fotoPerfil}
+                    source={{ uri: props.foto }} style={styles.fotoPerfil}
                 />
             </ImageBackground>
             <View style={styles.detalhesContainer}>
                 <TouchableOpacity onPress={props.onPress} style={styles.styleFundo}>
                     <Text style={styles.Texto}>{props.nome}</Text>
-                    <Text style={styles.Texto}>{props.emprego}</Text>
-                    <Text style={styles.Texto}>{props.local}</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -61,8 +59,8 @@ const styles = StyleSheet.create({
     },
 
     fotoPerfil: {
-        width:  200,
-        height:  200
+        width:  150,
+        height:  150
     },
 
 });
