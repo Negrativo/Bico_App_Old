@@ -4,12 +4,11 @@ import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity } from
 import imagem from '../../assets/Job.png';
 
 export default function EmpregoList(props) {
-
     return ( 
         <View style={styles.containerEmpr}>
             <ImageBackground style={styles.imagemFundo}>
                 <Image 
-                    source={imagem}
+                    source={{ uri: props.foto}} style={styles.fotoPerfil}
                 />
             </ImageBackground>
             <View style={styles.detalhesContainer}>
@@ -59,6 +58,11 @@ const styles = StyleSheet.create({
     Texto: {
         fontSize: 20,
         marginLeft: 10
-    }
+    },
+
+    fotoPerfil: {
+        width:  200,
+        height:  200
+    },
 
 });

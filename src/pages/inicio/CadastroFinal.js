@@ -8,11 +8,15 @@ import ValidateCadastro from '../../Componentes/schema/CadastroSchema';
 import OpcoesComponets from '../../Componentes/pesquisaOpcoes';
 
 export default function({ route, navigation }) {
-    const[Dados, setDados] = useState('')
+    const[Empregos, setEmpregos] = useState('')
     const[FotoPerfil, setFoto] = useState('');
-    const { _id } = route.params;
+    const[Descricao, setDescricao] = useState('');
+    const nome = route.params.nome;
+    const email = route.params.email;
+    const senha = route.params.senha;
 
     const createFormData = (photo, body = {}) => {
+        
         const data = new FormData();
       
         data.append('photo', {
@@ -41,7 +45,7 @@ export default function({ route, navigation }) {
     useEffect(() => {
         api.get('/pesquisa/cargos', {})
             .then(response => {
-                setDados(response.data);
+                setEmpregos(response.data);
             })
             .catch(error => {
                 console.log(error);
@@ -49,7 +53,10 @@ export default function({ route, navigation }) {
     }); 
 
     async function cadastrar() {
-        api.post('/cadastro/conclusao', { _id  })
+        let fotoPerfil = FotoPerfil;
+        let descricao = Descricao;
+        api.post('/usuario/cadastro', { nome, email, senha, 
+            descricao, fotoPerfil })
         .then(res => {
             alert('Cadastro completo!');
             navigation.navigate('Home');
@@ -69,7 +76,7 @@ export default function({ route, navigation }) {
             });
       
             if (!result.cancelled) {
-                setFoto(result.uri);            
+                setFoto(result.uri);    
             }
         }        
     };
@@ -100,7 +107,7 @@ export default function({ route, navigation }) {
                             <ImageBackground style={styles.backgroudFotoPerfil}>
                                 <View>
                                 {   FotoPerfil !== '' &&
-                                    <Image source={{uri:FotoPerfil}} style={styles.fotoPerfil}/> 
+                                    <Image source={{ uri: FotoPerfil }} style={styles.fotoPerfil}/> 
                                 }
                                 </View>
                             </ImageBackground>
@@ -109,14 +116,14 @@ export default function({ route, navigation }) {
                             </TouchableOpacity>
                         </View>
                         <View>
-                            <Text style={styles.textNome}>Nome completo</Text>
+                            <Text style={styles.textNome}>{nome}</Text>
                         </View>
                         <View style={styles.formCategorias}>
                             <Text>Quais são suas experiências  profissionais?</Text>
                             <FlatList
                                 numColumns={2}
                                 showsVerticalScrollIndicator={false}
-                                data={Dados}
+                                data={Empregos}
                                 keyExtractor={(item, Dados) => Dados.toString()}
                                 renderItem={({item}) => {
                                     return (
@@ -133,6 +140,7 @@ export default function({ route, navigation }) {
                                     placeholder={"Descrição profissional"}
                                     placeholderTextColor={"#FFFFFF"}                                
                                     maxLength={200}
+                                    onSubmit={descricao => setDescricao(descricao)}
                                     />
                             </View>                                            
                         </View>
@@ -225,6 +233,7 @@ const styles = StyleSheet.create({
     textNome: {
         fontSize: 24,
         fontWeight: "bold",
+        textTransform: 'uppercase',
         margin: 5
     },
 

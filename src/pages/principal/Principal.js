@@ -57,7 +57,7 @@ export default function({ navigation }) {
                     renderItem={({item}) => {
                         return (
                             <TouchableOpacity>
-                                <EmpregoList onPress={() => apresentaDetalhes(item._id)} nome={item.nome} local="" emprego="teste"/>
+                                <EmpregoList onPress={() => apresentaDetalhes(item._id)} foto={item.fotoPerfil} nome={item.nome} local="" emprego="teste"/>
                             </TouchableOpacity>          
                         )
                     }}
