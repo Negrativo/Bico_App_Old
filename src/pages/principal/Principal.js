@@ -4,7 +4,7 @@ import { View, Image, TextInput, FlatList, TouchableOpacity, SafeAreaView} from 
 import EmpregoList from '../../Componentes/EmpregoList';
 import DetalhesPrincipal from '../../Componentes/DetalhesPrincipal';
 import Styles from '../../Styles/StylesAbasPrincipais';
-import iconPesquisa from '../../../assets/pesquisar.png'
+import iconPesquisa from '../../../assets/pesquisar.png';
 import api from '../../services/api';
 
 export default function({ navigation }) {
