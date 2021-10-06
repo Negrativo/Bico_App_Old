@@ -24,7 +24,7 @@ export default function PesquisaEmprego(props) {
                         .includes(selected.toLowerCase()))
                 .map((list, index) => (
                     <View key={index} style={styles.itensPesquisa}>
-                        <TouchableOpacity onPress={props.selecionaProfissao(list.nome)}>
+                        <TouchableOpacity onPress={props.selecionaProfissao}>
                             <Text style={styles.textoOpcao}>{list.nome}</Text>
                         </TouchableOpacity>
                     </View>
