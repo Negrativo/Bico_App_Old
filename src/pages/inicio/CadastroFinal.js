@@ -6,15 +6,13 @@ import {Picker} from '@react-native-picker/picker';
 
 import api from '../../services/api';
 import ValidateCadastro from '../../Componentes/schema/CadastroSchema';
-import OpcoesComponets from '../../Componentes/pesquisaOpcoes';
-import iconPesquisa from '../../../assets/pesquisar.png';
+import PesquisaEmprego from '../../Componentes/PesquisaComponent';
 import styles from '../../Styles/StyleCadastroFinal';
 
 export default function({ route, navigation }) {
-    const [Empregos, setEmpregos] = useState('')
+    const [Empregos, setEmpregos] = useState([]);
     const [FotoPerfil, setFoto] = useState('');
     const [Descricao, setDescricao] = useState('');
-    const [selectedEmprego, setSelectedEmprego] = useState();
     const nome = route.params.nome;
     const email = route.params.email;
     const senha = route.params.senha;
@@ -54,7 +52,7 @@ export default function({ route, navigation }) {
             .catch(error => {
                 console.log(error);
             });
-    }); 
+    }, [Empregos]); 
 
     async function cadastrar() {
         let fotoPerfil = FotoPerfil;
@@ -85,9 +83,9 @@ export default function({ route, navigation }) {
         }        
     };
 
-    function pesquisaProfissao() {
+    function selecionaProfissao(value) {
         
-    }
+    };
 
     return (
         <View style={styles.container}>    
@@ -127,31 +125,8 @@ export default function({ route, navigation }) {
                             <Text style={styles.textNome}>{nome}</Text>
                         </View>
                         <View style={styles.formCategorias}>
-                            <Text>Quais são suas experiências  profissionais?</Text>
-                            <View style={styles.formBarraPesquisa}>
-                                <Picker
-                                    style={styles.barraPesquisa}
-                                    selectedValue={selectedEmprego}
-                                    mode={'dialog'}
-                                    onValueChange={(itemValue, Empregos) =>
-                                    setSelectedEmprego(itemValue)
-                                }>
-                                    <Picker.Item label="Garçom" value="Garçom" />
-                                    <Picker.Item label="Mecânico" value="Mecânico" />
-                                </Picker>
-                                <Image source={iconPesquisa} style={styles.iconPesquisa}/> 
-                            </View>
-                            <FlatList
-                                numColumns={2}
-                                showsVerticalScrollIndicator={false}
-                                data={Empregos}
-                                keyExtractor={(item, Dados) => Dados.toString()}
-                                renderItem={({item}) => {
-                                    return (
-                                        <OpcoesComponets cargo={item.nome}/>
-                                    )
-                                }}
-                            />
+                            <Text style={styles.textPesquisaEmprego}>Quais são suas experiências  profissionais?</Text>
+                            <PesquisaEmprego Lista={Empregos} placeholder={"Empregos"} clickOpcao={selecionaProfissao()}/>
                         </View>
                         <View style={styles.formDescricao}>
                             <Text>Como você se descreve profissionalmente?</Text>

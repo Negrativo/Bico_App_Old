@@ -32,9 +32,9 @@ export default styles = StyleSheet.create({
 
     formCategorias: {
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         height: 150,
-        margin: 10
+        margin: 10,
     },
 
     formBarraPesquisa: {
@@ -105,6 +105,11 @@ export default styles = StyleSheet.create({
     
     textCadastrar: {
         color: 'white'
+    },
+
+    textPesquisaEmprego: {
+        fontSize: 14,
+        margin: 5
     },
 
     buttonCadastro:{

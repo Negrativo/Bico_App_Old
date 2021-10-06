@@ -1,0 +1,82 @@
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, ScrollView } from 'react-native';
+import iconPesquisa from '../../assets/pesquisar.png';
+
+export default function PesquisaEmprego(props) {
+    const [selected, setSearch] = useState('');
+    const Data = props.Lista;
+
+    return ( 
+        <View style={styles.formComponente}>
+            <View style={styles.formBarraPesquisa}>
+                <TextInput
+                    style={styles.barraPesquisa}
+                    onChangeText={setSearch}
+                    placeholder={props.placeholder}
+                />
+                <Image source={iconPesquisa} style={styles.iconPesquisa}/> 
+            </View>
+            <ScrollView>
+            {!(selected === '') && Data
+                .filter((list) => 
+                        list.nome
+                        .toLowerCase()
+                        .includes(selected.toLowerCase()))
+                .map((list, index) => (
+                    <View key={index} style={styles.itensPesquisa}>
+                        <TouchableOpacity onPress={props.selecionaProfissao(list.nome)}>
+                            <Text style={styles.textoOpcao}>{list.nome}</Text>
+                        </TouchableOpacity>
+                    </View>
+                ))
+            }
+            </ScrollView>
+        </View>
+       
+    );
+}
+
+
+const styles = StyleSheet.create({
+    formComponente: {
+        backgroundColor: '#C4C4C4',
+        borderRadius: 25,
+        width: 350,
+        position: 'relative',
+        maxHeight: 120,
+        overflow: 'visible',
+    },
+    formBarraPesquisa: {
+        backgroundColor: '#C4C4C4',
+        borderWidth: 0.5,
+        borderRadius: 50,
+        width: 350,
+        height: 40,
+        justifyContent: "flex-end",
+        flexDirection: "row",
+    },
+
+    barraPesquisa: {
+        backgroundColor: '#C4C4C4',
+        width: 290,
+        color: 'black' 
+    },
+
+    iconPesquisa: {
+        resizeMode: "cover",
+        alignItems: 'center',
+        width: 40,
+        height: 40,
+        right: 10
+    },
+
+    itensPesquisa: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 2,
+    },
+
+    textoOpcao: {
+        fontSize: 18
+    },
+});
