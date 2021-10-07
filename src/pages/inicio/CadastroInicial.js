@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, Alert} from 'react-native';
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, ImageBackground} from 'react-native';
 import { Formik } from 'formik';
 
 import api from '../../services/api';
 import ValidateCadastro from '../../Componentes/schema/CadastroSchema';
-import Logo from '../../../assets/icos.gif';
+import Logo from '../../../assets/ico.png';
+import fundo from '../../../assets/fundo_login.jpeg';
 
 export default function({ navigation }) {
     const[Dados, setDados] = useState('');
 
     return (
-        <View style={styles.container}>
-
-            <Image 
-                source={Logo}
-                style={styles.logo}
-            />  
+        <View source={fundo} style={styles.container}>
     
             <Formik
                 initialValues={{ nome: '', email: '', senha: '', senha2: '', error: '' }}
@@ -36,8 +32,13 @@ export default function({ navigation }) {
                 }}
             >
                 {(props) => (
-                    <View style={styles.container}>
+                    <ImageBackground  source={fundo}  style={styles.image}>
                         
+                        <Image 
+                            source={Logo}
+                            style={styles.logo}
+                        />  
+
                         <View style={styles.form} >
                             <Text style={styles.label}>NOME</Text>  
                             <TextInput 
@@ -114,32 +115,37 @@ export default function({ navigation }) {
                         { props.errors.error && <Text style={styles.errorCadastro}>{props.errors.error}</Text> }
                         <TouchableOpacity style={styles.button} type="submit" onPress={props.handleSubmit}>
                             <Text style={styles.cadastrar}>CADASTRAR</Text>
-                        </TouchableOpacity>                        
-                    </View>
+                        </TouchableOpacity> 
+                        <Text style={styles.labelCadastro}>Ao clicar em cadastrar você concorda com os
+                            <TouchableOpacity>
+                                <Text style={styles.labelBold}>TERMOS DE USO</Text>
+                            </TouchableOpacity>
+                        </Text>                       
+                    </ImageBackground>
                 )}
             </Formik>
-
-            <Text style={styles.labelCadastro}>Ao clicar em cadastrar você concorda com os
-                <TouchableOpacity>
-                    <Text style={styles.labelBold}>TERMOS DE USO</Text>
-                </TouchableOpacity>
-            </Text>
         </View>     
     );
 }
 
 const styles = StyleSheet.create({
     logo: {      
-        width:  300,
-        height:  150,
-        marginTop: 40
+        marginTop: 10,
+        width:  200,
+        height:  200
+    },
+
+    image: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center",
+        alignItems: 'center'
     },
 
     container: {
-        backgroundColor: '#FFFFFF',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        backgroundColor: '#DDE0E1',
+        flex: 2,
+        justifyContent: 'center'
     },
     
     cadastrar: {

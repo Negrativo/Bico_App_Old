@@ -9,11 +9,9 @@ export default styles = StyleSheet.create({
     },
 
     formLogin: {
-        backgroundColor: '#DDE0E1',
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 30,
-        opacity: 0.90
     },
 
     container: {
@@ -47,7 +45,8 @@ export default styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 15,
-        marginTop: 25   
+        marginTop: 25,
+        color: 'white'   
     },
 
     button:{
@@ -69,7 +68,8 @@ export default styles = StyleSheet.create({
         fontSize: 15,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 10
+        marginTop: 10,
+        color: 'white'
     },
 
     labelBold: {
@@ -156,6 +156,16 @@ export default styles = StyleSheet.create({
         justifyContent: 'center',
         textAlign: 'center',
         marginTop: 10,
-        marginBottom: 10
-    }
+        marginBottom: 10,
+    },
+
+    video: {
+        position: 'absolute',
+        zIndex: 0,
+        top: 0,
+        right: 0,
+        left: 0,
+        bottom: 0,
+        opacity: 0.5,
+    },
 });
