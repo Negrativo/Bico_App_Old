@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, ImageBackground} from 'react-native';
 import { Formik } from 'formik';
+import { Video } from 'expo-av';
 
 import styles from '../../Styles/StylesInicio';
 import ValidateLogin from '../../Componentes/schema/LoginSchema';
 import api from '../../services/api';
-import fundo from '../../../assets/fundo_login.jpeg';
-import ico from '../../../assets/ico.png'
+import videoFundo from '../../../assets/fundofinal.mov';
+import ico from '../../../assets/BICO-3.png';
 
 export default function loginProfissional({ navigation }){
 
@@ -15,7 +16,8 @@ export default function loginProfissional({ navigation }){
     };
 
     return (
-    <View style={styles.container}>
+    <View style={styles.container}>        
+
         <Formik
             initialValues={{ email: '', senha: '', error: '' }}
             validationSchema={ValidateLogin}
@@ -35,7 +37,16 @@ export default function loginProfissional({ navigation }){
             }}
         >
             {(props) => (
-                <ImageBackground  source={fundo}  style={styles.image}>
+                <View  style={styles.image}>
+                    <Video
+                        source={videoFundo}
+                        style={styles.video}
+                        isLooping={true}
+                        isMuted
+                        onTouchStart
+                        shouldPlay={true}
+                        resizeMode="cover"
+                    />
                     <Image 
                         source={ico}
                         style={styles.logo}
@@ -84,7 +95,7 @@ export default function loginProfissional({ navigation }){
                             </TouchableOpacity>
                         </View>    
                         <TouchableOpacity style={styles.labelBorder}>
-                            <Text>Esqueceu sua senha?</Text>
+                            <Text style={styles.labelEntrar}>Esqueceu sua senha?</Text>
                         </TouchableOpacity>                
 
                         <Text style={styles.labelCadastro}>Ainda não possui cadastro? Crie um 
@@ -92,7 +103,7 @@ export default function loginProfissional({ navigation }){
                         </Text>
                     </ImageBackground>
                     
-                </ImageBackground>
+                </View>
             )}
         </Formik>    
     </View>

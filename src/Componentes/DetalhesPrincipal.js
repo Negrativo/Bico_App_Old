@@ -6,7 +6,6 @@ import HistoricoServicos from './HistoricoServico';
 import imagem from '../../assets/Job.png';
 
 export default function Detalhes(props) {
-
     return ( 
         <View style={styles.containerEmpr}>
             <View style={styles.barraSuperior} >
@@ -17,7 +16,7 @@ export default function Detalhes(props) {
             <View style={styles.formDadosPerfil}>
                 <ImageBackground style={styles.imagemFundo}>
                     <Image 
-                        source={imagem}
+                        source={{ uri: props.foto }} style={styles.fotoPerfil}
                     />
                 </ImageBackground>
 
@@ -34,21 +33,17 @@ export default function Detalhes(props) {
             <View style={styles.formDetalhes} >
                 <Text style={styles.textoDivoria} >_______________ Informações _______________</Text>
                 <View style={styles.formInputDescricao}>
-                    <TextInput style={styles.inputDescricao}
-                        multiline={true}
-                        placeholder={"Descrição profissional"}
-                        placeholderTextColor={"#000000"}                                
+                    <Text style={styles.inputDescricao}
+                        multiline={true}                          
                         maxLength={200}
-                        />
+                        editable={false}
+                    >{props.descricao}</Text>
                 </View> 
             </View>            
             <View style={styles.formHistorico}>
                 <Text style={styles.textoDivoria} >____________________________________________</Text>
                 <Text style={styles.textHistorico}>Hitórico</Text>
                 <ScrollView>                
-                    <HistoricoServicos servico="Segurança noturno" empresa="JK Seguranças"/>
-                    <HistoricoServicos servico="Segurança de evento" empresa="Aguias Segurança"/>
-                    <HistoricoServicos servico="Secretario de portaria" empresa="Condominio Garden"/>
                 </ScrollView>
             </View>            
         </View>
@@ -152,6 +147,13 @@ const styles = StyleSheet.create({
     formHistorico: {
         justifyContent: 'center',
         alignItems: 'center'
-    }
+    },
+
+    fotoPerfil: {
+        width:  150,
+        height:  150,
+        borderWidth: 0.5,
+        borderRadius: 80,
+    },
 
 });
