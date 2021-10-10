@@ -41,8 +41,9 @@ export default function({ route, navigation }) {
     async function cadastrar() {
         let fotoPerfil = FotoPerfil;
         let descricao = Descricao;
+        let empregos = EmpregosSelecionados;
         api.post('/usuario/cadastro', { nome, email, senha, 
-            descricao, fotoPerfil })
+            descricao, fotoPerfil, empregos })
         .then(res => {
             alert('Cadastro completo!');
             navigation.navigate('Home');
@@ -83,20 +84,6 @@ export default function({ route, navigation }) {
             <Formik
                 initialValues={{ }}
                 validationSchema={ValidateCadastro}
-                onSubmit={(values, { setErrors }) => {
-                    //let nome = values.nome;
-
-                    api.post('/cadastro', {
-                        nome, email, senha
-                    })
-                    .then(res => {
-                        alert('Usuario cadastrado com sucesso!');
-                        navigation.navigate('LoginProfissional');
-                    })
-                    .catch(error => {                      
-                        setErrors(error.response.data);
-                    });
-                }}
             >
                 {(props) => (
                     <View style={styles.container}>
