@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, ImageBackground, FlatList} from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, ImageBackground, FlatList, ScrollView} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Formik } from 'formik';
 
@@ -80,13 +80,13 @@ export default function({ route, navigation }) {
     };
 
     return (
-        <View style={styles.container}>    
+        <ScrollView style={styles.container}>    
             <Formik
                 initialValues={{ }}
                 validationSchema={ValidateCadastro}
             >
                 {(props) => (
-                    <View style={styles.container}>
+                    <View style={styles.formTela}>
                         <View style={styles.formFotoPerfil}>
                             <ImageBackground style={styles.backgroudFotoPerfil}>
                                 <View>
@@ -140,6 +140,6 @@ export default function({ route, navigation }) {
                     </View>
                 )}
             </Formik>
-        </View>     
+        </ScrollView>     
     );
 }

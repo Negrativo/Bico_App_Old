@@ -5,14 +5,17 @@ export default styles = StyleSheet.create({
     container: {
         backgroundColor: '#DDE0E1',
         flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center'
     },
 
     formFotoPerfil: {
         justifyContent: 'center',
         alignItems: 'center',  
         marginTop: 25     
+    },
+
+    formTela: {
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 
     formDescricao: {     

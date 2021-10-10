@@ -130,9 +130,9 @@ export default function({ navigation }) {
 
 const styles = StyleSheet.create({
     logo: {      
-        marginTop: 10,
-        width:  200,
-        height:  200
+        marginTop: -50,
+        width:  150,
+        height:  180
     },
 
     image: {
@@ -156,8 +156,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#00000F',
         borderWidth: 0.2,
         borderRadius: 50,
-        width: 300,
-        height: 50,
+        width: 250,
+        height: 45,
         justifyContent: 'center',
         alignItems: 'center',
         color: 'white'
@@ -168,12 +168,12 @@ const styles = StyleSheet.create({
         height: 30,
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 30,
+        marginBottom: 10,
         marginTop: 40
     },
 
     label: {
-        fontSize: 18,
+        fontSize: 14,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -182,12 +182,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#00000F',
         borderWidth: 0.2,
         borderRadius: 50,
-        width: 300,
-        height: 50,
+        width: 280,
+        height: 45,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 25,
-        marginBottom: 5
+        marginTop: 50,
+        marginBottom: -5
     },
 
     labelCadastro: {
@@ -195,8 +195,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 10,
-        paddingLeft: 10,
-        marginBottom: 20
+        paddingHorizontal: 10,
+        
     },
 
     labelBold: {
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         fontWeight: "bold",
-        marginTop: 5,
+        marginTop: 10,
         textDecorationLine: 'underline'
     },
 

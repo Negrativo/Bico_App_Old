@@ -78,7 +78,9 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
         fontWeight: "bold",
         marginTop: 5,
-        textDecorationLine: 'underline'
+        textDecorationLine: 'underline',
+        height: 30,
+        width: 30
     },
 
     labelEntrar: {
@@ -166,6 +168,6 @@ export default styles = StyleSheet.create({
         right: 0,
         left: 0,
         bottom: 0,
-        opacity: 0.5,
+        opacity: 0.9,
     },
 });

@@ -29,7 +29,7 @@ PesquisaEmprego(props) {
                         .includes(Search.toLowerCase()))
                 .map((list, index) => (
                     <View key={index} style={styles.itensPesquisa}>
-                        <TouchableOpacity onPress={() => selecionado(list.nome)}>
+                        <TouchableOpacity key={index} style={styles.botaoSelecao} onPress={() => selecionado(list.nome)}>
                             <Text style={styles.textoOpcao}>{list.nome}</Text>
                         </TouchableOpacity>
                     </View>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         overflow: 'visible',
     },
     formBarraPesquisa: {
-        backgroundColor: '#C4C4C4',
+        backgroundColor: '#FFFFFF',
         borderWidth: 0.5,
         borderRadius: 50,
         width: 350,
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     },
 
     barraPesquisa: {
-        backgroundColor: '#C4C4C4',
+        backgroundColor: '#FFFFFF',
         width: 290,
         color: 'black' 
     },
@@ -83,5 +83,12 @@ const styles = StyleSheet.create({
 
     textoOpcao: {
         fontSize: 18
+    },
+
+    botaoSelecao: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 350,
+        height: 20,
     },
 });
