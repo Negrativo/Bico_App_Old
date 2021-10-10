@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, ScrollView } from 'react-native';
-import iconPesquisa from '../../assets/pesquisar.png';
+import iconPesquisa from '../../../assets/pesquisar.png';
 
-export default function PesquisaEmprego(props) {
-    const [selected, setSearch] = useState('');
+export default function 
+PesquisaEmprego(props) {
+    const [Search, setSearch] = useState('');
     const Data = props.Lista;
+
+    function selecionado(nome) {
+        props.selecionaProfissao(nome);    
+    }
 
     return ( 
         <View style={styles.formComponente}>
@@ -17,14 +22,14 @@ export default function PesquisaEmprego(props) {
                 <Image source={iconPesquisa} style={styles.iconPesquisa}/> 
             </View>
             <ScrollView>
-            {!(selected === '') && Data
+            {!(Search === '') && Data
                 .filter((list) => 
                         list.nome
                         .toLowerCase()
-                        .includes(selected.toLowerCase()))
+                        .includes(Search.toLowerCase()))
                 .map((list, index) => (
                     <View key={index} style={styles.itensPesquisa}>
-                        <TouchableOpacity onPress={props.selecionaProfissao}>
+                        <TouchableOpacity onPress={() => selecionado(list.nome)}>
                             <Text style={styles.textoOpcao}>{list.nome}</Text>
                         </TouchableOpacity>
                     </View>

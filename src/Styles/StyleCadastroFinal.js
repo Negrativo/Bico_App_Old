@@ -49,6 +49,13 @@ export default styles = StyleSheet.create({
         marginBottom: 10
     },
 
+    formEmpregosSelecionados: {
+        height: 50,
+        width: 300,
+        flex: 1,
+        flexWrap: 'wrap'
+    },
+
     inputDescricao: {
         color: "#FFFFFF",
         textAlignVertical: 'top',

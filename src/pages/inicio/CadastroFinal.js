@@ -1,38 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TextInput, Input, TouchableOpacity, ImageBackground, FlatList} from 'react-native';
+import { View, Text, Image, TextInput, TouchableOpacity, ImageBackground, FlatList} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Formik } from 'formik';
-import {Picker} from '@react-native-picker/picker';
 
 import api from '../../services/api';
 import ValidateCadastro from '../../Componentes/schema/CadastroSchema';
-import PesquisaEmprego from '../../Componentes/PesquisaComponent';
+import PesquisaEmprego from '../../Componentes/inicio/PesquisaComponent';
 import styles from '../../Styles/StyleCadastroFinal';
+import OpcoesDeEmpregoSelecionado from '../../Componentes/inicio/EmpregosSelecionadosComponent'; 
 
 export default function({ route, navigation }) {
     const [Empregos, setEmpregos] = useState([]);
     const [FotoPerfil, setFoto] = useState('');
     const [Descricao, setDescricao] = useState('');
+    const [EmpregosSelecionados, setEmpregosSelecionados] = useState([]);
     const nome = route.params.nome;
     const email = route.params.email;
     const senha = route.params.senha;
-
-    const createFormData = (photo, body = {}) => {
-        
-        const data = new FormData();
-      
-        data.append('photo', {
-          name: photo.uri,
-          type: photo.type,
-          uri: Platform.OS === 'ios' ? photo.uri.replace('file://', '') : photo.uri,
-        });
-      
-        Object.keys(body).forEach((key) => {
-          data.append(key, body[key]);
-        });
-        console.log(data);
-        return data;
-    };
 
     async function permissao() {
         if (Platform.OS !== 'web') {
@@ -83,8 +67,15 @@ export default function({ route, navigation }) {
         }        
     };
 
-    function selecionaProfissao(value) {
-        
+    
+    adicionarProfissao = (item) => {
+        setEmpregosSelecionados([...EmpregosSelecionados, item]);
+        console.log(EmpregosSelecionados);
+    };
+
+    removerProfissao = (item) => {    
+        setEmpregosSelecionados(EmpregosSelecionados.filter((emprego) => emprego !== item));
+        console.log(EmpregosSelecionados);
     };
 
     return (
@@ -126,7 +117,23 @@ export default function({ route, navigation }) {
                         </View>
                         <View style={styles.formCategorias}>
                             <Text style={styles.textPesquisaEmprego}>Quais são suas experiências  profissionais?</Text>
-                            <PesquisaEmprego Lista={Empregos} placeholder={"Empregos"} clickOpcao={selecionaProfissao()}/>
+                            <PesquisaEmprego Lista={Empregos} placeholder={"Empregos"} selecionaProfissao={adicionarProfissao}/>
+                            <View style={styles.formEmpregosSelecionados}>
+                            {!(EmpregosSelecionados === '') && 
+                                <FlatList
+                                    horizontal={false}
+                                    numColumns={2}
+                                    showsVerticalScrollIndicator={false}
+                                    data={EmpregosSelecionados}
+                                    keyExtractor={(item, EmpregosSelecionados) => EmpregosSelecionados.toString()}
+                                    renderItem={({item}) => {
+                                        return (
+                                            <OpcoesDeEmpregoSelecionado emprego={item} removeProfissao={removerProfissao}/>
+                                        )
+                                    }}
+                                />
+                            }
+                            </View>
                         </View>
                         <View style={styles.formDescricao}>
                             <Text>Como você se descreve profissionalmente?</Text>
