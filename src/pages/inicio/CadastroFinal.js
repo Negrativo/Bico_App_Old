@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, ImageBackground, FlatList, ScrollView} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Formik } from 'formik';
+import MaskInput, { Masks } from 'react-native-mask-input';
 
 import api from '../../services/api';
 import ValidateCadastroFone from '../../Componentes/schema/CadastroFoneSchema';
@@ -12,8 +13,6 @@ import OpcoesDeEmpregoSelecionado from '../../Componentes/inicio/EmpregosSelecio
 export default function({ route, navigation }) {
     const [Empregos, setEmpregos] = useState([]);
     const [FotoPerfil, setFoto] = useState('');
-    const [Descricao, setDescricao] = useState('');
-    const [Telefone, setNumeroTelefone] = useState(0);
     const [EmpregosSelecionados, setEmpregosSelecionados] = useState([]);
     const nome = route.params.nome;
     const email = route.params.email;
@@ -39,21 +38,6 @@ export default function({ route, navigation }) {
             });
     }, [Empregos]); 
 
-    async function cadastrar() {
-        let fotoPerfil = FotoPerfil;
-        let descricao = Descricao;
-        let empregos = EmpregosSelecionados;
-        let telefone = Telefone;
-        api.post('/usuario/cadastro', { nome, email, senha, 
-            descricao, fotoPerfil, empregos, telefone })
-        .then(res => {
-            alert('Cadastro completo!');
-            navigation.navigate('Home');
-        })
-        .catch(error => {
-            console.log(error);                      
-        });    
-    }
     
     async function openGaleria() {
         if (permissao()) {
@@ -87,7 +71,20 @@ export default function({ route, navigation }) {
                 initialValues={{ telefone: '' }}
                 validationSchema={ValidateCadastroFone}
                 onSubmit={(values, { setErrors }) => {
-                    setNumeroTelefone(values.telefone);
+                    let fotoPerfil = FotoPerfil;
+                    let empregos = EmpregosSelecionados;
+                    let telefone = values.telefone;
+                    console.log({ nome, email, senha, 
+                        fotoPerfil, empregos, telefone });
+                    /*api.post('/usuario/cadastro', { nome, email, senha, 
+                        descricao, fotoPerfil, empregos, telefone })
+                    .then(res => {
+                        alert('Cadastro completo!');
+                        navigation.navigate('Home');
+                    })
+                    .catch(error => {
+                        console.log(error);                      
+                    });   */ 
                 }}
             >
                 {(props) => (
@@ -106,6 +103,22 @@ export default function({ route, navigation }) {
                         </View>
                         <View>
                             <Text style={styles.textNome}>{nome}</Text>
+                        </View>
+                        <View style={styles.formDescricao}>
+                            <View style={styles.form} >
+                                <Text style={styles.label}>Numero para contato profissional</Text>
+                                <MaskInput
+                                    style={styles.input}    
+                                    value={props.values.telefone}
+                                    onChangeText={(masked, unmasked, obfuscated) => props.setFieldValue('telefone', unmasked)}
+                                    mask={Masks.BRL_PHONE}
+                                    textAlign="center"
+                                    textContentType='telephoneNumber'
+                                    placeholder="Telefone"
+                                    placeholderTextColor="#FFFFFF"
+                                    autoCompleteType="tel"                                    
+                                />    
+                            </View>                                            
                         </View>
                         <View style={styles.formCategorias}>
                             <Text style={styles.textPesquisaEmprego}>Quais são suas experiências  profissionais?</Text>
@@ -127,24 +140,7 @@ export default function({ route, navigation }) {
                             }
                             </View>
                         </View>
-                        <View style={styles.formDescricao}>
-                        <View style={styles.form} >
-                            <Text style={styles.label}>Numero para contato profissional</Text>
-                            <TextInput 
-                                style={styles.input}
-                                textAlign="center"
-                                textContentType='telephoneNumber'
-                                placeholder="Telefone"
-                                placeholderTextColor="#FFFFFF"
-                                autoCompleteType="tel"
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                                value={props.values.telefone}
-                                onChangeText={fone => props.setFieldValue('telefone', fone)}
-                            />     
-                            </View>                                            
-                        </View>
-                        <TouchableOpacity onPress={cadastrar} style={styles.buttonCadastro}>
+                        <TouchableOpacity onPress={props.handleSubmit} style={styles.buttonCadastro}>
                             <Text style={styles.textCadastrar}>FINALIZAR CADASTRO</Text>
                         </TouchableOpacity>                                
                     </View>

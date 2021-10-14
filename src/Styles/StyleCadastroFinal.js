@@ -36,7 +36,7 @@ export default styles = StyleSheet.create({
     formCategorias: {
         alignItems: 'center',
         justifyContent: 'flex-start',
-        height: 150,
+        height: 200,
         margin: 10,
     },
 
@@ -125,7 +125,9 @@ export default styles = StyleSheet.create({
     buttonCadastro:{
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 20,
+        marginHorizontal: 20,
+        marginBottom: 20,
+        marginTop: 100,
         backgroundColor: '#00000F',
         borderWidth: 0.2,
         borderRadius: 50,
