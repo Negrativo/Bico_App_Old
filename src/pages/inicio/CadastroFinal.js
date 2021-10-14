@@ -4,7 +4,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Formik } from 'formik';
 
 import api from '../../services/api';
-import ValidateCadastro from '../../Componentes/schema/CadastroSchema';
+import ValidateCadastroFone from '../../Componentes/schema/CadastroFoneSchema';
 import PesquisaEmprego from '../../Componentes/inicio/PesquisaComponent';
 import styles from '../../Styles/StyleCadastroFinal';
 import OpcoesDeEmpregoSelecionado from '../../Componentes/inicio/EmpregosSelecionadosComponent'; 
@@ -13,6 +13,7 @@ export default function({ route, navigation }) {
     const [Empregos, setEmpregos] = useState([]);
     const [FotoPerfil, setFoto] = useState('');
     const [Descricao, setDescricao] = useState('');
+    const [Telefone, setNumeroTelefone] = useState(0);
     const [EmpregosSelecionados, setEmpregosSelecionados] = useState([]);
     const nome = route.params.nome;
     const email = route.params.email;
@@ -42,8 +43,9 @@ export default function({ route, navigation }) {
         let fotoPerfil = FotoPerfil;
         let descricao = Descricao;
         let empregos = EmpregosSelecionados;
+        let telefone = Telefone;
         api.post('/usuario/cadastro', { nome, email, senha, 
-            descricao, fotoPerfil, empregos })
+            descricao, fotoPerfil, empregos, telefone })
         .then(res => {
             alert('Cadastro completo!');
             navigation.navigate('Home');
@@ -82,8 +84,11 @@ export default function({ route, navigation }) {
     return (
         <ScrollView style={styles.container}>    
             <Formik
-                initialValues={{ }}
-                validationSchema={ValidateCadastro}
+                initialValues={{ telefone: '' }}
+                validationSchema={ValidateCadastroFone}
+                onSubmit={(values, { setErrors }) => {
+                    setNumeroTelefone(values.telefone);
+                }}
             >
                 {(props) => (
                     <View style={styles.formTela}>
@@ -123,15 +128,20 @@ export default function({ route, navigation }) {
                             </View>
                         </View>
                         <View style={styles.formDescricao}>
-                            <Text>Como você se descreve profissionalmente?</Text>
-                            <View style={styles.formInputDescricao}>
-                                <TextInput style={styles.inputDescricao}
-                                    multiline={true}
-                                    placeholder={"Descrição profissional"}
-                                    placeholderTextColor={"#FFFFFF"}                                
-                                    value={Descricao}
-                                    onChangeText={setDescricao}
-                                    />
+                        <View style={styles.form} >
+                            <Text style={styles.label}>Numero para contato profissional</Text>
+                            <TextInput 
+                                style={styles.input}
+                                textAlign="center"
+                                textContentType='telephoneNumber'
+                                placeholder="Telefone"
+                                placeholderTextColor="#FFFFFF"
+                                autoCompleteType="tel"
+                                autoCapitalize="none"
+                                autoCorrect={false}
+                                value={props.values.telefone}
+                                onChangeText={fone => props.setFieldValue('telefone', fone)}
+                            />     
                             </View>                                            
                         </View>
                         <TouchableOpacity onPress={cadastrar} style={styles.buttonCadastro}>

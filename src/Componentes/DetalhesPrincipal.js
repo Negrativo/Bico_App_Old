@@ -1,11 +1,18 @@
 import React, { useState, useEffect }  from 'react';
-import { View, Text, TextInput, StyleSheet, ImageBackground, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity, ScrollView, FlatList, Linking } from 'react-native';
 
 import OpcoesComponets from './pesquisaOpcoes';
 import HistoricoServicos from './HistoricoServico';
 import imagem from '../../assets/Job.png';
 
 export default function Detalhes(props) {
+    const Empregos = props.empregos;
+
+    function entrarEmContato() {
+        let telefone = props.telefone;
+        Linking.openURL('whatsapp://send?text=Corno&phone=5543998068333');
+    }
+
     return ( 
         <View style={styles.containerEmpr}>
             <View style={styles.barraSuperior} >
@@ -20,32 +27,37 @@ export default function Detalhes(props) {
                     />
                 </ImageBackground>
 
-                <View>
+                <View style={styles.dadosPerfil}>
                     <Text style={styles.TextoPerfil}>{props.nome}</Text>
                     <Text style={styles.TextoPerfil}>Avaliação: {props.avalicao}</Text>
-                    <Text style={styles.TextoPerfil}>Experiencias {props.empregos}</Text>   
-                    <OpcoesComponets cargo={"Restaurante"}/>
-                    <OpcoesComponets cargo={"Motorista"}/>
-                    <OpcoesComponets cargo={"Ver todos"}/>
+                    <Text style={styles.TextoPerfil}>{props.telefone}</Text>
+                    <Text style={styles.TextoPerfil}>Qualificações</Text>
+                    {!!props.empregos &&
+                        <FlatList
+                        showsVerticalScrollIndicator={false}
+                        data={Empregos}
+                        keyExtractor={(item, Empregos) => Empregos.toString()}
+                        renderItem={({item}) => {
+                            return (
+                                <OpcoesComponets cargo={item}/>         
+                            )
+                        }}/>
+                    }   
                 </View>
-            </View>        
-            
-            <View style={styles.formDetalhes} >
-                <Text style={styles.textoDivoria} >_______________ Informações _______________</Text>
-                <View style={styles.formInputDescricao}>
-                    <Text style={styles.inputDescricao}
-                        multiline={true}                          
-                        maxLength={200}
-                        editable={false}
-                    >{props.descricao}</Text>
-                </View> 
-            </View>            
+            </View>
+
             <View style={styles.formHistorico}>
                 <Text style={styles.textoDivoria} >____________________________________________</Text>
                 <Text style={styles.textHistorico}>Hitórico</Text>
                 <ScrollView>                
                 </ScrollView>
-            </View>            
+            </View>        
+         
+            <View style={styles.formBotaoContato}>
+                <TouchableOpacity style={styles.buttonCadastro} onPress={entrarEmContato()}>
+                    <Text style={styles.textBottom}>ENTRAR EM CONTATO</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
@@ -61,13 +73,6 @@ const styles = StyleSheet.create({
         shadowColor: 'black'
     },
 
-    detalhesContainer: {
-        backgroundColor: '#CFCFCF',
-        flexDirection: 'row',
-        shadowColor: 'black',
-        flex: 6
-    },
-
     imagemFundo: {
         resizeMode: "cover",
         justifyContent: "center",
@@ -80,23 +85,13 @@ const styles = StyleSheet.create({
         margin: 10
     },
 
-    styleFundo: {
-        justifyContent: 'space-around',
-        flex: 2,
-        width: 50,
-        height: 50
-    },
-
     barraSuperior: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center',
         height: 20,
-        marginTop: 5
-    },
-
-    botaoSair: {
-        color: '#CCCCCC'
+        marginTop: 5,
+        flex: 0.1
     },
 
     textoDivoria: {
@@ -117,36 +112,36 @@ const styles = StyleSheet.create({
         margin: 3
     },
 
-    inputDescricao: {
-        textAlignVertical: 'top',
-        margin: 20
+    textBottom: {
+        fontSize: 18,
+        color: "#FFFFFF"
+    },
+
+    dadosPerfil: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 240
     },
 
     formDadosPerfil: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         height: 200,
         justifyContent: 'flex-start',
-        alignItems: 'center'
-    },
-
-    formDetalhes: {
-        height: 200,
-        alignItems: 'center'
-    },
-
-    formInputDescricao: {
-        backgroundColor: "#CFCFCF",
-        height: 200,
-        width: 320,        
-        borderWidth: 0.5,
-        borderRadius: 50,
-        margin: 5,
-        borderColor: "#CFCFCF"
+        alignItems: 'center',
+        flex: 2
     },
 
     formHistorico: {
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        flex: 1,
+        marginTop: 20
+    },
+
+    formBotaoContato: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 0.5
     },
 
     fotoPerfil: {
@@ -154,6 +149,19 @@ const styles = StyleSheet.create({
         height:  150,
         borderWidth: 0.5,
         borderRadius: 80,
+    },
+
+    buttonCadastro:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 5,
+        backgroundColor: '#00000F',
+        borderWidth: 0.2,
+        borderRadius: 50,
+        width: 300,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
 });

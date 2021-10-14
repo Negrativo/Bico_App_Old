@@ -140,4 +140,30 @@ export default styles = StyleSheet.create({
         width: 290,
         color: 'white' 
     },
+
+    input: {
+        backgroundColor: '#00000F',
+        borderWidth: 0.2,
+        borderRadius: 50,
+        width: 250,
+        height: 45,
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white'
+    },
+
+    form: {
+        width: 300,
+        height: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10,
+        marginTop: 40
+    },
+
+    label: {
+        fontSize: 14,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
 });

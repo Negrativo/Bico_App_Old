@@ -46,7 +46,7 @@ export default function({ navigation }) {
                 </TextInput> 
                 <Image source={iconPesquisa} style={Styles.imagem}/>                 
             </View>
-            <View>
+            <SafeAreaView style={Styles.formNavegacao}>
                 {detalhes == false &&
                     <FlatList
                     showsVerticalScrollIndicator={false}
@@ -59,12 +59,12 @@ export default function({ navigation }) {
                                     onPress={() => apresentaDetalhes(item._id)} 
                                     foto={item.fotoPerfil} 
                                     nome={item.nome} 
-                                    local="" 
-                                    emprego="teste"/>
+                                    telefone={item.telefone}    
+                                />
                             </TouchableOpacity>          
                         )
                     }}
-                />
+                    />
                 }
                 {detalhes == true &&
                     <DetalhesPrincipal 
@@ -75,7 +75,7 @@ export default function({ navigation }) {
                         empregos={selecionado.empregos}
                         descricao={selecionado.descricao} />
                 }
-            </View>    
+            </SafeAreaView>    
             
         </SafeAreaView>
     );
