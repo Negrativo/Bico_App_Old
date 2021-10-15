@@ -2,15 +2,14 @@ import React, { useState, useEffect }  from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity, ScrollView, FlatList, Linking } from 'react-native';
 
 import OpcoesComponets from './pesquisaOpcoes';
-import HistoricoServicos from './HistoricoServico';
-import imagem from '../../assets/Job.png';
 
 export default function Detalhes(props) {
     const Empregos = props.empregos;
+    const Mensagem = `Olá, tudo bem? Sou ${props.nome} do aplicativo Bico.`;
 
-    function entrarEmContato() {
-        let telefone = props.telefone;
-        Linking.openURL('whatsapp://send?text=Corno&phone=5543998068333');
+
+    function entrarEmContato(telefone) {
+        Linking.openURL(`whatsapp://send?text=${Mensagem}&phone=55${telefone}`);
     }
 
     return ( 
@@ -32,7 +31,7 @@ export default function Detalhes(props) {
                     <Text style={styles.TextoPerfil}>Avaliação: {props.avalicao}</Text>
                     <Text style={styles.TextoPerfil}>{props.telefone}</Text>
                     <Text style={styles.TextoPerfil}>Qualificações</Text>
-                    {!!props.empregos &&
+                    {!!Empregos &&
                         <FlatList
                         showsVerticalScrollIndicator={false}
                         data={Empregos}
@@ -54,7 +53,7 @@ export default function Detalhes(props) {
             </View>        
          
             <View style={styles.formBotaoContato}>
-                <TouchableOpacity style={styles.buttonCadastro} onPress={entrarEmContato()}>
+                <TouchableOpacity style={styles.buttonCadastro} onPress={() => entrarEmContato(props.telefone)}>
                     <Text style={styles.textBottom}>ENTRAR EM CONTATO</Text>
                 </TouchableOpacity>
             </View>
