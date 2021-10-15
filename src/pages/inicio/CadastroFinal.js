@@ -74,17 +74,15 @@ export default function({ route, navigation }) {
                     let fotoPerfil = FotoPerfil;
                     let empregos = EmpregosSelecionados;
                     let telefone = values.telefone;
-                    console.log({ nome, email, senha, 
-                        fotoPerfil, empregos, telefone });
-                    /*api.post('/usuario/cadastro', { nome, email, senha, 
-                        descricao, fotoPerfil, empregos, telefone })
+                    api.post('/usuario/cadastro', { nome, email, senha, 
+                        fotoPerfil, empregos, telefone })
                     .then(res => {
                         alert('Cadastro completo!');
                         navigation.navigate('Home');
                     })
                     .catch(error => {
                         console.log(error);                      
-                    });   */ 
+                    });   
                 }}
             >
                 {(props) => (

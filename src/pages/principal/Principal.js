@@ -58,8 +58,7 @@ export default function({ navigation }) {
                                 <EmpregoList 
                                     onPress={() => apresentaDetalhes(item._id)} 
                                     foto={item.fotoPerfil} 
-                                    nome={item.nome} 
-                                    telefone={item.telefone}    
+                                    nome={item.nome}    
                                 />
                             </TouchableOpacity>          
                         )
@@ -73,7 +72,8 @@ export default function({ navigation }) {
                         foto={selecionado.fotoPerfil}
                         avalicao={selecionado.avaliacao}
                         empregos={selecionado.empregos}
-                        descricao={selecionado.descricao} />
+                        descricao={selecionado.descricao}
+                        telefone={selecionado.telefone} />
                 }
             </SafeAreaView>    
             
