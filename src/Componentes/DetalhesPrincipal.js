@@ -5,7 +5,7 @@ import OpcoesComponets from './pesquisaOpcoes';
 
 export default function Detalhes(props) {
     const Empregos = props.empregos;
-    const Mensagem = `Olá, tudo bem? Sou ${props.nome} do aplicativo Bico.`;
+    const Mensagem = `Olá ${props.nome}, tudo bem? Vi seu perfil no aplicativo Bico.`;
 
 
     function entrarEmContato(telefone) {
