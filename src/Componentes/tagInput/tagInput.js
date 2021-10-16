@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-export default function EmpregoList(props) {
+export default function tagInput(props) {
 
     return ( 
         <TouchableOpacity style={styles.formRecomendacao}>

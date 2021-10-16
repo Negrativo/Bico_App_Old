@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Image, TextInput, FlatList, TouchableOpacity, SafeAreaView} from 'react-native';
 
-import EmpregoList from '../../Componentes/EmpregoList';
-import DetalhesPrincipal from '../../Componentes/DetalhesPrincipal';
+import UsuarioComponent from '../../Componentes/usuario/UsuarioComponent';
+import DetalhesUsuario from '../../Componentes/detalhes/DetalhesUsuario';
 import Styles from '../../Styles/StylesAbasPrincipais';
 import iconPesquisa from '../../../assets/pesquisar.png';
 import api from '../../services/api';
@@ -55,7 +55,7 @@ export default function({ navigation }) {
                     renderItem={({item}) => {
                         return (
                             <TouchableOpacity>
-                                <EmpregoList 
+                                <UsuarioComponent 
                                     onPress={() => apresentaDetalhes(item._id)} 
                                     foto={item.fotoPerfil} 
                                     nome={item.nome}    
@@ -66,7 +66,7 @@ export default function({ navigation }) {
                     />
                 }
                 {detalhes == true &&
-                    <DetalhesPrincipal 
+                    <DetalhesUsuario 
                         sair={() => mostraDetalhes(!detalhes)} 
                         nome={selecionado.nome} 
                         foto={selecionado.fotoPerfil}

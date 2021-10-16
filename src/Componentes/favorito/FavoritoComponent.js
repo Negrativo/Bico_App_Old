@@ -2,8 +2,9 @@ import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
 
 import imagem from '../../assets/Job.png';
+import styles from './stylesFavorito';
 
-export default function EmpregoList(props) {
+export default function FavoritoComponent(props) {
 
     return ( 
         <View style={styles.containerEmpr}>
@@ -22,43 +23,3 @@ export default function EmpregoList(props) {
         </View>
     )
 }
-2
-
-const styles = StyleSheet.create({
-    containerEmpr: {
-        backgroundColor: '#CFCFCF',
-        width: 370,
-        flexDirection: 'row',
-        marginBottom: 10,
-        marginTop: 10,
-        shadowColor: 'black'
-    },
-
-    detalhesContainer: {
-        backgroundColor: '#CFCFCF',
-        flexDirection: 'row',
-        shadowColor: 'black',
-        flex: 6
-    },
-
-    imagemFundo: {
-        resizeMode: "cover",
-        justifyContent: "center",
-        alignItems: 'center',
-        backgroundColor: '#434343',
-        flex: 3,
-        width: 50,
-        height: 100
-    },
-
-    styleFundo: {
-        justifyContent: 'space-around',
-        flex: 2
-    },
-
-    Texto: {
-        fontSize: 20,
-        marginLeft: 10
-    }
-
-});

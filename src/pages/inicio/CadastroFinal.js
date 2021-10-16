@@ -6,9 +6,9 @@ import MaskInput, { Masks } from 'react-native-mask-input';
 
 import api from '../../services/api';
 import ValidateCadastroFone from '../../Componentes/schema/CadastroFoneSchema';
-import PesquisaEmprego from '../../Componentes/inicio/PesquisaComponent';
+import Pesquisa from '../../Componentes/barraPesquisa/PesquisaComponent';
 import styles from '../../Styles/StyleCadastroFinal';
-import OpcoesDeEmpregoSelecionado from '../../Componentes/inicio/EmpregosSelecionadosComponent'; 
+import TagInputSelecionado from '../../Componentes/tagInput/tagInputSelecionado'; 
 
 export default function({ route, navigation }) {
     const [Empregos, setEmpregos] = useState([]);
@@ -119,8 +119,8 @@ export default function({ route, navigation }) {
                             </View>                                            
                         </View>
                         <View style={styles.formCategorias}>
-                            <Text style={styles.textPesquisaEmprego}>Quais são suas experiências  profissionais?</Text>
-                            <PesquisaEmprego Lista={Empregos} placeholder={"Empregos"} selecionaProfissao={adicionarProfissao}/>
+                            <Text style={styles.textPesquisa}>Quais são suas experiências  profissionais?</Text>
+                            <Pesquisa Lista={Empregos} placeholder={"Empregos"} selecionaProfissao={adicionarProfissao}/>
                             <View style={styles.formEmpregosSelecionados}>
                             {!(EmpregosSelecionados === '') && 
                                 <FlatList
@@ -131,7 +131,7 @@ export default function({ route, navigation }) {
                                     keyExtractor={(item, EmpregosSelecionados) => EmpregosSelecionados.toString()}
                                     renderItem={({item}) => {
                                         return (
-                                            <OpcoesDeEmpregoSelecionado emprego={item} removeProfissao={removerProfissao}/>
+                                            <TagInputSelecionado emprego={item} removeProfissao={removerProfissao}/>
                                         )
                                     }}
                                 />
