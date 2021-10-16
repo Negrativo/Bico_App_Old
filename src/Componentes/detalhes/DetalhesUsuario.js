@@ -6,7 +6,7 @@ import OpcoesComponets from '../tagInput/tagInput';
 import styles from './stylesDetalhes';
 
 export default function DetalhesUsuario(props) {
-    const [ Favorito, serFavorito] = useState(true);
+    const [ Favorito, serFavorito] = useState(false);
     const Empregos = props.empregos;
     const Mensagem = `Olá ${props.nome}, tudo bem? Vi seu perfil no aplicativo Bico.`;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
 
-import imagem from '../../assets/Job.png';
+import imagem from '../../../assets/Job.png';
 import styles from './stylesFavorito';
 
 export default function FavoritoComponent(props) {
