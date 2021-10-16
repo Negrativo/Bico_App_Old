@@ -5,7 +5,7 @@ import MapView from 'react-native-maps';
 import iconPesquisa from '../../../assets/pesquisar.png';
 import Styles from '../../Styles/StylesAbasPrincipais';
 import api from '../../services/api';
-import OpcoesComponets from '../../Componentes/pesquisaOpcoes';
+//import TagInput from '../../Componentes/tagInput/tagInput';
 import useLocation from '../../Componentes/maps/UserLocation';
 
 export default function({ navigation }) {
@@ -48,7 +48,7 @@ export default function({ navigation }) {
                     keyExtractor={(item, Dados) => Dados.toString()}
                     //renderItem={({item}) => {
                       //  return (
-                       //     <OpcoesComponets cargo={item.nome}/>
+                       //     <TagInput cargo={item.nome}/>
                         //)
                     //}}
                 />

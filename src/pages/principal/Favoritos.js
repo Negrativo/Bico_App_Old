@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, ScrollView} from 'react-native';
+import { View, StyleSheet, ScrollView} from 'react-native';
 
-import FavoritoList from '../../Componentes/FavoritoList';
+import FavoritoComponent from '../../Componentes/favorito/FavoritoComponent';
 import Styles from '../../Styles/StylesAbasPrincipais';
 
 export default function({ navigation }) {
     return(
         <View style={Styles.container}>
             <ScrollView style={Styles.scrollView}>
-                    <FavoritoList nome="Lucas Souza" local="Londrina" emprego="Restaurante"/>
-                    <FavoritoList nome="Jose da Silva" local="Ibiporã" emprego="Loja"/>
-                    <FavoritoList nome="Rafael Siqueira" local="Londrina" emprego="Marmoraria"/>
-                    <FavoritoList nome="Marcela Duarte" local="Cambe" emprego="Faxineira"/>
-                    <FavoritoList nome="Felipe Ramos" local="Cambe" emprego="Barbearia"/>
-                    <FavoritoList nome="Barbara Menezes" local="Londrina" emprego="Baba"/>
+                    <FavoritoComponent nome="Lucas Souza" local="Londrina" emprego="Restaurante"/>
+                    <FavoritoComponent nome="Jose da Silva" local="Ibiporã" emprego="Loja"/>
+                    <FavoritoComponent nome="Rafael Siqueira" local="Londrina" emprego="Marmoraria"/>
+                    <FavoritoComponent nome="Marcela Duarte" local="Cambe" emprego="Faxineira"/>
+                    <FavoritoComponent nome="Felipe Ramos" local="Cambe" emprego="Barbearia"/>
+                    <FavoritoComponent nome="Barbara Menezes" local="Londrina" emprego="Baba"/>
             </ScrollView>
         </View> 
     );

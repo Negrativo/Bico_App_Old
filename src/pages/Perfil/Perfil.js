@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, ImageBackground, ScrollView} from 'react-native';
 
 import api from '../../services/api';
-import FavoritoList from '../../Componentes/FavoritoList';
+import FavoritoComponent from '../../Componentes/favorito/FavoritoComponent';
 
 export default function({ route, navigation }) {
     const[Dados, setDados] = useState('')
@@ -59,11 +59,11 @@ export default function({ route, navigation }) {
                     </View>
                     <View style={styles.formHistorico}>
                         <Text style={styles.textHistorico}>Hitórico</Text>
-                        <FavoritoList nome="Segurança noturno" local="Londrina"/>
-                        <FavoritoList nome="Segurança de evento" local="Apucarana"/>
-                        <FavoritoList nome="Secretario de portaria" local="Londrina"/>
-                        <FavoritoList nome="Garçon" local="Londrina"/>
-                        <FavoritoList nome="Sergurança de evento" local="Londrina"/>
+                        <FavoritoComponent nome="Segurança noturno" local="Londrina"/>
+                        <FavoritoComponent nome="Segurança de evento" local="Apucarana"/>
+                        <FavoritoComponent nome="Secretario de portaria" local="Londrina"/>
+                        <FavoritoComponent nome="Garçon" local="Londrina"/>
+                        <FavoritoComponent nome="Sergurança de evento" local="Londrina"/>
                     </View>
                 </ScrollView>                                                       
             </View>
