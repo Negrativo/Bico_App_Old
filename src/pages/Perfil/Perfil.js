@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, ImageBackground, ScrollView} from 'react-native';
 
 import api from '../../services/api';
 import FavoritoComponent from '../../Componentes/favorito/FavoritoComponent';
+import { onSignOut, isSignedIn } from '../../services/auth';
+import storage from '../../services/storage';
+import AuthContext from '../../context/AuthContext';
 
 export default function({ route, navigation }) {
     const[Dados, setDados] = useState('')
     const[fotoPerfil, setFoto] = useState(null);
-
+    const { isLogged } = useContext(AuthContext);
     /*
     Sera usado para buscar o historico de serviço realizado pelo usuario
     useEffect(() => {
@@ -19,6 +22,10 @@ export default function({ route, navigation }) {
                 console.log(error);
             });
     }); */
+
+    function logoutUser() {
+        isLogged = false;
+    }
 
     return (
         <View style={styles.container}>    
@@ -54,7 +61,10 @@ export default function({ route, navigation }) {
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.buttonCadastro}>
                             <Text style={styles.textBottom}>Configurações</Text>
-                        </TouchableOpacity>                        
+                        </TouchableOpacity> 
+                        <TouchableOpacity style={styles.buttonCadastro} onPress={() => logoutUser()}>
+                            <Text style={styles.textBottom}>Sair</Text>
+                        </TouchableOpacity>                          
                         <Text style={styles.divisoria}>________________________________</Text>
                     </View>
                     <View style={styles.formHistorico}>

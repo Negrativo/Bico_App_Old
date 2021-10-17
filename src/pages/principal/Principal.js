@@ -6,14 +6,20 @@ import DetalhesUsuario from '../../Componentes/detalhes/DetalhesUsuario';
 import Styles from '../../Styles/StylesAbasPrincipais';
 import iconPesquisa from '../../../assets/pesquisar.png';
 import api from '../../services/api';
+import storage from '../../services/storage';
 
 export default function({ navigation }) {
     const[dadosLista, setDados] = useState('');
     const[detalhes, mostraDetalhes] = useState(false);
     const[selecionado, setDetalhes] = useState('');
-
+    const token = storage.getItem("TOKEN_KEY").toString('base64');
+    
     useEffect(() => {
-        api.get('/principal/lista', {})
+        api.get('/principal/lista', {
+                headers: {
+                    'Authorization': `Basic ${token}`
+                }
+            })
             .then(response => {
                 setDados(response.data);
             })

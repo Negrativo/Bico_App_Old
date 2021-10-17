@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, ImageBackground} from 'react-native';
 import { Formik } from 'formik';
 import { Video } from 'expo-av';
@@ -8,8 +8,13 @@ import ValidateLogin from '../../Componentes/schema/LoginSchema';
 import api from '../../services/api';
 import videoFundo from '../../../assets/fundofinal.mov';
 import ico from '../../../assets/BICO-3.png';
+import { onSignIn } from '../../services/auth';
+import storage from '../../services/storage';
+import AuthContext from '../../context/AuthContext';
 
 export default function loginProfissional({ navigation }){
+    const [token, setToken] = useState('');
+    const { isLogged } = useContext(AuthContext);
 
     async function handleSubmitCadastro() {
         navigation.navigate('Cadastro');
@@ -28,7 +33,7 @@ export default function loginProfissional({ navigation }){
                         email, senha
                     })
                     .then(res => {
-                        navigation.navigate('Home');
+                            isLogged = true;
                     })
                     .catch(error => {
                         console.log(error);                      

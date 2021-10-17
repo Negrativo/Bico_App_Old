@@ -7,18 +7,24 @@ import Styles from '../../Styles/StylesAbasPrincipais';
 import api from '../../services/api';
 //import TagInput from '../../Componentes/tagInput/tagInput';
 import useLocation from '../../Componentes/maps/UserLocation';
+import storage from '../../services/storage';
 
 export default function({ navigation }) {
     const [Dados, setDados] = useState('');
     const [ErrorMsg, setErrorMsg] = useState(null);
-    const [Coords, setCoords] = useState(null); 
+    const [Coords, setCoords] = useState(null);
+    const token = storage.getItem("TOKEN_KEY");
      
     const [latitude, setLatitude] = useState(-20.398259);	
     const [longitude, setLongitude] = useState(-43.507726);
     const { coords, errorMsg } = useLocation();
 
     useEffect(() => {
-        api.get('/pesquisa/cargos', {})
+        api.get('/pesquisa/cargos', {}, {
+            headers: {
+              'Authorization': `Basic ${token}`
+            },
+          })
             .then(response => {
                 setDados(response.data);
             })
