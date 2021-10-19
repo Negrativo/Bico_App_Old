@@ -6,18 +6,18 @@ import DetalhesUsuario from '../../Componentes/detalhes/DetalhesUsuario';
 import Styles from '../../Styles/StylesAbasPrincipais';
 import iconPesquisa from '../../../assets/pesquisar.png';
 import api from '../../services/api';
-import storage from '../../services/storage';
+import { useAuth } from '../../context/AuthContext';
 
 export default function({ navigation }) {
     const[dadosLista, setDados] = useState('');
     const[detalhes, mostraDetalhes] = useState(false);
     const[selecionado, setDetalhes] = useState('');
-    const token = storage.getItem("TOKEN_KEY").toString('base64');
+    const { Token, User } = useAuth();
     
     useEffect(() => {
         api.get('/principal/lista', {
                 headers: {
-                    'Authorization': `Basic ${token}`
+                    'Authorization': `Basic ${Token}`
                 }
             })
             .then(response => {

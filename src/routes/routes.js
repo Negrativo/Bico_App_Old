@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import AuthContext from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 import BottomTabs from './BottomTabs';
 import CadastroInicial from '../pages/inicio/CadastroInicial';
@@ -10,7 +10,7 @@ import loginProfissional from '../pages/inicio/loginProfissional';
 const Stack = createStackNavigator();
 
 export default function Routes(props) {   
-    const { isLogged } = useContext(AuthContext);
+    const { isLogged } = useAuth();
     return (
         <Stack.Navigator>
             {isLogged == true ? (

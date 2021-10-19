@@ -5,20 +5,20 @@ import { Video } from 'expo-av';
 
 import styles from '../../Styles/StylesInicio';
 import ValidateLogin from '../../Componentes/schema/LoginSchema';
-import api from '../../services/api';
 import videoFundo from '../../../assets/fundofinal.mov';
 import ico from '../../../assets/BICO-3.png';
-import { onSignIn } from '../../services/auth';
-import storage from '../../services/storage';
-import AuthContext from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
 export default function loginProfissional({ navigation }){
-    const [token, setToken] = useState('');
-    const { isLogged } = useContext(AuthContext);
+    const { Login } = useAuth();
 
     async function handleSubmitCadastro() {
         navigation.navigate('Cadastro');
     };
+
+    function handleLogin(email, senha) {
+        Login(email, senha);
+    }
 
     return (
     <View style={styles.container}>        
@@ -29,16 +29,7 @@ export default function loginProfissional({ navigation }){
             onSubmit={(values, { setErrors })=> {
                 let email = values.email;
                 let senha = values.senha;
-                api.post('/login', {
-                        email, senha
-                    })
-                    .then(res => {
-                            isLogged = true;
-                    })
-                    .catch(error => {
-                        console.log(error);                      
-                        setErrors({ error: 'Usuario não cadastrado'});
-                    });
+                handleLogin(email,senha);
             }}
         >
             {(props) => (
