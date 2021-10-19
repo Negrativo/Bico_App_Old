@@ -10,10 +10,10 @@ import loginProfissional from '../pages/inicio/loginProfissional';
 const Stack = createStackNavigator();
 
 export default function Routes(props) {   
-    const { isLogged } = useAuth();
+    const { Logado } = useAuth();
     return (
         <Stack.Navigator>
-            {isLogged == true ? (
+            {Logado == true ? (
             <>
                 <Stack.Screen 
                     name="Home" 

@@ -2,16 +2,19 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import api from '../services/api';
 import { onSignOut, onSignIn, isSignedIn } from '../services/auth';
+import storage from '../services/storage';
 
 const AuthContext = React.createContext({});
  
 export const AuthProvider = ({ children }) => {
     const [User, setUser] = useState(null);
     const [Token, setToken] = useState(null);
-  
+    const [Logado, setUserLogado] = useState(false);
+
     useEffect(() => {
       isSignedIn()
-          .catch(erro => alert(erro))
+        .then(res => setUserLogado(res))
+        .catch(erro => alert(erro))
     })
   
     function Login(email, senha) {
@@ -19,10 +22,10 @@ export const AuthProvider = ({ children }) => {
             email, senha
         })
         .then(res => {
-            onSignIn(res.data.token)
-            .then(setUser(res.data.user))
-            .then(setToken(res.data.token));
-            //onSignIn(token)
+            storage.setItem("TOKEN_KEY", JSON.stringify(res.data.token));
+            storage.setItem("USER", JSON.stringify(res.data.user));
+            setUser(res.data.user);
+            setToken(res.data.token);
         })
         .catch(error => {
             console.log(error);                      
@@ -30,11 +33,12 @@ export const AuthProvider = ({ children }) => {
     }
 
     function Logout() {
-        onSignOut();
+        onSignOut()
+            .then(setUserLogado(false));
     }
 
     return (
-        <AuthContext.Provider value={{isLogged: Boolean(User), Login, Logout, User, Token}}>
+        <AuthContext.Provider value={{Logado, Login, Logout, User, Token}}>
             {children}
         </AuthContext.Provider>
     );

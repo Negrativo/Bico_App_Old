@@ -13,7 +13,7 @@ export default function({ navigation }) {
     const [Dados, setDados] = useState('');
     const [ErrorMsg, setErrorMsg] = useState(null);
     const [Coords, setCoords] = useState(null);
-    const token = storage.getItem("TOKEN_KEY");
+    const Token = storage.getItem("TOKEN_KEY");
      
     const [latitude, setLatitude] = useState(-20.398259);	
     const [longitude, setLongitude] = useState(-43.507726);
@@ -22,7 +22,7 @@ export default function({ navigation }) {
     useEffect(() => {
         api.get('/pesquisa/cargos', {}, {
             headers: {
-              'Authorization': `Basic ${token}`
+              'Authorization': `Basic ${Token}`
             },
           })
             .then(response => {

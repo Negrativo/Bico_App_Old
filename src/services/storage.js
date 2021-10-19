@@ -1,38 +1,37 @@
-import * as FileSystem from 'expo-file-system';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const DOCUMENT_FOLDER = `${FileSystem.documentDirectory}`
-
-const storage = ({
-    setItem: async (key, value) => {
-        const writtenContents = 
-            await AsyncStorage.setItem(
-                `${DOCUMENT_FOLDER}/${key}`, 
-                value
-            )
-        return writtenContents
-    },
-
-    getItem: async (key) => {
+export default {
+ 
+    async setItem(key, value) {
         try {
-          const value = 
-            await AsyncStorage.getItem(`${DOCUMENT_FOLDER}/${key}`)
-          return value
-        } catch (error) {
-          return null
+            return await AsyncStorage.setItem(key, JSON.stringify(value));
+        } catch(error) {
+            console.log(error);
         }
     },
 
-    removeItem: async (key) => {
-        await AsyncStorage.removeItem(`${DOCUMENT_FOLDER}/${key}`)
+    async getItem(key) {
+        return await AsyncStorage.getItem(key)
+        .then((result) => {
+            if (result) {
+                try {
+                    result = JSON.parse(result);
+                } catch (e) {
+                    console.error('AsyncStorage#getItem error deserializing JSON for key: ' + key, e.message);
+                }
+            }
+            return result;
+        })
     },
 
-    getAllKeys: async () => {
+    async removeItem(key) {
+        return await AsyncStorage.removeItem(key)
+    },
+
+    async getAllKeys() {
         const keys = 
             await AsyncStorage.getAllKeys()
         return keys
     },
 
-});
-
-export default storage;
+};

@@ -3,14 +3,12 @@ import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, ImageBackgr
 
 import api from '../../services/api';
 import FavoritoComponent from '../../Componentes/favorito/FavoritoComponent';
-import { onSignOut, isSignedIn } from '../../services/auth';
-import storage from '../../services/storage';
-import AuthContext from '../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 
 export default function({ route, navigation }) {
     const[Dados, setDados] = useState('')
     const[fotoPerfil, setFoto] = useState(null);
-    const { isLogged } = useContext(AuthContext);
+    const { Logout } = useAuth();
     /*
     Sera usado para buscar o historico de serviço realizado pelo usuario
     useEffect(() => {
@@ -24,7 +22,7 @@ export default function({ route, navigation }) {
     }); */
 
     function logoutUser() {
-        isLogged = false;
+        Logout();
     }
 
     return (
