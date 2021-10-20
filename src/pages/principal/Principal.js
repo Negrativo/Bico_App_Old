@@ -7,13 +7,12 @@ import Styles from '../../Styles/StylesAbasPrincipais';
 import iconPesquisa from '../../../assets/pesquisar.png';
 import api from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
-import storage from '../../services/storage';
 
 export default function({ navigation }) {
     const[dadosLista, setDados] = useState('');
     const[detalhes, mostraDetalhes] = useState(false);
     const[selecionado, setDetalhes] = useState('');
-    const Token = storage.getItem("TOKEN_KEY");
+    const { Token, User } = useAuth();
     
     useEffect(() => {
         api.get('/principal/lista', {
@@ -31,7 +30,13 @@ export default function({ navigation }) {
 
     function apresentaDetalhes(_idSelecionado) {               
         const userSelecionado = { _id : _idSelecionado };
-        api.post(`/usuario/dadosSelecionado`, userSelecionado)
+        console.log(Token);
+        api.post(`/usuario/dadosSelecionado`, {
+                headers: {
+                    'Authorization': `Basic ${Token}`
+                },
+                body: userSelecionado
+            })
             .then(response => {
                 setDetalhes(response.data);
             })

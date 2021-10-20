@@ -7,13 +7,13 @@ import Styles from '../../Styles/StylesAbasPrincipais';
 import api from '../../services/api';
 //import TagInput from '../../Componentes/tagInput/tagInput';
 import useLocation from '../../Componentes/maps/UserLocation';
-import storage from '../../services/storage';
+import { useAuth } from '../../context/AuthContext';
 
 export default function({ navigation }) {
     const [Dados, setDados] = useState('');
     const [ErrorMsg, setErrorMsg] = useState(null);
     const [Coords, setCoords] = useState(null);
-    const Token = storage.getItem("TOKEN_KEY");
+    const { Token, User } = useAuth();
      
     const [latitude, setLatitude] = useState(-20.398259);	
     const [longitude, setLongitude] = useState(-43.507726);

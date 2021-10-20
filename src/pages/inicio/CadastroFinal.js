@@ -78,7 +78,7 @@ export default function({ route, navigation }) {
                         fotoPerfil, empregos, telefone })
                     .then(res => {
                         alert('Cadastro completo!');
-                        navigation.navigate('Home');
+                        navigation.navigate('Login');
                     })
                     .catch(error => {
                         console.log(error);                      

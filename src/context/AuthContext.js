@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import api from '../services/api';
 import { onSignOut, onSignIn, isSignedIn } from '../services/auth';
@@ -12,20 +13,23 @@ export const AuthProvider = ({ children }) => {
     const [Logado, setUserLogado] = useState(false);
 
     useEffect(() => {
-      isSignedIn()
-        .then(res => setUserLogado(res))
-        .catch(erro => alert(erro))
+        isSignedIn()
+            //.then(res => setUserLogado(res)) TO DO - Implementar remoção do user apos logout
+            .catch(erro => alert(erro))
     })
-  
+
     function Login(email, senha) {
         api.post('/login', {
             email, senha
         })
         .then(res => {
-            storage.setItem("TOKEN_KEY", JSON.stringify(res.data.token));
-            storage.setItem("USER", JSON.stringify(res.data.user));
+            const user = res.data.user;
+            const token = res.data.token;
+            onSignIn(token, user);
             setUser(res.data.user);
             setToken(res.data.token);
+            setUserLogado(true);
+            console.log(User, Token);
         })
         .catch(error => {
             console.log(error);                      
@@ -33,8 +37,9 @@ export const AuthProvider = ({ children }) => {
     }
 
     function Logout() {
-        onSignOut()
-            .then(setUserLogado(false));
+        onSignOut();
+        setUserLogado(false);
+        setToken(null);
     }
 
     return (
