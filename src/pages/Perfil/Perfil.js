@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, ImageBackground, ScrollView} from 'react-native';
 
 import api from '../../services/api';
 import FavoritoComponent from '../../Componentes/favorito/FavoritoComponent';
+import { useAuth } from '../../context/AuthContext';
 
 export default function({ route, navigation }) {
     const[Dados, setDados] = useState('')
     const[fotoPerfil, setFoto] = useState(null);
+    const { User, Token, Logout } = useAuth();
 
+    api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
     /*
     Sera usado para buscar o historico de serviço realizado pelo usuario
     useEffect(() => {
@@ -20,45 +23,40 @@ export default function({ route, navigation }) {
             });
     }); */
 
+    function logoutUser() {
+        Logout();
+    }
+
     return (
         <View style={styles.container}>    
             <View style={styles.container}>
                 <View style={styles.formFotoPerfil}>
-                    <ImageBackground style={styles.fotoPerfil}>
-                        <Image></Image>
+                    <ImageBackground style={styles.fundoFoto}>
+                        <Image 
+                            source={{ uri: User.fotoPerfil }} style={styles.fotoPerfil}
+                        />
                     </ImageBackground>
                 </View>
                 <View style={styles.formCabecalhoPerfil}>
-                    <Text style={styles.textNome}>NOME COMPLETO</Text>
-                    <Text>Avaliação: 0.0</Text>
+                    <Text style={styles.textNome}>{User.nome.toUpperCase()}</Text>
+                    <Text style={styles.textGeral}>Avaliação: {User.avaliacao}</Text>
                 </View>
                 <Text>________________________________</Text>
-                <ScrollView style={styles.scrollContainer}
-                    showsVerticalScrollIndicator={false}>
-                    <View style={styles.formDescricao}>
-                        <View style={styles.formInputDescricao}>
-                            <TextInput style={styles.inputDescricao}
-                                multiline={true}
-                                placeholder={"Descrição profissional"}
-                                placeholderTextColor={"#FFFFFF"}                                
-                                maxLength={200}
-                                />
-                        </View>                                            
-                    </View>
+                <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                     <View style={styles.formBottons}>
                         <TouchableOpacity style={styles.buttonCadastro}>
                             <Text style={styles.textBottom}>Editar perfil</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.buttonCadastro}>
-                            <Text style={styles.textBottom}>ANUNCIAR EMPREGO</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonCadastro}>
                             <Text style={styles.textBottom}>Configurações</Text>
-                        </TouchableOpacity>                        
+                        </TouchableOpacity> 
+                        <TouchableOpacity style={styles.buttonCadastro} onPress={() => logoutUser()}>
+                            <Text style={styles.textBottom}>Sair</Text>
+                        </TouchableOpacity>                          
                         <Text style={styles.divisoria}>________________________________</Text>
                     </View>
                     <View style={styles.formHistorico}>
-                        <Text style={styles.textHistorico}>Hitórico</Text>
+                        <Text style={styles.textGeral}>Hitórico</Text>
                         <FavoritoComponent nome="Segurança noturno" local="Londrina"/>
                         <FavoritoComponent nome="Segurança de evento" local="Apucarana"/>
                         <FavoritoComponent nome="Secretario de portaria" local="Londrina"/>
@@ -129,9 +127,19 @@ const styles = StyleSheet.create({
         margin: 20
     },
 
-    fotoPerfil: {
-        backgroundColor: '#C4C4C4',
+    fundoFoto: {
         resizeMode: "cover",
+        justifyContent: "center",
+        alignItems: 'center',
+        backgroundColor: '#C4C4C4',
+        width: 150,
+        height: 150,
+        borderWidth: 0.5,
+        borderRadius: 80,
+        margin: 10
+    },
+
+    fotoPerfil: {
         width: 150,
         height: 150,
         borderWidth: 0.5,
@@ -157,6 +165,10 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: "bold",
         margin: 5
+    },
+
+    textGeral: {
+        fontSize: 18,
     },
 
     textBottom: {

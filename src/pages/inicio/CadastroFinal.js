@@ -57,12 +57,10 @@ export default function({ route, navigation }) {
     
     adicionarProfissao = (item) => {
         setEmpregosSelecionados([...EmpregosSelecionados, item]);
-        console.log(EmpregosSelecionados);
     };
 
     removerProfissao = (item) => {    
         setEmpregosSelecionados(EmpregosSelecionados.filter((emprego) => emprego !== item));
-        console.log(EmpregosSelecionados);
     };
 
     return (
@@ -78,7 +76,7 @@ export default function({ route, navigation }) {
                         fotoPerfil, empregos, telefone })
                     .then(res => {
                         alert('Cadastro completo!');
-                        navigation.navigate('Home');
+                        navigation.navigate('Login');
                     })
                     .catch(error => {
                         console.log(error);                      

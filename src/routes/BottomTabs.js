@@ -1,26 +1,17 @@
 
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import Principal from '../pages/principal/Principal';
+import Favoritos from '../pages/principal/Favoritos';
+import Pesquisa from '../pages/principal/Pesquisa';
+import Perfil from '../pages/Perfil/Perfil';
 
-
-import CadastroInicial from './pages/inicio/CadastroInicial';
-import CadastroFinal from './pages/inicio/CadastroFinal';
-import loginProfissional from './pages/inicio/loginProfissional';
-//import ModoLogin from './pages/inicio/ModoLogin';
-import Principal from './pages/principal/Principal';
-import Favoritos from './pages/principal/Favoritos';
-import Pesquisa from './pages/principal/Pesquisa';
-import Perfil from './pages/Perfil/Perfil';
-
-const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
-export default function Routes() {
+export default function BottomTabs() {
 
-    createBottomTabs = () => {
         return  <Tab.Navigator>
                     <Tab.Screen 
                         name ="Principal" 
@@ -67,54 +58,4 @@ export default function Routes() {
                         }} 
                     />
                 </Tab.Navigator>
-    }
-            
-            /*<Stack.Screen 
-                name="ModoLogin" 
-                component={ModoLogin}
-                options={{
-                    headerLeft: ()=> null,
-                    headerShown: false
-                }} 
-            />*/
-    return (
-        <Stack.Navigator>
-            <Stack.Screen 
-                name="Login" 
-                component={loginProfissional}
-                options={{
-                    headerLeft: ()=> null,
-                    headerShown: false
-                }} 
-            />
-            <Stack.Screen 
-                name="Cadastro" 
-                component={CadastroInicial} 
-                options={{
-                    headerStyle: {
-                        height: 70,
-                        backgroundColor: "#EDEDED"
-                    }
-                }}
-            />
-            <Stack.Screen 
-                name="Finalização de cadastro" 
-                component={CadastroFinal} 
-                options={{
-                    headerStyle: {
-                        height: 70,
-                        backgroundColor: "#EDEDED"
-                    }
-                }}
-            />
-            <Stack.Screen 
-                name="Home" 
-                children={createBottomTabs}
-                options={{
-                    headerLeft: ()=> null,
-                    headerShown: false
-                }}                
-            />            
-        </Stack.Navigator>
-    )
 }
