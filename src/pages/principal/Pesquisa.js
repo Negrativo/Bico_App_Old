@@ -7,6 +7,7 @@ import Styles from '../../Styles/StylesAbasPrincipais';
 import api from '../../services/api';
 //import TagInput from '../../Componentes/tagInput/tagInput';
 import useLocation from '../../Componentes/maps/UserLocation';
+import MapsTheme from '../../Componentes/maps/MapsTheme.json';
 import { useAuth } from '../../context/AuthContext';
 
 export default function({ navigation }) {
@@ -14,23 +15,23 @@ export default function({ navigation }) {
     const [ErrorMsg, setErrorMsg] = useState(null);
     const [Coords, setCoords] = useState(null);
     const { Token, User } = useAuth();
+
+    api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
      
     const [latitude, setLatitude] = useState(-20.398259);	
     const [longitude, setLongitude] = useState(-43.507726);
     const { coords, errorMsg } = useLocation();
 
     useEffect(() => {
-        api.get('/pesquisa/cargos', {}, {
-            headers: {
-              'Authorization': `Basic ${Token}`
-            },
-          })
+        if (!!Token) {
+            api.get('/pesquisa/cargos')
             .then(response => {
                 setDados(response.data);
             })
             .catch(error => {
                 console.log(error);
             });
+        }
     });    
 
     return(
@@ -61,14 +62,15 @@ export default function({ navigation }) {
             </View>
             <MapView
                 showsUserLocation={true}
-     	        showsMyLocationButton={false}
+     	        showsMyLocationButton={true}
                 toolbarEnabled={false}
+                customMapStyle={MapsTheme}
                 style={{
                     height: '100%',
                     width: '100%',
                     position: 'relative',		
-              }}
-              initialRegion={{
+                }}
+                initialRegion={{
                 latitude,	
                 longitude,	
                 latitudeDelta: 0.195,  	

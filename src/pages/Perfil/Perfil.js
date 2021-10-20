@@ -9,6 +9,8 @@ export default function({ route, navigation }) {
     const[Dados, setDados] = useState('')
     const[fotoPerfil, setFoto] = useState(null);
     const { User, Token, Logout } = useAuth();
+
+    api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
     /*
     Sera usado para buscar o historico de serviço realizado pelo usuario
     useEffect(() => {
@@ -44,9 +46,6 @@ export default function({ route, navigation }) {
                     <View style={styles.formBottons}>
                         <TouchableOpacity style={styles.buttonCadastro}>
                             <Text style={styles.textBottom}>Editar perfil</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonCadastro}>
-                            <Text style={styles.textBottom}>ANUNCIAR EMPREGO</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.buttonCadastro}>
                             <Text style={styles.textBottom}>Configurações</Text>

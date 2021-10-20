@@ -57,12 +57,10 @@ export default function({ route, navigation }) {
     
     adicionarProfissao = (item) => {
         setEmpregosSelecionados([...EmpregosSelecionados, item]);
-        console.log(EmpregosSelecionados);
     };
 
     removerProfissao = (item) => {    
         setEmpregosSelecionados(EmpregosSelecionados.filter((emprego) => emprego !== item));
-        console.log(EmpregosSelecionados);
     };
 
     return (

@@ -6,9 +6,11 @@ import OpcoesComponets from '../tagInput/tagInput';
 import styles from './stylesDetalhes';
 
 export default function DetalhesUsuario(props) {
+    const Dados = props.UserSelecionado;
+    const UserLogado = props.UserLogado;
     const [ Favorito, serFavorito] = useState(false);
-    const Empregos = props.empregos;
-    const Mensagem = `Olá ${props.nome}, tudo bem? Vi seu perfil no aplicativo Bico.`;
+    const Empregos = Dados.empregos;
+    const Mensagem = `Olá ${Dados.nome}, tudo bem? Sou ${UserLogado.nome}.\nVi seu perfil no aplicativo Bico e gostaria de conversar melhor sobre o assunto.`;
 
     function clickFavorito() {
         serFavorito(!Favorito);
@@ -28,14 +30,14 @@ export default function DetalhesUsuario(props) {
             <View style={styles.formDadosPerfil}>
                 <ImageBackground style={styles.imagemFundo}>
                     <Image 
-                        source={{ uri: props.foto }} style={styles.fotoPerfil}
+                        source={{ uri: Dados.fotoPerfil }} style={styles.fotoPerfil}
                     />
                 </ImageBackground>
 
                 <View style={styles.dadosPerfil}>
-                    <Text style={styles.TextoPerfil}>{props.nome}</Text>
-                    <Text style={styles.TextoPerfil}>Avaliação: {props.avalicao}</Text>
-                    <Text style={styles.TextoPerfil}>{props.telefone}</Text>
+                    <Text style={styles.TextoPerfil}>{Dados.nome}</Text>
+                    <Text style={styles.TextoPerfil}>Avaliação: {Dados.avalicao}</Text>
+                    <Text style={styles.TextoPerfil}>{Dados.telefone}</Text>
                     <Text style={styles.TextoPerfil}>Qualificações</Text>
                     {!!Empregos &&
                         <FlatList
@@ -59,7 +61,7 @@ export default function DetalhesUsuario(props) {
             </View>        
          
             <View style={styles.formBotaoContato}>
-                <TouchableOpacity style={styles.buttonCadastro} onPress={() => entrarEmContato(props.telefone)}>
+                <TouchableOpacity style={styles.buttonCadastro} onPress={() => entrarEmContato(Dados.telefone)}>
                     <Text style={styles.textBottom}>ENTRAR EM CONTATO</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.favoritoIcon} onPress={() => clickFavorito()}>

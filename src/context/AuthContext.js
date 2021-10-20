@@ -2,8 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import api from '../services/api';
-import { onSignOut, onSignIn, isSignedIn } from '../services/auth';
-import storage from '../services/storage';
+import { onSignOut, onSignIn, isSignedIn, UserSignedIn } from '../services/auth';
 
 const AuthContext = React.createContext({});
  
@@ -14,7 +13,15 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         isSignedIn()
-            //.then(res => setUserLogado(res)) TO DO - Implementar remoção do user apos logout
+            .then(res => {
+                if (res === true) {
+                    setUserLogado(res);
+                    UserSignedIn().then(dados => {
+                        setUser(dados.user);
+                        setToken(dados.token);
+                    })
+                }
+            })
             .catch(erro => alert(erro))
     })
 
@@ -23,13 +30,12 @@ export const AuthProvider = ({ children }) => {
             email, senha
         })
         .then(res => {
-            const user = res.data.user;
-            const token = res.data.token;
-            onSignIn(token, user);
-            setUser(res.data.user);
-            setToken(res.data.token);
+            const User = res.data.user;
+            const Token = res.data.token;
+            onSignIn(Token, User);
+            setUser(User);
+            setToken(Token);
             setUserLogado(true);
-            console.log(User, Token);
         })
         .catch(error => {
             console.log(error);                      
@@ -40,6 +46,7 @@ export const AuthProvider = ({ children }) => {
         onSignOut();
         setUserLogado(false);
         setToken(null);
+        //setUser(null); TO DO - Implementar remoção do user apos logout
     }
 
     return (
