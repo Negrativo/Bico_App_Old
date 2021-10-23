@@ -11,14 +11,15 @@ export default styles = StyleSheet.create({
         fontSize: 30
     },
     containerPesquisa: {
-        backgroundColor: '#DDE0E1',
+        backgroundColor: '#FFFFFF',
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center'
     },
     barraPesquisa: {
-        backgroundColor: '#434343',
-        width: 290 
+        backgroundColor: '#FFFFFF',
+        width: 290,
+        marginTop: 5
     },
     imagem: {
         resizeMode: "cover",
@@ -28,15 +29,15 @@ export default styles = StyleSheet.create({
         right: 10
     },
     formBarraPesquisa: {
-        backgroundColor: '#434343',
+        backgroundColor: '#FFFFFF',
         borderWidth: 0.2,
         borderRadius: 50,
         width: 350,
         height: 40,
         justifyContent: "flex-end",
         flexDirection: "row",
-        marginTop: 50,
-        marginBottom: 10
+        marginTop: 45,
+        marginBottom: 15
     },
     formNavegacao:{
         width: 350,

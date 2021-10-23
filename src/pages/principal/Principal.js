@@ -45,7 +45,7 @@ export default function({ navigation }) {
                 <TextInput 
                     style={Styles.barraPesquisa}
                     textAlign="left"
-                    placeholderTextColor="#D9DBDC"
+                    placeholderTextColor="#000000"
                     placeholder="Pesquisar">    
                 </TextInput> 
                 <Image source={iconPesquisa} style={Styles.imagem}/>                 
