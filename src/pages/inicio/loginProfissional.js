@@ -5,7 +5,7 @@ import { Video } from 'expo-av';
 
 import styles from '../../Styles/StylesInicio';
 import ValidateLogin from '../../Componentes/schema/LoginSchema';
-import videoFundo from '../../../assets/fundofinal.mov';
+import videoFundo from '../../../assets/fundofinal.mp4';
 import ico from '../../../assets/BICO-3.png';
 import { useAuth } from '../../context/AuthContext';
 
