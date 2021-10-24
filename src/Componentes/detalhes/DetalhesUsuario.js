@@ -4,16 +4,27 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import OpcoesComponets from '../tagInput/tagInput';
 import styles from './stylesDetalhes';
+import api from '../../services/api';
 
 export default function DetalhesUsuario(props) {
     const Dados = props.UserSelecionado;
     const UserLogado = props.UserLogado;
-    const [ Favorito, serFavorito] = useState(false);
+    const [ Favoritar, serFavorito] = useState(false);
     const Empregos = Dados.empregos;
     const Mensagem = `Olá ${Dados.nome}, tudo bem? Sou ${UserLogado.nome}.\nVi seu perfil no aplicativo Bico e gostaria de conversar melhor sobre o assunto.`;
 
     function clickFavorito() {
-        serFavorito(!Favorito);
+        const _id = UserLogado._id;
+        const favoritoId = Dados._id;
+        api.post(`/favorito/adicionar`, { _id, favoritoId })
+        .then(response => {
+            console.log(response.status);
+            console.log(response.data.Favoritado);
+            serFavorito(response.data.Favoritado);
+        })
+        .catch(error => {
+            console.log(error);
+        });
     }
 
     function entrarEmContato(telefone) {
@@ -65,8 +76,8 @@ export default function DetalhesUsuario(props) {
                     <Text style={styles.textBottom}>ENTRAR EM CONTATO</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.favoritoIcon} onPress={() => clickFavorito()}>
-                    { Favorito && <MaterialCommunityIcons name="heart" color={"red"} size={40} /> }
-                    { !Favorito && <MaterialCommunityIcons name="heart-outline" color={"red"} size={40} /> }
+                    { Favoritar && <MaterialCommunityIcons name="heart" color={"red"} size={40} /> }
+                    { !Favoritar && <MaterialCommunityIcons name="heart-outline" color={"red"} size={40} /> }
                 </TouchableOpacity>
             </View>
         </View>
