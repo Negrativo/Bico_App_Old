@@ -46,8 +46,8 @@ export default styles = StyleSheet.create({
         justifyContent: "center",
         flexDirection: 'column',
         alignItems: 'center',
-        marginTop: 5,
-        marginBottom: 10
+        marginTop: 45,
+        marginBottom: 15
     },
     formRecomendacao: {
         backgroundColor: '#1087AC',

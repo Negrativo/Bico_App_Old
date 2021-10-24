@@ -18,8 +18,6 @@ export default function DetalhesUsuario(props) {
         const favoritoId = Dados._id;
         api.post(`/favorito/adicionar`, { _id, favoritoId })
         .then(response => {
-            console.log(response.status);
-            console.log(response.data.Favoritado);
             serFavorito(response.data.Favoritado);
         })
         .catch(error => {
