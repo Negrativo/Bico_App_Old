@@ -46,10 +46,11 @@ export default function({ route, navigation }) {
                 allowsEditing: true,
                 aspect: [4, 3],
                 quality: 1,
+                base64: true,
             });
       
             if (!result.cancelled) {
-                setFoto(result.uri);    
+                setFoto(`data:image/png;base64,${result.base64}`);
             }
         }        
     };
