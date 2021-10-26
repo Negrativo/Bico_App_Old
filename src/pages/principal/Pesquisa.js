@@ -23,15 +23,19 @@ export default function({ navigation }) {
     const { coords, errorMsg } = useLocation();
 
     useEffect(() => {
-        if (!!Token) {
-            api.get('/pesquisa/cargos')
-            .then(response => {
-                setDados(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        let mounted = true;
+        if(mounted){
+            if (!!Token) {
+                api.get('/pesquisa/cargos')
+                .then(response => {
+                    setDados(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            }
         }
+        return () => mounted = false;
     });    
 
     return(

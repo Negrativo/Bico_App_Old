@@ -3,46 +3,45 @@ import { View, StyleSheet, SafeAreaView, FlatList, TouchableOpacity} from 'react
 
 import FavoritoComponent from '../../Componentes/favorito/FavoritoComponent';
 import Styles from '../../Styles/StylesAbasPrincipais';
-import DetalhesUsuario from '../../Componentes/detalhes/DetalhesUsuario';
 import api from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
 
 export default function({ navigation }) {
     const[dadosLista, setDados] = useState('');
-    const[detalhes, mostraDetalhes] = useState(false);
-    const[selecionado, setDetalhes] = useState('');
     const { Token, User } = useAuth();
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
-    /*useEffect(() => {
-        if (!!Token) {
-            api.post('/favoritos/lista', { _id: User._id })
-            .then(response => {
-                setDados(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+    useEffect(() => {
+        let mounted = true;
+        if(mounted){
+            if (!!Token) {
+                api.post('/favoritos/lista', { _id: User._id })
+                .then(response => {
+                    setDados(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            }
         }
-    });*/ 
+        return () => mounted = false;
+    });
 
-    function apresentaDetalhes(_idSelecionado) {               
+    function apresentaDetalhes(_idSelecionado) {
         api.post(`/usuario/dadosSelecionado`, { _id : _idSelecionado })
             .then(response => {
-                setDetalhes(response.data);
+                navigation.navigate('Detalhes', { DadosSelecionado: response.data });
             })
             .catch(error => {
                 console.log(error);
             });
-        mostraDetalhes(!detalhes);
     }
 
     return(
         <View style={Styles.container}>
             <SafeAreaView style={Styles.formNavegacao}>
-                {detalhes == false &&
-                    <FlatList
+                <FlatList
                     showsVerticalScrollIndicator={false}
                     data={dadosLista}
                     keyExtractor={(item, dadosLista) => dadosLista.toString()}
@@ -57,15 +56,7 @@ export default function({ navigation }) {
                             </TouchableOpacity>          
                         )
                     }}
-                    />
-                }
-                {detalhes == true &&
-                    <DetalhesUsuario 
-                        sair={() => mostraDetalhes(!detalhes)} 
-                        UserSelecionado={selecionado} 
-                        UserLogado={User}
-                    />
-                }
+                />
             </SafeAreaView>   
         </View> 
     );

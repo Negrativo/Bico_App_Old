@@ -15,14 +15,10 @@ export default function({ route, navigation }) {
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
-    useLayoutEffect(() => {
-       
-    }); 
-
     function favoritado() {
-        console.log(User.favoritosIds.includes(UserSelecionado._id));
         return User.favoritosIds.includes(UserSelecionado._id);
     }
+    
     function clickFavorito() {
         const _id = User._id;
         const favoritoId = UserSelecionado._id;

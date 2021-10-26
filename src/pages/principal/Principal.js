@@ -2,7 +2,6 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { View, Image, TextInput, FlatList, TouchableOpacity, SafeAreaView} from 'react-native';
 
 import UsuarioComponent from '../../Componentes/usuario/UsuarioComponent';
-import DetalhesUsuario from '../../Componentes/detalhes/DetalhesUsuario';
 import Styles from '../../Styles/StylesAbasPrincipais';
 import iconPesquisa from '../../../assets/pesquisar.png';
 import api from '../../services/api';
@@ -15,15 +14,19 @@ export default function({ navigation }) {
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
     useLayoutEffect(() => {
-        if (!!Token) {
-            api.get('/principal/lista')
-            .then(response => {
-                setDados(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        let mounted = true;
+        if(mounted){
+            if (!!Token) {
+                api.get('/principal/lista')
+                .then(response => {
+                    setDados(response.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            }
         }
+        return () => mounted = false;
     }); 
 
     function apresentaDetalhes(_idSelecionado) {               

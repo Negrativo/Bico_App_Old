@@ -13,7 +13,7 @@ export default function FavoritoComponent(props) {
                 />
             </ImageBackground>
             <View style={styles.detalhesContainer}>
-                <TouchableOpacity style={styles.styleFundo}>
+                <TouchableOpacity onPress={props.onPress} style={styles.styleFundo}>
                     <Text style={styles.Texto}>{props.nome}</Text>
                 </TouchableOpacity>
             </View>
