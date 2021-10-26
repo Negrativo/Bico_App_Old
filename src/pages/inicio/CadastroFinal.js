@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, ImageBackground, FlatList, ScrollView} from 'react-native';
+import { View, Text, Image, SafeAreaView, TouchableOpacity, ImageBackground, FlatList } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { Formik } from 'formik';
 import MaskInput, { Masks } from 'react-native-mask-input';
@@ -29,13 +29,17 @@ export default function({ route, navigation }) {
 
 
     useEffect(() => {
-        api.get('/pesquisa/cargos', {})
+        let mounted = true;
+        if(mounted){
+            api.get('/pesquisa/cargos', {})
             .then(response => {
                 setEmpregos(response.data);
             })
             .catch(error => {
                 console.log(error);
             });
+        }
+        return () => mounted = false;
     }, [Empregos]); 
 
     
@@ -65,7 +69,7 @@ export default function({ route, navigation }) {
     };
 
     return (
-        <ScrollView style={styles.container}>    
+        <SafeAreaView style={styles.container}>    
             <Formik
                 initialValues={{ telefone: '' }}
                 validationSchema={ValidateCadastroFone}
@@ -94,7 +98,7 @@ export default function({ route, navigation }) {
                                 }
                                 </View>
                             </ImageBackground>
-                            <TouchableOpacity onPress={openGaleria} style={styles.bottomFoto}>
+                            <TouchableOpacity onPress={() => openGaleria()} style={styles.bottomFoto}>
                                 <Text style={styles.textFoto}>Selecionar foto</Text>
                             </TouchableOpacity>
                         </View>
@@ -143,6 +147,6 @@ export default function({ route, navigation }) {
                     </View>
                 )}
             </Formik>
-        </ScrollView>     
+        </SafeAreaView>     
     );
 }

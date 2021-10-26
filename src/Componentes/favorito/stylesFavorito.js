@@ -25,7 +25,7 @@ export default styles = StyleSheet.create({
         backgroundColor: '#434343',
         flex: 3,
         width: 50,
-        height: 100
+        height: 150
     },
 
     styleFundo: {
@@ -36,6 +36,11 @@ export default styles = StyleSheet.create({
     Texto: {
         fontSize: 20,
         marginLeft: 10
-    }
+    },
+
+    fotoPerfil: {
+        width:  150,
+        height:  150
+    },
 
 });
