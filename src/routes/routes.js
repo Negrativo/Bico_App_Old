@@ -6,6 +6,7 @@ import BottomTabs from './BottomTabs';
 import CadastroInicial from '../pages/inicio/CadastroInicial';
 import CadastroFinal from '../pages/inicio/CadastroFinal';
 import loginProfissional from '../pages/inicio/loginProfissional';
+import Detalhes from '../pages/principal/DetalhesUsuario';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +22,16 @@ export default function Routes(props) {
                     options={{
                         headerLeft: ()=> null,
                         headerShown: false
+                    }}                
+                />
+                <Stack.Screen 
+                    name="Detalhes"
+                    component={Detalhes}
+                    options={{
+                        headerStyle: {
+                            height: 70,
+                            backgroundColor: "#EDEDED"
+                        }
                     }}                
                 />
             </>   

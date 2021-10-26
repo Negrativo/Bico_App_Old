@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
                 }
             })
             .catch(erro => alert(erro))
-    })
+    }, [Logado])
 
     function Login(email, senha) {
         api.post('/login', {

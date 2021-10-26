@@ -15,7 +15,7 @@ export default function({ navigation }) {
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (!!Token) {
             api.post('/favoritos/lista', { _id: User._id })
             .then(response => {
@@ -25,7 +25,7 @@ export default function({ navigation }) {
                 console.log(error);
             });
         }
-    }); 
+    });*/ 
 
     function apresentaDetalhes(_idSelecionado) {               
         api.post(`/usuario/dadosSelecionado`, { _id : _idSelecionado })
