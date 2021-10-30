@@ -39,9 +39,7 @@ export default function({ route, navigation }) {
         <SafeAreaView style={styles.containerEmpr}>
             <View style={styles.formDadosPerfil}>
                 <ImageBackground style={styles.imagemFundo}>
-                    <Image 
-                        source={{ uri: UserSelecionado.fotoPerfil }} style={styles.fotoPerfil}
-                    />
+                    { !!UserSelecionado.fotoPerfil && <Image source={{ uri: UserSelecionado.fotoPerfil }} style={styles.fotoPerfil} /> }
                 </ImageBackground>
 
                 <View style={styles.dadosPerfil}>

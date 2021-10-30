@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, SafeAreaView, FlatList, TouchableOpacity} from 'react-native';
 
 import FavoritoComponent from '../../Componentes/favorito/FavoritoComponent';
+import FavoritoPlaceholderComponent from '../../Componentes/favorito/FavoritoPlaceholderComponent';
 import Styles from '../../Styles/StylesAbasPrincipais';
 import api from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
@@ -18,7 +19,8 @@ export default function({ navigation }) {
             if (!!Token) {
                 api.post('/favoritos/lista', { _id: User._id })
                 .then(response => {
-                    setDados(response.data);
+                    if(mounted)
+                        setDados(response.data);
                 })
                 .catch(error => {
                     console.log(error);
@@ -44,18 +46,15 @@ export default function({ navigation }) {
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={dadosLista}
-                    keyExtractor={(item, dadosLista) => dadosLista.toString()}
-                    renderItem={({item}) => {
-                        return (
-                            <TouchableOpacity>
-                                <FavoritoComponent 
-                                    onPress={() => apresentaDetalhes(item._id)}  
-                                    foto={item.fotoPerfil} 
-                                    nome={item.nome} 
-                                />
-                            </TouchableOpacity>          
-                        )
-                    }}
+                    keyExtractor={dadosLista => dadosLista._id}
+                    ListEmptyComponent={FavoritoPlaceholderComponent}
+                    renderItem={({item}) => (
+                        <FavoritoComponent 
+                            onPress={() => apresentaDetalhes(item._id)}  
+                            foto={item.fotoPerfil} 
+                            nome={item.nome} 
+                        />     
+                    )}
                 />
             </SafeAreaView>   
         </View> 

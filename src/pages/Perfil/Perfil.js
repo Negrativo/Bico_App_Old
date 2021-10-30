@@ -32,9 +32,7 @@ export default function({ route, navigation }) {
             <View style={styles.container}>
                 <View style={styles.formFotoPerfil}>
                     <ImageBackground style={styles.fundoFoto}>
-                        <Image 
-                            source={{ uri: User.fotoPerfil }} style={styles.fotoPerfil}
-                        />
+                        { !!User.fotoPerfil && <Image source={{ uri: User.fotoPerfil }} style={styles.fotoPerfil} /> }
                     </ImageBackground>
                 </View>
                 <View style={styles.formCabecalhoPerfil}>

@@ -33,7 +33,8 @@ export default function({ route, navigation }) {
         if(mounted){
             api.get('/pesquisa/cargos', {})
             .then(response => {
-                setEmpregos(response.data);
+                if(mounted)
+                    setEmpregos(response.data);
             })
             .catch(error => {
                 console.log(error);

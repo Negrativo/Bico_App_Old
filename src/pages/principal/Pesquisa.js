@@ -28,7 +28,8 @@ export default function({ navigation }) {
             if (!!Token) {
                 api.get('/pesquisa/cargos')
                 .then(response => {
-                    setDados(response.data);
+                    if(mounted)
+                        setDados(response.data);
                 })
                 .catch(error => {
                     console.log(error);

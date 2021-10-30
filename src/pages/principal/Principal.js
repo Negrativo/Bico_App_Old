@@ -2,6 +2,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { View, Image, TextInput, FlatList, TouchableOpacity, SafeAreaView} from 'react-native';
 
 import UsuarioComponent from '../../Componentes/usuario/UsuarioComponent';
+import UsuarioPlaceholderComponent from '../../Componentes/usuario/UsuarioPlaceholderComponent';
 import Styles from '../../Styles/StylesAbasPrincipais';
 import iconPesquisa from '../../../assets/pesquisar.png';
 import api from '../../services/api';
@@ -15,17 +16,18 @@ export default function({ navigation }) {
 
     useLayoutEffect(() => {
         let mounted = true;
-        if(mounted){
-            if (!!Token) {
-                api.get('/principal/lista')
-                .then(response => {
+
+        if (!!Token) {
+            api.get('/principal/lista')
+            .then(response => {
+                if(mounted)
                     setDados(response.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-            }
+            })
+            .catch(error => {
+                console.log(error);
+            });
         }
+
         return () => mounted = false;
     }); 
 
@@ -42,30 +44,28 @@ export default function({ navigation }) {
     return(
         <SafeAreaView style={Styles.container}>
             <View style={Styles.formBarraPesquisa}>
-                <TextInput 
+                <TextInput
                     style={Styles.barraPesquisa}
                     textAlign="left"
                     placeholderTextColor="#000000"
                     placeholder="Pesquisar">    
-                </TextInput> 
+                </TextInput>
                 <Image source={iconPesquisa} style={Styles.imagem}/>                 
             </View>
             <SafeAreaView style={Styles.formNavegacao}>
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={dadosLista}
-                    keyExtractor={(item, dadosLista) => dadosLista.toString()}
-                    renderItem={({item}) => {
-                        return (
-                            <TouchableOpacity>
-                                <UsuarioComponent 
-                                    onPress={() => apresentaDetalhes(item._id)} 
-                                    foto={item.fotoPerfil} 
-                                    nome={item.nome}    
-                                />
-                            </TouchableOpacity>          
-                        )
-                    }}
+                    maxToRenderPerBatch={10}
+                    keyExtractor={dadosLista => dadosLista._id}
+                    ListEmptyComponent={UsuarioPlaceholderComponent}
+                    renderItem={({item}) => (
+                        <UsuarioComponent
+                            onPress={() => apresentaDetalhes(item._id)} 
+                            foto={item.fotoPerfil} 
+                            nome={item.nome}    
+                        />
+                    )}
                 />
             </SafeAreaView>    
             
