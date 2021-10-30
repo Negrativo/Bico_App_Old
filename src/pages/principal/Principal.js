@@ -52,7 +52,7 @@ export default function({ navigation }) {
                 </TextInput>
                 <Image source={iconPesquisa} style={Styles.imagem}/>                 
             </View>
-            <SafeAreaView style={Styles.formNavegacao}>
+            <SafeAreaView style={Styles.formNavegacaoPrincipal}>
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={dadosLista}

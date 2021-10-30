@@ -22,8 +22,15 @@ export const AuthProvider = ({ children }) => {
                     })
                 }
             })
-            .catch(erro => alert(erro))
+            .catch(erro => alert("Erro na inicialização: ", erro))
     }, [Logado])
+
+    //Alterar para fazer todas as mudanças no front e quando o app detectar alteração, atualizar o usuario no back
+    useEffect(() => {
+        if (User && Logado) {
+           
+        }
+    })
 
     function Login(email, senha) {
         api.post('/login', {
@@ -38,7 +45,7 @@ export const AuthProvider = ({ children }) => {
             setUserLogado(true);
         })
         .catch(error => {
-            console.log(error);                      
+            console.log("Erro no login: ", error);                      
         });
     }
 

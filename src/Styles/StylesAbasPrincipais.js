@@ -39,7 +39,17 @@ export default styles = StyleSheet.create({
         marginTop: 45,
         marginBottom: 15
     },
-    formNavegacao:{
+    formNavegacaoPrincipal:{
+        width: 350,
+        height: 4,
+        flex: 1,
+        justifyContent: "center",
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop: 10,
+        marginBottom: 15
+    },
+    formNavegacaoFavoritos:{
         width: 350,
         height: 4,
         flex: 1,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, SafeAreaView, FlatList, TouchableOpacity} from 'react-native';
+import { View, StyleSheet, SafeAreaView, FlatList, Text} from 'react-native';
 
 import FavoritoComponent from '../../Componentes/favorito/FavoritoComponent';
 import FavoritoPlaceholderComponent from '../../Componentes/favorito/FavoritoPlaceholderComponent';
@@ -10,6 +10,7 @@ import { useAuth } from '../../context/AuthContext';
 export default function({ navigation }) {
     const[dadosLista, setDados] = useState('');
     const { Token, User } = useAuth();
+    const [hasErros, setHasErros] = useState(false);
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
@@ -19,11 +20,14 @@ export default function({ navigation }) {
             if (!!Token) {
                 api.post('/favoritos/lista', { _id: User._id })
                 .then(response => {
-                    if(mounted)
+                    if(mounted) {
+                        setHasErros(false);
                         setDados(response.data);
+                    }
                 })
                 .catch(error => {
-                    console.log(error);
+                    if(mounted)
+                        setHasErros(true);
                 });
             }
         }
@@ -42,20 +46,28 @@ export default function({ navigation }) {
 
     return(
         <View style={Styles.container}>
-            <SafeAreaView style={Styles.formNavegacao}>
+            <SafeAreaView style={Styles.formNavegacaoFavoritos}>
+            { !hasErros &&
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={dadosLista}
-                    keyExtractor={dadosLista => dadosLista._id}
+                    keyExtractor={dadosLista => dadosLista.toString()}
                     ListEmptyComponent={FavoritoPlaceholderComponent}
                     renderItem={({item}) => (
                         <FavoritoComponent 
-                            onPress={() => apresentaDetalhes(item._id)}  
-                            foto={item.fotoPerfil} 
-                            nome={item.nome} 
-                        />     
+                        onPress={() => apresentaDetalhes(item._id)}  
+                        foto={item.fotoPerfil} 
+                        nome={item.nome} 
+                        />
                     )}
                 />
+            }
+            {
+                hasErros &&
+                <View>
+                    <Text style={Styles.Text}>Não encontrado favoritos.</Text>
+                </View>
+            }
             </SafeAreaView>   
         </View> 
     );
