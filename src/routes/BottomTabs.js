@@ -3,10 +3,10 @@ import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import Principal from '../pages/principal/Principal';
-import Favoritos from '../pages/principal/Favoritos';
-import Pesquisa from '../pages/principal/Pesquisa';
-import Perfil from '../pages/Perfil/Perfil';
+import Principal from '../pages/principal/Principal/Principal';
+import Favoritos from '../pages/principal/Favoritos/Favoritos';
+import Pesquisa from '../pages/principal/Pesquisa/Pesquisa';
+import Perfil from '../pages/principal/Perfil/Perfil';
 
 const Tab = createMaterialBottomTabNavigator();
 

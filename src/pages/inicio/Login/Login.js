@@ -3,13 +3,16 @@ import { View, Text, Image, TextInput, TouchableOpacity, ImageBackground} from '
 import { Formik } from 'formik';
 import { Video } from 'expo-av';
 
-import styles from '../../Styles/StylesInicio';
-import ValidateLogin from '../../Componentes/schema/LoginSchema';
-import videoFundo from '../../../assets/fundofinal.mp4';
-import ico from '../../../assets/BICO-3.png';
-import { useAuth } from '../../context/AuthContext';
+import videoFundo from '../../../../assets/fundofinal.mp4';
+import ico from '../../../../assets/BICO-3.png';
 
-export default function loginProfissional({ navigation }){
+import { useAuth } from '../../../context/AuthContext';
+
+import ValidateLogin from '../../../Componentes/schema/LoginSchema';
+
+import styles from './StylesLogin';
+
+export default function Login({ navigation }){
     const { Login } = useAuth();
 
     async function handleSubmitCadastro() {

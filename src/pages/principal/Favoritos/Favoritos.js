@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, SafeAreaView, FlatList, Text} from 'react-native';
+import { View, SafeAreaView, FlatList, Text} from 'react-native';
 
-import FavoritoComponent from '../../Componentes/favorito/FavoritoComponent';
-import FavoritoPlaceholderComponent from '../../Componentes/favorito/FavoritoPlaceholderComponent';
-import Styles from '../../Styles/StylesAbasPrincipais';
-import api from '../../services/api';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
+import api from '../../../services/api';
+
+import FavoritoComponent from '../../../Componentes/favorito/FavoritoComponent';
+import FavoritoPlaceholderComponent from '../../../Componentes/favorito/FavoritoPlaceholderComponent';
+
+import styles from './StylesFavorito';
 
 export default function({ navigation }) {
     const[dadosLista, setDados] = useState('');
@@ -45,8 +47,8 @@ export default function({ navigation }) {
     }
 
     return(
-        <View style={Styles.container}>
-            <SafeAreaView style={Styles.formNavegacaoFavoritos}>
+        <View style={styles.container}>
+            <SafeAreaView style={styles.formNavegacaoFavoritos}>
             { !hasErros &&
                 <FlatList
                     showsVerticalScrollIndicator={false}
@@ -65,7 +67,7 @@ export default function({ navigation }) {
             {
                 hasErros &&
                 <View>
-                    <Text style={Styles.Text}>Não encontrado favoritos.</Text>
+                    <Text style={styles.Text}>Não encontrado favoritos.</Text>
                 </View>
             }
             </SafeAreaView>   
@@ -73,18 +75,3 @@ export default function({ navigation }) {
     );
 
 }
-
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#E5E5E5',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-
-    Text: {
-        fontSize: 30
-    }
-
-});

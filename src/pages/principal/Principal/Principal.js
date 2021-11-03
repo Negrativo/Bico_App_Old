@@ -1,16 +1,20 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { View, Image, TextInput, FlatList, TouchableOpacity, SafeAreaView} from 'react-native';
+import React, { useState, useLayoutEffect } from 'react';
+import { View, Image, TextInput, FlatList, SafeAreaView} from 'react-native';
 
-import UsuarioComponent from '../../Componentes/usuario/UsuarioComponent';
-import UsuarioPlaceholderComponent from '../../Componentes/usuario/UsuarioPlaceholderComponent';
-import Styles from '../../Styles/StylesAbasPrincipais';
-import iconPesquisa from '../../../assets/pesquisar.png';
-import api from '../../services/api';
-import { useAuth } from '../../context/AuthContext';
+import iconPesquisa from '../../../../assets/pesquisar.png';
+
+import { useAuth } from '../../../context/AuthContext';
+import api from '../../../services/api';
+
+import UsuarioComponent from '../../../Componentes/usuario/UsuarioComponent';
+import UsuarioPlaceholderComponent from '../../../Componentes/usuario/UsuarioPlaceholderComponent';
+
+import styles from './StylesPrincipal';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function({ navigation }) {
     const[dadosLista, setDados] = useState('');
-    const { Token, User } = useAuth();
+    const { Token } = useAuth();
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
@@ -42,17 +46,17 @@ export default function({ navigation }) {
     }
 
     return(
-        <SafeAreaView style={Styles.container}>
-            <View style={Styles.formBarraPesquisa}>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.formBarraPesquisa}>
                 <TextInput
-                    style={Styles.barraPesquisa}
+                    style={styles.barraPesquisa}
                     textAlign="left"
                     placeholderTextColor="#000000"
                     placeholder="Pesquisar">    
                 </TextInput>
-                <Image source={iconPesquisa} style={Styles.imagem}/>                 
+                <Image source={iconPesquisa} style={styles.imagem}/>                 
             </View>
-            <SafeAreaView style={Styles.formNavegacaoPrincipal}>
+            <SafeAreaView style={styles.formNavegacaoPrincipal}>
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={dadosLista}

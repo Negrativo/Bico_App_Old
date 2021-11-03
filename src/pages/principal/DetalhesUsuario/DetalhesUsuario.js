@@ -1,16 +1,21 @@
-import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { View, SafeAreaView, Text, StyleSheet, ImageBackground, Image, TouchableOpacity, ScrollView, FlatList, Linking} from 'react-native';
+import React, { useState } from 'react';
+import { View, SafeAreaView, Text, ImageBackground, Image, TouchableOpacity, ScrollView, FlatList, Linking } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaskInput, { Masks } from 'react-native-mask-input';
 
-import api from '../../services/api';
-import { useAuth } from '../../context/AuthContext';
-import OpcoesComponets from '../../Componentes/tagInput/tagInput';
+import { useAuth } from '../../../context/AuthContext';
+import api from '../../../services/api';
 
-export default function({ route, navigation }) {
+import OpcoesComponets from '../../../Componentes/tagInput/tagInput';
+
+import styles from './StylesDetalhesUsuario';
+
+export default function({ route }) {
     const { Token, User } = useAuth();
     const UserSelecionado = route.params.DadosSelecionado;
     const [ Favoritar, serFavorito] = useState(favoritado);
     const Empregos = UserSelecionado.empregos;
+    const Telefone = UserSelecionado.telefone;
     const Mensagem = `Olá ${UserSelecionado.nome}, tudo bem? Sou ${User.nome}.\nEncontrei seu perfil no aplicativo Bico e gostaria de conversar melhor sobre o assunto.`;
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
@@ -44,8 +49,17 @@ export default function({ route, navigation }) {
 
                 <View style={styles.dadosPerfil}>
                     <Text style={styles.TextoPerfil}>{UserSelecionado.nome}</Text>
-                    <Text style={styles.TextoPerfil}>Avaliação: {UserSelecionado.avalicao}</Text>
-                    <Text style={styles.TextoPerfil}>{UserSelecionado.telefone}</Text>
+                    <Text style={styles.TextoPerfil}>Avaliação: {UserSelecionado.avalicao || 0}</Text>
+                    <MaskInput
+                        style={styles.TextoPerfil}    
+                        value={Telefone.toString()}
+                        mask={Masks.BRL_PHONE}
+                        textAlign="center"
+                        textContentType='telephoneNumber'
+                        placeholder="Telefone"
+                        placeholderTextColor="#FFFFFF"
+                        autoCompleteType="tel"                                    
+                    /> 
                     <Text style={styles.TextoPerfil}>Qualificações</Text>
                     {!!Empregos &&
                         <FlatList
@@ -81,119 +95,3 @@ export default function({ route, navigation }) {
     )
 
 }
-
-const styles = StyleSheet.create({
-    
-    containerEmpr: {
-        backgroundColor: '#CFCFCF',
-        flex: 1,
-        shadowColor: 'black',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    imagemFundo: {
-        resizeMode: "cover",
-        justifyContent: "center",
-        alignItems: 'center',
-        backgroundColor: '#434343',
-        width: 130,
-        height: 130,
-        borderWidth: 0.5,
-        borderRadius: 80,
-        margin: 10
-    },
-
-    barraSuperior: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        height: 20,
-        marginTop: 5,
-        flex: 0.1
-    },
-
-    textoDivoria: {
-        fontSize: 18,
-        marginLeft: 10,
-        justifyContent: 'center',
-        alignContent: 'center'
-    },
-
-    sair: {
-        fontSize: 30,
-        margin: 5
-    },
-
-    TextoPerfil: {
-        fontSize: 20,
-        marginLeft: 10,
-        margin: 3
-    },
-
-    textBottom: {
-        fontSize: 18,
-        color: "#FFFFFF"
-    },
-
-    dadosPerfil: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: 240
-    },
-
-    formDadosPerfil: {
-        flexDirection: 'column',
-        height: 250,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        flex: 2,
-        marginTop: 50
-    },
-
-    formHistorico: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1,
-        marginTop: 20
-    },
-
-    formBotaoContato: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 0.5,
-        flexDirection: 'row'
-    },
-
-    fotoPerfil: {
-        width:  150,
-        height:  150,
-        borderWidth: 0.5,
-        borderRadius: 80,
-    },
-
-    buttonCadastro:{
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: 5,
-        backgroundColor: '#00000F',
-        borderWidth: 0.2,
-        borderRadius: 50,
-        width: 270,
-        height: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    favoritoIcon: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'black',
-        width:  50,
-        height:  50,
-        borderWidth: 0.2,
-        borderRadius: 50,
-        
-    },
-
-});

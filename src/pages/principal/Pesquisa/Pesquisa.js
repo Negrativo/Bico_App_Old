@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { View, Image, TextInput, FlatList } from 'react-native';
 import MapView from 'react-native-maps';
 
-import iconPesquisa from '../../../assets/pesquisar.png';
-import Styles from '../../Styles/StylesAbasPrincipais';
-import api from '../../services/api';
-//import TagInput from '../../Componentes/tagInput/tagInput';
-import useLocation from '../../Componentes/maps/UserLocation';
-import MapsTheme from '../../Componentes/maps/MapsTheme.json';
-import { useAuth } from '../../context/AuthContext';
+import iconPesquisa from '../../../../assets/pesquisar.png';
 
-export default function({ navigation }) {
+import { useAuth } from '../../../context/AuthContext';
+import api from '../../../services/api';
+
+import useLocation from '../../../Componentes/maps/UserLocation';
+import MapsTheme from '../../../Componentes/maps/MapsTheme.json';
+
+import styles from './StylesPesquisa';
+
+export default function() {
     const [Dados, setDados] = useState('');
     const [ErrorMsg, setErrorMsg] = useState(null);
     const [Coords, setCoords] = useState(null);
@@ -40,18 +42,18 @@ export default function({ navigation }) {
     });    
 
     return(
-        <View style={Styles.containerPesquisa}>
-            <View style={Styles.formBarraPesquisa}>
+        <View style={styles.containerPesquisa}>
+            <View style={styles.formBarraPesquisa}>
                 <TextInput 
-                    style={Styles.barraPesquisa}
+                    style={styles.barraPesquisa}
                     textAlign="left"
                     placeholderTextColor="#000000"
                     placeholder="Pesquisar">    
                 </TextInput> 
-                <Image source={iconPesquisa} style={Styles.imagem}/>                 
+                <Image source={iconPesquisa} style={styles.imagem}/>                 
             </View>
 
-            <View style={Styles.formGrupoRecomendacao}>
+            <View style={styles.formGrupoRecomendacao}>
                 <FlatList
                     horizontal={false}
                     numColumns={2}

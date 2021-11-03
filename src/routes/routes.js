@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useAuth } from '../context/AuthContext';
 
 import BottomTabs from './BottomTabs';
-import CadastroInicial from '../pages/inicio/CadastroInicial';
-import CadastroFinal from '../pages/inicio/CadastroFinal';
-import loginProfissional from '../pages/inicio/loginProfissional';
-import Detalhes from '../pages/principal/DetalhesUsuario';
+import Detalhes from '../pages/principal/DetalhesUsuario/DetalhesUsuario';
+
+import CadastroInicial from '../pages/inicio/CadastroInicial/CadastroInicial';
+import CadastroFinal from '../pages/inicio/CadastroFinal/CadastroFinal';
+import Login from '../pages/inicio/Login/Login';
 
 const Stack = createStackNavigator();
 
@@ -39,7 +40,7 @@ export default function Routes(props) {
             <>
                 <Stack.Screen 
                     name="Login" 
-                    component={loginProfissional}
+                    component={Login}
                     options={{
                         headerLeft: ()=> null,
                         headerShown: false

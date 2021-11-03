@@ -4,11 +4,13 @@ import * as ImagePicker from 'expo-image-picker';
 import { Formik } from 'formik';
 import MaskInput, { Masks } from 'react-native-mask-input';
 
-import api from '../../services/api';
-import ValidateCadastroFone from '../../Componentes/schema/CadastroFoneSchema';
-import Pesquisa from '../../Componentes/barraPesquisa/PesquisaComponent';
-import styles from '../../Styles/StyleCadastroFinal';
-import TagInputSelecionado from '../../Componentes/tagInput/tagInputSelecionado'; 
+import api from '../../../services/api';
+
+import ValidateCadastroFone from '../../../Componentes/schema/CadastroFoneSchema';
+import Pesquisa from '../../../Componentes/barraPesquisa/PesquisaComponent';
+import TagInputSelecionado from '../../../Componentes/tagInput/tagInputSelecionado';
+
+import styles from './StyleCadastroFinal';
 
 export default function({ route, navigation }) {
     const [Empregos, setEmpregos] = useState([]);
@@ -61,11 +63,11 @@ export default function({ route, navigation }) {
     };
 
     
-    adicionarProfissao = (item) => {
+    const adicionarProfissao = (item) => {
         setEmpregosSelecionados([...EmpregosSelecionados, item]);
     };
 
-    removerProfissao = (item) => {    
+    const removerProfissao = (item) => {    
         setEmpregosSelecionados(EmpregosSelecionados.filter((emprego) => emprego !== item));
     };
 
