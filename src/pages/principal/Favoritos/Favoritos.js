@@ -1,7 +1,9 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, SafeAreaView, FlatList, Text} from 'react-native';
 
 import { useAuth } from '../../../context/AuthContext';
+import { getListaFavoritos } from '../../../services/FavoritoService';
+import { getDadosUsuario } from '../../../services/UsuarioService';
 import api from '../../../services/api';
 
 import FavoritoComponent from '../../../Componentes/favorito/FavoritoComponent';
@@ -16,34 +18,28 @@ export default function({ navigation }) {
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         let mounted = true;
         if(mounted){
             if (!!Token) {
-                api.post('/favoritos/lista', { _id: User._id })
-                .then(response => {
-                    if(mounted) {
-                        setHasErros(false);
-                        setDados(response.data);
-                    }
-                })
-                .catch(error => {
-                    if(mounted)
-                        setHasErros(true);
-                });
+                getListaFavoritos(User._id)
+                    .then(response => {
+                        if(mounted) {
+                            setHasErros(response.error);
+                            setDados(response.data);
+                        }
+                    })
             }
         }
         return () => mounted = false;
     });
 
     function apresentaDetalhes(_idSelecionado) {
-        api.post(`/usuario/dadosSelecionado`, { _id : _idSelecionado })
+        getDadosUsuario(_idSelecionado)
             .then(response => {
-                navigation.navigate('Detalhes', { DadosSelecionado: response.data });
+                if (response.error != "")
+                    navigation.navigate('Detalhes', { DadosSelecionado: response.data });
             })
-            .catch(error => {
-                console.log(error);
-            });
     }
 
     return(
