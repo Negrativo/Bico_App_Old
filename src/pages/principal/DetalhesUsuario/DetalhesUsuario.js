@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, SafeAreaView, Text, ImageBackground, Image, TouchableOpacity, ScrollView, FlatList, Linking } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaskInput, { Masks } from 'react-native-mask-input';
@@ -19,6 +19,14 @@ export default function({ route }) {
     const Mensagem = `Olá ${UserSelecionado.nome}, tudo bem? Sou ${User.nome}.\nEncontrei seu perfil no aplicativo Bico e gostaria de conversar melhor sobre o assunto.`;
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
+
+    useEffect(() => {
+        let mounted = true;
+        if(mounted){
+            serFavorito(favoritado);
+        }
+        return () => mounted = false;
+    });
 
     function favoritado() {
         return User.favoritosIds.includes(UserSelecionado._id);
