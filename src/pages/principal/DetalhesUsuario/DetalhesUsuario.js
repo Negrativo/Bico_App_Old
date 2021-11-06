@@ -28,16 +28,26 @@ export default function({ route }) {
         const _id = User._id;
         const favoritoId = UserSelecionado._id;
         api.post(`/favorito/adicionar`, { _id, favoritoId })
-        .then(response => {
-            serFavorito(response.data.Favoritado);
-        })
-        .catch(error => {
-            console.log(error);
-        });
+            .then(response => {
+                serFavorito(response.data.Favoritado);
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     function entrarEmContato(telefone) {
         Linking.openURL(`whatsapp://send?text=${Mensagem}&phone=55${telefone}`);
+        registrarHistorico();
+    }
+
+    function registrarHistorico() {    
+        const _id = User._id;
+        const historicoId = UserSelecionado._id;           
+        api.post(`/historico/adicionar`, { _id, historicoId })
+            .catch(error => {
+                console.log(error);
+            });
     }
 
     return ( 

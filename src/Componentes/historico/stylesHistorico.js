@@ -34,6 +34,13 @@ export default styles = StyleSheet.create({
         borderRadius: 80,
     },
 
+    fotoPerfil: {
+        width:  75,
+        height:  75,
+        borderWidth: 0.5,
+        borderRadius: 80,
+    },
+
     styleFundo: {
         justifyContent: 'center',
         alignContent: 'center'

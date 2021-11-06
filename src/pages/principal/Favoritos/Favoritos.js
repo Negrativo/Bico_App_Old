@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import { View, SafeAreaView, FlatList, Text} from 'react-native';
 
 import { useAuth } from '../../../context/AuthContext';
@@ -16,7 +16,7 @@ export default function({ navigation }) {
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         let mounted = true;
         if(mounted){
             if (!!Token) {
@@ -57,7 +57,7 @@ export default function({ navigation }) {
                     ListEmptyComponent={FavoritoPlaceholderComponent}
                     renderItem={({item}) => (
                         <FavoritoComponent 
-                        onPress={() => apresentaDetalhes(item._id)}  
+                        onPress={() => apresentaDetalhes(item._id)}
                         foto={item.fotoPerfil} 
                         nome={item.nome} 
                         />
@@ -67,7 +67,7 @@ export default function({ navigation }) {
             {
                 hasErros &&
                 <View>
-                    <Text style={styles.Text}>Não encontrado favoritos.</Text>
+                    <Text style={styles.Text}>Não encontrado favoritos</Text>
                 </View>
             }
             </SafeAreaView>   

@@ -1,22 +1,21 @@
 import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
 
-import imagem from '../../assets/Job.png';
 import styles from './stylesHistorico';
 
-export default function EmpregoList(props) {
+export default function HistoricoServicoComponent(props) {
 
     return ( 
         <View style={styles.containerEmpr}>
             <ImageBackground style={styles.imagemFundo}>
-                <Image 
-                    source={imagem}
-                />
+            { !!props.foto && <Image source={{ uri: props.foto }} style={styles.fotoPerfil} /> }
             </ImageBackground>
             <View style={styles.detalhesContainer}>
                 <View style={styles.styleFundo}>
-                    <Text style={styles.Texto}>{props.empresa}</Text>
-                    <Text style={styles.Texto}>{props.servico}</Text>
+                    <TouchableOpacity onPress={props.onPress}>
+                        <Text style={styles.Texto}>{props.nome}</Text>
+                        <Text style={styles.Texto}>{props.data}</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>

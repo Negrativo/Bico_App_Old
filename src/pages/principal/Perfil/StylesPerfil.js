@@ -98,6 +98,10 @@ export default styles = StyleSheet.create({
         margin: 5
     },
 
+    Text: {
+        fontSize: 30
+    },
+
     textGeral: {
         fontSize: 18,
     },
