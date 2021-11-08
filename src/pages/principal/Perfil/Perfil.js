@@ -11,28 +11,26 @@ import styles from './StylesPerfil';
 
 export default function({ navigation }) {
     const[dadosLista, setDados] = useState('');
-    const { Token, User, Logout } = useAuth();
+    const { Token, User, Logout, permitido } = useAuth();
     const [hasErros, setHasErros] = useState(false);
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
     useLayoutEffect(() => {
         let mounted = true;
-        if(mounted){
-            if (!!Token) {
-                api.post('/historico/lista', { _id: User._id })
-                .then(response => {
-                    if(mounted) {
-                        setHasErros(false);
-                        setDados(response.data);
-                    }
-                })
-                .catch(error => {
-                    console.log(error);
-                    if(mounted)
-                        setHasErros(true);
-                });
-            }
+        if(mounted && permitido){
+            api.post('/historico/lista', { _id: User._id })
+            .then(response => {
+                if(mounted) {
+                    setHasErros(false);
+                    setDados(response.data);
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                if(mounted)
+                    setHasErros(true);
+            });
         }
         return () => mounted = false;
     });
