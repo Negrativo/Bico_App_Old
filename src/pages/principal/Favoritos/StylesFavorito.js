@@ -4,7 +4,7 @@ export default styles = StyleSheet.create({
     container: {
         backgroundColor: '#DDE0E1',
         flex: 1,
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
         alignItems: 'center'
     },
     Text: {
@@ -58,6 +58,10 @@ export default styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 45,
         marginBottom: 15
+    },
+    formListaVazia: {
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     formRecomendacao: {
         backgroundColor: '#1087AC',

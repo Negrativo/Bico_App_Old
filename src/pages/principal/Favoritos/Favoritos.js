@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, SafeAreaView, FlatList, Text} from 'react-native';
 
 import { useAuth } from '../../../context/AuthContext';
@@ -11,30 +11,38 @@ import styles from './StylesFavorito';
 
 export default function({ navigation }) {
     const[dadosLista, setDados] = useState('');
-    const { Token, User } = useAuth();
-    const [hasErros, setHasErros] = useState(false);
+    const { Token, User, permitido } = useAuth();
+    const [OnLoad, setOnLoad] = useState(true);
+    const [refreshing, setRefreshing] = useState(false);
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         let mounted = true;
-        if(mounted){
-            if (!!Token) {
-                api.post('/favoritos/lista', { _id: User._id })
-                .then(response => {
-                    if(mounted) {
-                        setHasErros(false);
-                        setDados(response.data);
-                    }
-                })
-                .catch(error => {
-                    if(mounted)
-                        setHasErros(true);
-                });
-            }
+        if(mounted && permitido){
+            getDadosLista();
         }
         return () => mounted = false;
     });
+
+    async function getDadosLista() {
+        await api.post('/favoritos/lista', { favoritosIds: User.favoritosIds })
+                .then(response => {
+                    setDados(response.data);
+                    setOnLoad(false);
+                    setRefreshing(false);
+                })
+                .catch(error => {
+                    setDados([]);
+                    setRefreshing(false);
+                    setOnLoad(false);
+                });
+    }
+
+    function refreshList() {
+        setRefreshing(true);
+        getDadosLista();
+    }
 
     function apresentaDetalhes(_idSelecionado) {
         api.post(`/usuario/dadosSelecionado`, { _id : _idSelecionado })
@@ -46,15 +54,25 @@ export default function({ navigation }) {
             });
     }
 
+    function listaVazia() {
+        return (
+            <View style={styles.formListaVazia}>
+                <Text style={styles.Text}>Não encontrado favoritos</Text>
+            </View>
+        )
+    }
+
     return(
         <View style={styles.container}>
             <SafeAreaView style={styles.formNavegacaoFavoritos}>
-            { !hasErros &&
+            { !OnLoad &&
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={dadosLista}
                     keyExtractor={dadosLista => dadosLista.toString()}
-                    ListEmptyComponent={FavoritoPlaceholderComponent}
+                    ListEmptyComponent={listaVazia}
+                    onRefresh={() => refreshList()}
+                    refreshing={refreshing}
                     renderItem={({item}) => (
                         <FavoritoComponent 
                         onPress={() => apresentaDetalhes(item._id)}
@@ -64,12 +82,7 @@ export default function({ navigation }) {
                     )}
                 />
             }
-            {
-                hasErros &&
-                <View>
-                    <Text style={styles.Text}>Não encontrado favoritos</Text>
-                </View>
-            }
+            { OnLoad && <FavoritoPlaceholderComponent/> }
             </SafeAreaView>   
         </View> 
     );

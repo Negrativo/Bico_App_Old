@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, SafeAreaView, Text, ImageBackground, Image, TouchableOpacity, ScrollView, FlatList, Linking } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaskInput, { Masks } from 'react-native-mask-input';
@@ -11,29 +11,31 @@ import OpcoesComponets from '../../../Componentes/tagInput/tagInput';
 import styles from './StylesDetalhesUsuario';
 
 export default function({ route }) {
-    const { Token, User } = useAuth();
+    const { Token, User, setFavorito } = useAuth();
     const UserSelecionado = route.params.DadosSelecionado;
-    const [ Favoritar, serFavorito] = useState(favoritado);
+    const [ Favoritar, setStatusFavorito] = useState();
     const Empregos = UserSelecionado.empregos;
     const Telefone = UserSelecionado.telefone;
     const Mensagem = `Olá ${UserSelecionado.nome}, tudo bem? Sou ${User.nome}.\nEncontrei seu perfil no aplicativo Bico e gostaria de conversar melhor sobre o assunto.`;
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
+    useEffect(() => {
+        let mounted = true;
+        if(mounted){
+            const statusFavorito = favoritado();
+            setStatusFavorito(statusFavorito);
+        }
+        return () => mounted = false;
+    }, [Favoritar]);
+
     function favoritado() {
         return User.favoritosIds.includes(UserSelecionado._id);
     }
     
     function clickFavorito() {
-        const _id = User._id;
-        const favoritoId = UserSelecionado._id;
-        api.post(`/favorito/adicionar`, { _id, favoritoId })
-            .then(response => {
-                serFavorito(response.data.Favoritado);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        const statusFavorito = setFavorito(UserSelecionado._id);
+        setStatusFavorito(statusFavorito);
     }
 
     function entrarEmContato(telefone) {

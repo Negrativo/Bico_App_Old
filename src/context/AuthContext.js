@@ -56,8 +56,31 @@ export const AuthProvider = ({ children }) => {
         //setUser(null); TO DO - Implementar remoção do user apos logout
     }
 
+    function setFavorito(favoritoId) {
+        const favoritos = User.favoritosIds;
+        let Favoritado = favoritos.includes(favoritoId);
+        
+        if (Favoritado == false) {
+            favoritos.push(favoritoId);
+            Favoritado = true;
+        } else {
+            favoritos.splice(favoritos.indexOf(favoritoId), 1);
+            Favoritado = false;
+        }
+
+        api.post(`/favorito/adicionar`, { _id: User._id, favoritos })
+            .then(DadosUser => setUser(DadosUser.data))
+            .catch(error => {console.log(error)});
+        
+        return Favoritado;
+    }
+
+    function permitido() {
+        return !!Token && !!User && Logado;
+    }
+
     return (
-        <AuthContext.Provider value={{Logado, Login, Logout, User, Token}}>
+        <AuthContext.Provider value={{Logado, User, Token, Login, Logout, setFavorito, permitido}}>
             {children}
         </AuthContext.Provider>
     );

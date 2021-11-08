@@ -14,18 +14,17 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function({ navigation }) {
     const[dadosLista, setDados] = useState('');
-    const { Token, User } = useAuth();
+    const { Token, User, permitido } = useAuth();
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
     useLayoutEffect(() => {
         let mounted = true;
 
-        if (!!Token) {
+        if (mounted && permitido) {
             api.get(`/principal/lista/`, {params: {_id: User._id}})
             .then(response => {
-                if(mounted)
-                    setDados(response.data);
+                setDados(response.data);
             })
             .catch(error => {
                 console.log(error);
