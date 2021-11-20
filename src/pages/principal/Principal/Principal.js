@@ -10,7 +10,6 @@ import UsuarioComponent from '../../../Componentes/usuario/UsuarioComponent';
 import UsuarioPlaceholderComponent from '../../../Componentes/usuario/UsuarioPlaceholderComponent';
 
 import styles from './StylesPrincipal';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function({ navigation }) {
     const[dadosLista, setDados] = useState('');
@@ -67,7 +66,8 @@ export default function({ navigation }) {
                         <UsuarioComponent
                             onPress={() => apresentaDetalhes(item._id)} 
                             foto={item.fotoPerfil} 
-                            nome={item.nome}    
+                            nome={item.nome}
+                            empregos={item.empregos}
                         />
                     )}
                 />

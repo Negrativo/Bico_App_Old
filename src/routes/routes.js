@@ -4,6 +4,8 @@ import { useAuth } from '../context/AuthContext';
 
 import BottomTabs from './BottomTabs';
 import Detalhes from '../pages/principal/DetalhesUsuario/DetalhesUsuario';
+import Favoritos from '../pages/principal/Favoritos/Favoritos';
+import EditarPerfil from '../pages/principal/EditarPerfil/EditarPerfil';
 
 import CadastroInicial from '../pages/inicio/CadastroInicial/CadastroInicial';
 import CadastroFinal from '../pages/inicio/CadastroFinal/CadastroFinal';
@@ -11,7 +13,7 @@ import Login from '../pages/inicio/Login/Login';
 
 const Stack = createStackNavigator();
 
-export default function Routes(props) {   
+export default function Routes() {   
     const { Logado } = useAuth();
     return (
         <Stack.Navigator>
@@ -34,6 +36,26 @@ export default function Routes(props) {
                             backgroundColor: "#EDEDED"
                         }
                     }}                
+                />
+                <Stack.Screen 
+                    name ="Favoritos" 
+                    component={Favoritos}
+                    options={{
+                        headerStyle: {
+                            height: 70,
+                            backgroundColor: "#EDEDED"
+                        }
+                    }} 
+                />
+                <Stack.Screen 
+                    name ="Atualizar dados" 
+                    component={EditarPerfil}
+                    options={{
+                        headerStyle: {
+                            height: 70,
+                            backgroundColor: "#EDEDED"
+                        }
+                    }} 
                 />
             </>   
             ) : (

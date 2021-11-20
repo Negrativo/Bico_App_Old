@@ -12,37 +12,22 @@ const Tab = createMaterialBottomTabNavigator();
 
 export default function BottomTabs() {
 
-        return  <Tab.Navigator>
+        return  <Tab.Navigator barStyle={{ backgroundColor: '#000000'}}>
                     <Tab.Screen 
                         name ="Principal" 
-                        component={Principal} 
+                        component={Principal}
                         options={{
-                            tabBarLabel: 'Principal',
-                            tabBarColor: "#000000",
                             tabBarIcon: ({ color }) => (
                                 <MaterialCommunityIcons name="home" color={"#EDEDED"} size={26} />
                             ),
                         }
                     } />
-                    <Tab.Screen 
+                    <Tab.Screen
                         name ="Pesquisa" 
                         component={Pesquisa}
                         options={{
-                            tabBarLabel: 'Pesquisa',
-                            tabBarColor: "#000000",
                             tabBarIcon: ({ color }) => (
                                 <MaterialCommunityIcons name="magnify" color={"#EDEDED"} size={29} />
-                            ),
-                        }} 
-                    />
-                    <Tab.Screen 
-                        name ="Favoritos" 
-                        component={Favoritos}
-                        options={{
-                            tabBarLabel: 'Favoritos',
-                            tabBarColor: "#000000",
-                            tabBarIcon: ({ color }) => (
-                                <MaterialCommunityIcons name="heart" color={"#EDEDED"} size={26} />
                             ),
                         }} 
                     />
@@ -50,8 +35,6 @@ export default function BottomTabs() {
                         name ="Perfil" 
                         component={Perfil} 
                         options={{
-                            tabBarLabel: 'Perfil',
-                            tabBarColor: "#000000",
                             tabBarIcon: ({ color }) => (
                                 <MaterialCommunityIcons name="account" color={"#EDEDED"} size={26} />
                             ),

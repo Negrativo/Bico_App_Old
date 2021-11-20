@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import {
     Placeholder,
     PlaceholderMedia,
@@ -10,6 +10,21 @@ import {
 import styles from './stylesUsuarioComponent';
 
 export default function UsuarioComponent(props) {
+    const EmpregosData = listaEmpregos();
+
+    function listaEmpregos() {
+        const empregos = props.empregos;
+        return (!!empregos && empregos.length > 3) ? listaEmpregosLimitados() : empregos;
+    }
+
+    function listaEmpregosLimitados() {
+        const empregos = props.empregos;
+        let lista = empregos.slice(0, 3);
+        const calculo = 'E outras: ' + (empregos.length - 3).toString() + ' qualificações';
+        lista.push(calculo);
+        return lista;
+    }
+
     return ( 
         <>
         { props?.nome && 
@@ -19,7 +34,19 @@ export default function UsuarioComponent(props) {
                 </ImageBackground>
                 <View style={styles.detalhesContainer}>
                     <TouchableOpacity onPress={props.onPress} style={styles.styleFundo}>
-                        <Text style={styles.Texto}>{props.nome}</Text>
+                        <View style={styles.detalhesNomeContainer}>
+                            <Text style={styles.Texto}>{props.nome}</Text>
+                        </View>
+                        <View style={styles.detalhesEmpregosContainer}>
+                            <FlatList
+                                showsVerticalScrollIndicator={false}
+                                data={EmpregosData}
+                                keyExtractor={EmpregosData => EmpregosData.toString()}
+                                renderItem={({item}) => (
+                                    <Text style={styles.textoEmpregos}>{item}</Text>
+                                )}
+                            />
+                        </View>
                     </TouchableOpacity>
                 </View>
             </View>

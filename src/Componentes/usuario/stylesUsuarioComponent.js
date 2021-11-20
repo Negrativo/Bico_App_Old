@@ -18,6 +18,16 @@ export default styles = StyleSheet.create({
         flex: 6
     },
 
+    detalhesNomeContainer: {
+        justifyContent: 'center',
+        flex: 1,
+    },
+
+    detalhesEmpregosContainer: {
+        justifyContent: 'flex-start',
+        flex: 3,
+    },
+
     imagemFundo: {
         resizeMode: "cover",
         justifyContent: "center",
@@ -35,6 +45,11 @@ export default styles = StyleSheet.create({
 
     Texto: {
         fontSize: 20,
+        marginLeft: 10
+    },
+
+    textoEmpregos: {
+        fontSize: 16,
         marginLeft: 10
     },
 

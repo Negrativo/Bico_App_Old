@@ -21,7 +21,7 @@ export default function({ route }) {
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
     function favoritado() {
-        return User.favoritosIds.includes(UserSelecionado._id);
+        return !!User.favoritosIds ? User.favoritosIds.includes(UserSelecionado._id) : false;
     }
     
     function clickFavorito() {

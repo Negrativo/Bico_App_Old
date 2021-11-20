@@ -51,6 +51,14 @@ export default function({ navigation }) {
         Logout();
     }
 
+    function favoritosUser() {
+        navigation.navigate('Favoritos');
+    }
+
+    function EditarUser() {
+        navigation.navigate('Atualizar dados');
+    }
+
     return (
         <View style={styles.container}>    
             <View style={styles.container}>
@@ -66,8 +74,11 @@ export default function({ navigation }) {
                 <Text>________________________________</Text>
                 <View style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                     <View style={styles.formBottons}>
-                        <TouchableOpacity style={styles.buttonCadastro}>
-                            <Text style={styles.textBottom}>Editar perfil</Text>
+                        <TouchableOpacity style={styles.buttonCadastro} onPress={() => EditarUser()}>
+                            <Text style={styles.textBottom}>Atualizar dados</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.buttonCadastro} onPress={() => favoritosUser()}>
+                            <Text style={styles.textBottom}>Favoritos</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.buttonCadastro}>
                             <Text style={styles.textBottom}>Configurações</Text>
