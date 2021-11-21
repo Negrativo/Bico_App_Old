@@ -57,19 +57,20 @@ export default function({ route }) {
                     { !!UserSelecionado.fotoPerfil && <Image source={{ uri: UserSelecionado.fotoPerfil }} style={styles.fotoPerfil} /> }
                 </ImageBackground>
 
+                <Text style={styles.TextoNome}>{UserSelecionado.nome}</Text>
+                <Text style={styles.TextoHeader}>Avaliação: {UserSelecionado.avalicao || "Sem avaliação"}</Text>
+                <MaskInput
+                    style={styles.TextoHeader}    
+                    value={Telefone.toString()}
+                    mask={Masks.BRL_PHONE}
+                    textAlign="center"
+                    textContentType='telephoneNumber'
+                    placeholder="Telefone"
+                    placeholderTextColor="#FFFFFF"
+                    autoCompleteType="tel"                                    
+                /> 
                 <View style={styles.dadosPerfil}>
-                    <Text style={styles.TextoPerfil}>{UserSelecionado.nome}</Text>
-                    <Text style={styles.TextoPerfil}>Avaliação: {UserSelecionado.avalicao || 0}</Text>
-                    <MaskInput
-                        style={styles.TextoPerfil}    
-                        value={Telefone.toString()}
-                        mask={Masks.BRL_PHONE}
-                        textAlign="center"
-                        textContentType='telephoneNumber'
-                        placeholder="Telefone"
-                        placeholderTextColor="#FFFFFF"
-                        autoCompleteType="tel"                                    
-                    /> 
+                    
                     <Text style={styles.TextoPerfil}>Qualificações</Text>
                     {!!Empregos &&
                         <FlatList
@@ -81,25 +82,17 @@ export default function({ route }) {
                                 <OpcoesComponets cargo={item}/>         
                             )
                         }}/>
-                    }   
+                    }
+                    <View style={styles.formBotaoContato}>
+                        <TouchableOpacity style={styles.buttonCadastro} onPress={() => entrarEmContato(UserSelecionado.telefone)}>
+                            <Text style={styles.textBottom}>ENTRAR EM CONTATO</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.favoritoIcon} onPress={() => clickFavorito()}>
+                            { Favoritar && <MaterialCommunityIcons name="heart" color={"red"} size={40} /> }
+                            { !Favoritar && <MaterialCommunityIcons name="heart-outline" color={"red"} size={40} /> }
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
-
-            <View style={styles.formHistorico}>
-                <Text style={styles.textoDivoria} >____________________________________________</Text>
-                <Text style={styles.textHistorico}>Hitórico</Text>
-                <ScrollView>                
-                </ScrollView>
-            </View>        
-         
-            <View style={styles.formBotaoContato}>
-                <TouchableOpacity style={styles.buttonCadastro} onPress={() => entrarEmContato(UserSelecionado.telefone)}>
-                    <Text style={styles.textBottom}>ENTRAR EM CONTATO</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.favoritoIcon} onPress={() => clickFavorito()}>
-                    { Favoritar && <MaterialCommunityIcons name="heart" color={"red"} size={40} /> }
-                    { !Favoritar && <MaterialCommunityIcons name="heart-outline" color={"red"} size={40} /> }
-                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )

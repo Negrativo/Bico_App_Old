@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 export default styles = StyleSheet.create({
     
     containerEmpr: {
-        backgroundColor: '#CFCFCF',
+        backgroundColor: '#000000',
         flex: 1,
         shadowColor: 'black',
         justifyContent: 'center',
@@ -43,10 +43,25 @@ export default styles = StyleSheet.create({
         margin: 5
     },
 
-    TextoPerfil: {
-        fontSize: 20,
+    TextoHeader: {
+        fontSize: 18,
         marginLeft: 10,
-        margin: 3
+        margin: 3,
+        color: '#FFFFFF'
+    },
+
+    TextoPerfil: {
+        fontSize: 18,
+        marginLeft: 10,
+        margin: 3,
+        color: '#000000'
+    },
+    
+    TextoNome: {
+        fontSize: 22,
+        fontWeight: "bold",
+        margin: 3,
+        color: '#FFFFFF'
     },
 
     textBottom: {
@@ -57,7 +72,11 @@ export default styles = StyleSheet.create({
     dadosPerfil: {
         alignItems: 'center',
         justifyContent: 'center',
-        height: 240
+        flex: 1,
+        width: 400,
+        backgroundColor: '#F0F0F0',
+        borderTopLeftRadius: 80,
+        borderTopRightRadius: 80
     },
 
     formDadosPerfil: {
@@ -66,20 +85,13 @@ export default styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         flex: 2,
-        marginTop: 50
-    },
-
-    formHistorico: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1,
         marginTop: 20
     },
 
     formBotaoContato: {
         justifyContent: 'center',
         alignItems: 'center',
-        flex: 0.5,
+        flex: 0.3,
         flexDirection: 'row'
     },
 

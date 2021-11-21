@@ -1,4 +1,5 @@
 import React from 'react';
+import {StyleSheet} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useAuth } from '../context/AuthContext';
 
@@ -31,11 +32,12 @@ export default function Routes() {
                     name="Detalhes"
                     component={Detalhes}
                     options={{
-                        headerStyle: {
-                            height: 70,
-                            backgroundColor: "#EDEDED"
-                        }
-                    }}                
+                        title: '',
+                        headerStyle: styles.Header,
+                        headerBackTitleStyle: styles.labelHeader,
+                        headerBackTitleVisible: 'true'
+                    }}
+                    
                 />
                 <Stack.Screen 
                     name ="Favoritos" 
@@ -94,3 +96,17 @@ export default function Routes() {
     )
 
 }
+
+
+const styles = StyleSheet.create({
+    
+    Header: {
+        height: 70,
+        backgroundColor: "#000000",
+    },
+
+    labelHeader: {
+        color: 'white'
+    }
+
+})

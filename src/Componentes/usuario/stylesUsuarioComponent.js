@@ -45,7 +45,8 @@ export default styles = StyleSheet.create({
 
     Texto: {
         fontSize: 20,
-        marginLeft: 10
+        marginLeft: 10,
+        fontWeight: "bold",
     },
 
     textoEmpregos: {
