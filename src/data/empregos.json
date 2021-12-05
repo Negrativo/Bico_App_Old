@@ -1,11 +1,8 @@
-{ 
-    "categorias": [
-        "Serviços Gerais",
-        "Construção Civil",
-        "Serviços Domésticos"
-    ],
-    "Reformas e Reparos": {
-        "ImagemCategoria": "",
+[
+    {
+        "_id": "1",
+        "nome": "Reformas e Reparos",
+        "imagem": "",
         "Servicos": [
             "Acessibilidade",
             "Afiação",
@@ -78,9 +75,10 @@
             "Outros"
         ]
     },
-
-    "Assistência Técnica": {
-        "ImagemCategoria": "",
+    {
+        "_id": "2",
+        "nome": "Assistência Técnica",
+        "imagem": "",
         "Servicos": [
             "Aparelho de Som",
             "Aparelhos de Ginástica",
@@ -110,9 +108,10 @@
             "Video Game"
         ]
     },
-
-    "Serviços Domésticos": {
-        "ImagemCategoria": "",
+    {
+        "_id": "3",
+        "nome": "Serviços Domésticos",
+        "imagem": "",
         "Servicos": [
             "Adestrador de Cães",
             "Babá",
@@ -131,6 +130,4 @@
             "Serviços para Pets"
         ]
     }
-
-}
-
+]
