@@ -1,8 +1,15 @@
-[
+import reformaReparo from '../../assets/icon_empregos/reformas-reparos.png';
+import suporteTecnico from '../../assets/icon_empregos/assistencia-tecnica.png';
+import servicoDomestico from '../../assets/icon_empregos/servicos-domesticos.png';
+import consultoria from '../../assets/icon_empregos/consultoria.png';
+import autos from '../../assets/icon_empregos/mecanica.png';
+import eventos from '../../assets/icon_empregos/eventos.png';
+
+export const empregos = [
     {
         "_id": "1",
         "nome": "Reformas e Reparos",
-        "imagem": "",
+        "imagem": reformaReparo,
         "Servicos": [
             "Acessibilidade",
             "Afiação",
@@ -78,7 +85,7 @@
     {
         "_id": "2",
         "nome": "Assistência Técnica",
-        "imagem": "",
+        "imagem": suporteTecnico,
         "Servicos": [
             "Aparelho de Som",
             "Aparelhos de Ginástica",
@@ -111,7 +118,7 @@
     {
         "_id": "3",
         "nome": "Serviços Domésticos",
-        "imagem": "",
+        "imagem": servicoDomestico,
         "Servicos": [
             "Adestrador de Cães",
             "Babá",
@@ -129,5 +136,23 @@
             "Segurança Pratimonial",
             "Serviços para Pets"
         ]
+    },
+    {
+        "_id": "4",
+        "nome": "Festas e Eventos",
+        "imagem": eventos,
+        "Servicos": []
+    },
+    {
+        "_id": "5",
+        "nome": "Consultoria",
+        "imagem": consultoria,
+        "Servicos": []
+    },
+    {
+        "_id": "6",
+        "nome": "Autos",
+        "imagem": autos,
+        "Servicos": []
     }
 ]

@@ -1,8 +1,8 @@
 import React, { useState, useLayoutEffect } from 'react';
-import { View, Image, TextInput, FlatList, SafeAreaView} from 'react-native';
+import { View, Image, Text, TextInput, FlatList, SafeAreaView} from 'react-native';
 
 import iconPesquisa from '../../../../assets/pesquisar.png';
-import EmpregosData from '../../../data/empregos.json';
+import { empregos } from '../../../data/empregos';
 
 import { useAuth } from '../../../context/AuthContext';
 import api from '../../../services/api';
@@ -21,7 +21,7 @@ export default function({ navigation }) {
     useLayoutEffect(() => {
         let mounted = true;
         return () => mounted = false;
-    }); 
+    });
 
     function acessaServicos(_idSelecionado) {               
         
@@ -38,11 +38,13 @@ export default function({ navigation }) {
                 </TextInput>
                 <Image source={iconPesquisa} style={styles.imagem}/>                 
             </View>
+                <Text style={styles.textoCategorias}>Categorias</Text>
+            
             <SafeAreaView style={styles.formNavegacaoPrincipal}>
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     numColumns={2}
-                    data={EmpregosData}
+                    data={empregos}
                     keyExtractor={dadosLista => dadosLista._id}
                     maxToRenderPerBatch={10}
                     ListEmptyComponent={CategoriasEmpregosPlaceholder}
@@ -50,6 +52,7 @@ export default function({ navigation }) {
                         <CategoriasEmpregosComponent
                             onPress={() => acessaServicos()}
                             nome={item.nome}
+                            foto={item.imagem}
                         />
                     )}
                 />

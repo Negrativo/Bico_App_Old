@@ -10,6 +10,11 @@ export default styles = StyleSheet.create({
     Text: {
         fontSize: 30
     },
+    textoCategorias: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        alignItems: 'flex-start'
+    },
     containerPesquisa: {
         backgroundColor: '#FFFFFF',
         flex: 1,
@@ -67,6 +72,9 @@ export default styles = StyleSheet.create({
         borderRadius: 15,
         marginHorizontal: 5,
         alignItems: 'center'
+    },
+    formCategorias: {
+        
     },
     formGrupoRecomendacao: {
         justifyContent: "flex-start",

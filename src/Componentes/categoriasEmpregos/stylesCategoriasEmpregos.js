@@ -3,14 +3,14 @@ import {StyleSheet} from 'react-native';
 export default styles = StyleSheet.create({
     
     container: {
-        backgroundColor: '#CFCFCF',
         width: 150,
-        height: 150,
+        height: 170,
         shadowColor: 'black',
+        flex: 1,
     },
 
     containerView: {
-        margin: 10
+        margin: 10,
     },
 
     containerImagem: {
@@ -18,16 +18,18 @@ export default styles = StyleSheet.create({
     },
 
     containerTexto: {
-        flex: 1,
+        
     },
 
     Texto: {
-        fontSize: 20,
+        fontSize: 18,
     },
 
     fotoCategoria: {
-        width:  140,
-        height:  140
+        width:  150,
+        height:  150,
+        borderWidth: 0.2,
+        borderRadius: 15,
     },
 
 });
