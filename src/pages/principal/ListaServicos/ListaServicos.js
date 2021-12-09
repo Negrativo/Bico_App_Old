@@ -10,25 +10,19 @@ import api from '../../../services/api';
 import CategoriasEmpregosComponent from '../../../Componentes/categoriasEmpregos/categoriasEmpregosComponent';
 import CategoriasEmpregosPlaceholder from '../../../Componentes/categoriasEmpregos/categoriasEmpregosPlaceholderComponent';
 
-import styles from './StylesPrincipal';
+import styles from './StylesListaServicos';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function({ navigation }) {
+export default function({ route, navigation }) {
     const[dadosLista, setDados] = useState('');
     const { Token, User } = useAuth();
+    const ListaServicos = route.params.servicosCategoria;
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
-    useLayoutEffect(() => {
-        let mounted = true;
-        return () => mounted = false;
-    });
-
-    function acessaServicos(servicosCategoria) {               
-        navigation.navigate('Lista Serviços', { servicosCategoria });
-    }
-
     return(
         <SafeAreaView style={styles.container}>
+            <Text style={styles.textoCategorias}>Serviços da categoria selecionada</Text>
             <View style={styles.formBarraPesquisa}>
                 <TextInput
                     style={styles.barraPesquisa}
@@ -38,22 +32,18 @@ export default function({ navigation }) {
                 </TextInput>
                 <Image source={iconPesquisa} style={styles.imagem}/>                 
             </View>
-                <Text style={styles.textoCategorias}>Categorias</Text>
             
             <SafeAreaView style={styles.formNavegacaoPrincipal}>
                 <FlatList
-                    showsVerticalScrollIndicator={false}
-                    numColumns={2}
-                    data={empregos}
-                    keyExtractor={dadosLista => dadosLista._id}
-                    maxToRenderPerBatch={10}
+                    data={ListaServicos}
+                    keyExtractor={dadosLista => dadosLista}
                     ListEmptyComponent={CategoriasEmpregosPlaceholder}
                     renderItem={({item}) => (
-                        <CategoriasEmpregosComponent
-                            onPress={() => acessaServicos(item.Servicos)}
-                            nome={item.nome}
-                            foto={item.imagem}
-                        />
+                        <TouchableOpacity onPress={() => {}} style={styles.containerListaServicos}>
+                            <View style={styles.contornoDadosLista}>
+                                <Text style={styles.Text}>{item}</Text>
+                            </View>
+                        </TouchableOpacity>
                     )}
                 />
             </SafeAreaView>    
