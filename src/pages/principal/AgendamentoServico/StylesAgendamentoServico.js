@@ -14,7 +14,6 @@ export default styles = StyleSheet.create({
         flex: 1,
     },
 
-
     formFotoPerfil: {
         justifyContent: 'center',
         alignItems: 'center',  
