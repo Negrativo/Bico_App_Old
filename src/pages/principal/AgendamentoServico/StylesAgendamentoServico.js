@@ -3,92 +3,45 @@ import {StyleSheet} from 'react-native';
 export default styles = StyleSheet.create({
 
     container: {
-        backgroundColor: '#DDE0E1',
+        backgroundColor: '#fcfcfc',
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center'
     },
 
-    scrollContainer: {
-        backgroundColor: '#DDE0E1',
-        flex: 1,
-    },
-
-    formFotoPerfil: {
+    formObservacao: {     
         justifyContent: 'center',
-        alignItems: 'center',  
-        marginTop: 25     
+        alignItems: 'center',
+        margin: 5
     },
-
-    formDescricao: {     
+    
+    formEndereco: {
         justifyContent: 'center',
         alignItems: 'center',
         margin: 5
     },
 
-    formHistorico: {     
-        justifyContent: 'center',
-        alignItems: 'center',
-        margin: 5
-    },
-
-    formInputDescricao: {
+    formInputObservacao: {
         backgroundColor: "#000000",
-        height: 200,
-        width: 320,        
+        width: 320,
+        maxHeight: 150,   
         borderWidth: 0.5,
         borderRadius: 50,
-        margin: 5,
+        marginVertical: 5,
+        padding: 5,
+        justifyContent: 'center'
     },
 
-    formCabecalhoPerfil: {        
-        justifyContent: 'center',
-        alignItems: 'center', 
-    },
 
-    formBottons: {        
-        justifyContent: 'center',
-        alignItems: 'center', 
-    },
-
-    inputDescricao: {
-        color: "#FFFFFF",
-        textAlignVertical: 'top',
-        margin: 20
-    },
-
-    fundoFoto: {
-        resizeMode: "cover",
-        justifyContent: "center",
-        alignItems: 'center',
-        backgroundColor: '#C4C4C4',
-        width: 150,
-        height: 150,
-        borderWidth: 0.5,
-        borderRadius: 80,
-        margin: 10
-    },
-
-    fotoPerfil: {
-        width: 150,
-        height: 150,
-        borderWidth: 0.5,
-        borderRadius: 80,
-        margin: 10
-    },
-
-    bottomFoto: {
-        backgroundColor: "#000000",
+    viewCalendario: {
         alignItems: 'center',
         justifyContent: 'center',
-        height: 30,
-        width: 150,        
-        borderWidth: 0.5,
-        borderRadius: 50,
     },
 
-    textFoto: {
-        color: "#FFFFFF"
+    viewHorario: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 10
     },
 
     textNome: {
@@ -97,35 +50,45 @@ export default styles = StyleSheet.create({
         margin: 5
     },
 
-    Text: {
-        fontSize: 30
-    },
-
     textGeral: {
         fontSize: 18,
     },
 
-    textBottom: {
-        fontSize: 18,
-        color: "#FFFFFF"
+    textHoraSelecionada: {
+        color: 'white',
+        fontSize: 30,
     },
 
-    textHistorico: {
-        fontSize: 14,
-        margin: 5
+    textAdicionarEndereco: {
+        fontSize: 16,
+        textDecorationLine: 'underline'
     },
 
-    formCategorias: {
-        alignItems: 'center',
+    textFinalizacao: {
+        color: 'white'
+    },
+
+    horarioInput: {
+        backgroundColor: '#00000F',
+        borderWidth: 0.2,
+        borderRadius: 50,
+        width: 120,
+        height: 45,
         justifyContent: 'center',
-        height: 150,
-        margin: 20
+        alignItems: 'center',
+        marginVertical: 5
     },
 
-    buttonCadastro:{
+    inputObservacao: {
+        color: "#FFFFFF",
+        textAlignVertical: 'top',
+        margin: 15,
+        fontSize: 16,
+    },
+
+    buttonSolicitacao:{
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 5,
         backgroundColor: '#00000F',
         borderWidth: 0.2,
         borderRadius: 50,
@@ -133,11 +96,6 @@ export default styles = StyleSheet.create({
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
-    },
-
-    divisoria: {
-        color: 'black',
-        fontSize: 24
     },
 
 })

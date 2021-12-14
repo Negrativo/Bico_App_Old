@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 export default styles = StyleSheet.create({
     container: {
-        backgroundColor: '#DDE0E1',
+        backgroundColor: '#FCFCFC',
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center'
@@ -16,7 +16,7 @@ export default styles = StyleSheet.create({
     containerListaServicos: {
         backgroundColor: '#FFFFFF',
         alignItems: 'flex-start',
-        borderWidth: 1,
+        borderWidth: 0.2,
         width: 400,
         paddingHorizontal: 10
     },

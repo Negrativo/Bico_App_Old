@@ -15,7 +15,7 @@ export default styles = StyleSheet.create({
     },
 
     container: {
-        backgroundColor: '#DDE0E1',
+        backgroundColor: '#FCFCFC',
         flex: 2,
         justifyContent: 'center'
     },

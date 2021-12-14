@@ -1,11 +1,14 @@
-import React, { useState,useLayoutEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, ImageBackground, FlatList} from 'react-native';
-import {Calendar, CalendarList, Agenda, LocaleConfig} from 'react-native-calendars';
+import React, { useState } from 'react';
+import { View} from 'react-native';
+import {Calendar, LocaleConfig} from 'react-native-calendars';
+import moment from 'moment';
 
 import styles from './styleCalendarioComponent';
 
 export default function({ navigation }) {
-    const[DiaSelecionado, setDiaSelecionado] = useState('');
+    const _format = 'YYYY-MM-DD';
+    const _today = moment().format(_format);
+    const[markedDates, setMarkedDates] = useState({[_today]: {disabled: true}})
 
     LocaleConfig.locales['br'] = {
     monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
@@ -16,15 +19,24 @@ export default function({ navigation }) {
     };
     LocaleConfig.defaultLocale = 'br';
 
-    function getDiaSelecionado() {
-        return `${DiaSelecionado}`
+    function onDaySelect(day) {
+        const _selectedDay = moment(day.dateString).format(_format);
+        
+        let marked = true;
+        if (markedDates[_selectedDay]) {
+          marked = !markedDates[_selectedDay].marked;
+        }
+        
+        const updatedMarkedDates = {...markedDates, ...{ [_selectedDay]: { marked } } }
+
+        setMarkedDates(updatedMarkedDates);
     }
 
     return (
         <View style={styles.container}>
             <Calendar
-                onDayPress={(dia) => setDiaSelecionado(dia.dateString)}
-                markedDates={DiaSelecionado}
+                onDayPress={(dia) => onDaySelect(dia)}
+                markedDates={markedDates}
             ></Calendar>
         </View>     
     );
