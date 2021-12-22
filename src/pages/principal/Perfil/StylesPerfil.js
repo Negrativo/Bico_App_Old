@@ -130,7 +130,7 @@ export default styles = StyleSheet.create({
         backgroundColor: '#00000F',
         borderWidth: 0.2,
         borderRadius: 50,
-        width: 300,
+        width: 200,
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',

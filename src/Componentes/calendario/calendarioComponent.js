@@ -8,7 +8,7 @@ import styles from './styleCalendarioComponent';
 export default function({ navigation }) {
     const _format = 'YYYY-MM-DD';
     const _today = moment().format(_format);
-    const[markedDates, setMarkedDates] = useState({[_today]: {disabled: true}})
+    const[markedDates, setMarkedDates] = useState({[_today]: {}})
 
     LocaleConfig.locales['br'] = {
     monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],

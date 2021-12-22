@@ -38,7 +38,8 @@ export default function({ navigation }) {
                 </TextInput>
                 <Image source={iconPesquisa} style={styles.imagem}/>                 
             </View>
-                <Text style={styles.textoCategorias}>Categorias</Text>
+            
+            <Text style={styles.textoCategorias}>Categorias</Text>
             
             <SafeAreaView style={styles.formNavegacaoPrincipal}>
                 <FlatList

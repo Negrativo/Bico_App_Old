@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput} from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, SafeAreaView} from 'react-native';
 import CalendarioComponent from '../../../Componentes/calendario/calendarioComponent';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
@@ -26,7 +26,7 @@ export default function({ navigation, route }) {
     };
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Text style={styles.textNome}>{servicosSelecionado}</Text>
             <View style={styles.viewCalendario}>
                 <Text style={styles.textGeral}>Qual dia gostaria de agendar:</Text>
@@ -73,6 +73,6 @@ export default function({ navigation, route }) {
                     <Text style={styles.textFinalizacao}>SOLICITAR PROFISSIONAL</Text>
                 </TouchableOpacity> 
             </View>   
-        </View>     
+        </SafeAreaView>     
     );
 }
