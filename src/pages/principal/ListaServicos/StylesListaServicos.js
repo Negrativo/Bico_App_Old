@@ -36,7 +36,7 @@ export default styles = StyleSheet.create({
     barraPesquisa: {
         backgroundColor: '#FFFFFF',
         width: 290,
-        marginTop: 5
+        marginVertical: 5
     },
     imagem: {
         resizeMode: "cover",

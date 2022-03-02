@@ -41,7 +41,8 @@ export default styles = StyleSheet.create({
     viewHorario: {
         alignItems: 'center',
         justifyContent: 'center',
-        marginVertical: 10
+        marginVertical: 10,
+        marginHorizontal: 3
     },
 
     textNome: {
@@ -51,7 +52,7 @@ export default styles = StyleSheet.create({
     },
 
     textGeral: {
-        fontSize: 18,
+        fontSize: 16,
     },
 
     textHoraSelecionada: {

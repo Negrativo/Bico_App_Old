@@ -6,7 +6,6 @@ export default styles = StyleSheet.create({
         width: 150,
         height: 170,
         shadowColor: 'black',
-        flex: 1,
     },
 
     containerView: {
@@ -18,7 +17,7 @@ export default styles = StyleSheet.create({
     },
 
     containerTexto: {
-        
+        flex: 1
     },
 
     Texto: {
