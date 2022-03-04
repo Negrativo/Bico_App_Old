@@ -13,8 +13,7 @@ import CategoriasEmpregosPlaceholder from '../../../Componentes/categoriasEmpreg
 import styles from './StylesPrincipal';
 
 export default function({ navigation }) {
-    const[dadosLista, setDados] = useState('');
-    const { Token, User } = useAuth();
+    const { Token } = useAuth();
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 

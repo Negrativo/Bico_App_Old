@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput, SafeAreaView, ScrollView} from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, SafeAreaView, ScrollView, Button} from 'react-native';
 import CalendarioComponent from '../../../Componentes/calendario/calendarioComponent';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import * as Location from 'expo-location';
 
 import { useAuth } from '../../../context/AuthContext';
 import api from '../../../services/api';
@@ -9,10 +10,20 @@ import api from '../../../services/api';
 import styles from './StylesAgendamentoServico';
 
 export default function({ navigation, route }) {
-    const { Token, User, Logout } = useAuth();
+    const { Token } = useAuth();
     const [horaAgendamento, setHoras] = useState('00:00');
     const [mostraSelecaoHorario, setSelecaoHorario] = useState(false);
+    const [location, setLocation] = useState(null);
     const servicosSelecionado = route.params.servicosSelecionado;
+
+    const getLocate = async () => {
+        let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status === 'granted') {
+        let location = await Location.getCurrentPositionAsync({});
+        console.log(location)
+        setLocation(location.coords);
+      }
+    }
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
@@ -63,7 +74,9 @@ export default function({ navigation, route }) {
                 <View style={styles.formEndereco}>
                     <Text style={styles.textGeral}>Selecione o endereço para realização do serviço:</Text>
                     <View style={styles.formInputObservacao}>
-                        
+                        <Button title="Buscar localização"
+                            onPress={getLocate}
+                        />
                     </View>
                     <TouchableOpacity style={styles.textAdicionarEndereco}>
                         <Text style={styles.textAdicionarEndereco} >Adicionar endereço</Text>
