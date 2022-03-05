@@ -7,6 +7,8 @@ import BottomTabs from './BottomTabs';
 import Detalhes from '../pages/principal/DetalhesUsuario/DetalhesUsuario';
 import Favoritos from '../pages/principal/Favoritos/Favoritos';
 import EditarPerfil from '../pages/principal/EditarPerfil/EditarPerfil';
+import ListaServicos from '../pages/principal/ListaServicos/ListaServicos';
+import AgendamentoServico from '../pages/principal/AgendamentoServico/AgendamentoServico';
 
 import CadastroInicial from '../pages/inicio/CadastroInicial/CadastroInicial';
 import CadastroFinal from '../pages/inicio/CadastroFinal/CadastroFinal';
@@ -52,6 +54,26 @@ export default function Routes() {
                 <Stack.Screen 
                     name ="Atualizar dados" 
                     component={EditarPerfil}
+                    options={{
+                        headerStyle: {
+                            height: 70,
+                            backgroundColor: "#EDEDED"
+                        }
+                    }} 
+                />
+                <Stack.Screen 
+                    name ="Lista Serviços" 
+                    component={ListaServicos}
+                    options={{
+                        headerStyle: {
+                            height: 70,
+                            backgroundColor: "#EDEDED"
+                        }
+                    }} 
+                />
+                <Stack.Screen 
+                    name ="Agendamento" 
+                    component={AgendamentoServico}
                     options={{
                         headerStyle: {
                             height: 70,

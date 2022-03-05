@@ -1,47 +1,29 @@
 import React, { useState, useLayoutEffect } from 'react';
-import { View, Image, TextInput, FlatList, SafeAreaView} from 'react-native';
+import { View, Image, Text, TextInput, FlatList, SafeAreaView} from 'react-native';
 
 import iconPesquisa from '../../../../assets/pesquisar.png';
+import { empregos } from '../../../data/empregos';
 
 import { useAuth } from '../../../context/AuthContext';
 import api from '../../../services/api';
 
-import UsuarioComponent from '../../../Componentes/usuario/UsuarioComponent';
-import UsuarioPlaceholderComponent from '../../../Componentes/usuario/UsuarioPlaceholderComponent';
+import CategoriasEmpregosComponent from '../../../Componentes/categoriasEmpregos/categoriasEmpregosComponent';
+import CategoriasEmpregosPlaceholder from '../../../Componentes/categoriasEmpregos/categoriasEmpregosPlaceholderComponent';
 
 import styles from './StylesPrincipal';
 
 export default function({ navigation }) {
-    const[dadosLista, setDados] = useState('');
-    const { Token, User } = useAuth();
+    const { Token } = useAuth();
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
     useLayoutEffect(() => {
         let mounted = true;
-
-        if (!!Token) {
-            api.get(`/principal/lista/`, {params: {_id: User._id}})
-            .then(response => {
-                if(mounted)
-                    setDados(response.data);
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        }
-
         return () => mounted = false;
-    }); 
+    });
 
-    function apresentaDetalhes(_idSelecionado) {               
-        api.post(`/usuario/dadosSelecionado`, { _id : _idSelecionado })
-            .then(response => {
-                navigation.navigate('Detalhes', { DadosSelecionado: response.data });
-            })
-            .catch(error => {
-                console.log(error);
-            });
+    function acessaServicos(servicosCategoria) {               
+        navigation.navigate('Lista Serviços', { servicosCategoria });
     }
 
     return(
@@ -55,19 +37,22 @@ export default function({ navigation }) {
                 </TextInput>
                 <Image source={iconPesquisa} style={styles.imagem}/>                 
             </View>
+            
+            <Text style={styles.textoCategorias}>Categorias</Text>
+            
             <SafeAreaView style={styles.formNavegacaoPrincipal}>
                 <FlatList
                     showsVerticalScrollIndicator={false}
-                    data={dadosLista}
-                    maxToRenderPerBatch={10}
+                    numColumns={2}
+                    data={empregos}
                     keyExtractor={dadosLista => dadosLista._id}
-                    ListEmptyComponent={UsuarioPlaceholderComponent}
+                    maxToRenderPerBatch={10}
+                    ListEmptyComponent={CategoriasEmpregosPlaceholder}
                     renderItem={({item}) => (
-                        <UsuarioComponent
-                            onPress={() => apresentaDetalhes(item._id)} 
-                            foto={item.fotoPerfil} 
+                        <CategoriasEmpregosComponent
+                            onPress={() => acessaServicos(item.Servicos)}
                             nome={item.nome}
-                            empregos={item.empregos}
+                            foto={item.imagem}
                         />
                     )}
                 />

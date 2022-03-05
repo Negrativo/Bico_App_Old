@@ -7,19 +7,31 @@ export default styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center'
     },
-    Text: {
-        fontSize: 30
-    },
-    textoCategorias: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        alignItems: 'flex-start'
-    },
     containerPesquisa: {
         backgroundColor: '#FFFFFF',
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center'
+    },
+    containerListaServicos: {
+        backgroundColor: '#FFFFFF',
+        alignItems: 'flex-start',
+        borderWidth: 0.2,
+        width: 400,
+        paddingHorizontal: 10
+    },
+    contornoDadosLista: {
+        height: 30,
+        justifyContent: 'center'
+    },
+    Text: {
+        fontSize: 18,
+    },
+    textoCategorias: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        alignItems: 'flex-start',
+        marginVertical: 10
     },
     barraPesquisa: {
         backgroundColor: '#FFFFFF',
@@ -41,18 +53,14 @@ export default styles = StyleSheet.create({
         height: 40,
         justifyContent: "flex-end",
         flexDirection: "row",
-        marginTop: 45,
         marginBottom: 15
     },
     formNavegacaoPrincipal:{
-        width: 350,
-        height: 4,
         flex: 1,
         justifyContent: "center",
         flexDirection: 'column',
         alignItems: 'center',
         marginTop: 10,
-        marginBottom: 15
     },
     formNavegacaoFavoritos:{
         width: 350,

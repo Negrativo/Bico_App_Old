@@ -28,7 +28,6 @@ export default function({ navigation }) {
                     }
                 })
                 .catch(error => {
-                    console.log(error);
                     if(mounted)
                         setHasErros(true);
                 });
@@ -71,7 +70,7 @@ export default function({ navigation }) {
                     <Text style={styles.textNome}>{User.nome.toUpperCase()}</Text>
                     <Text style={styles.textGeral}>Avaliação: {User.avaliacao}</Text>
                 </View>
-                <Text>________________________________</Text>
+                <Text>__________________________</Text>
                 <View style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                     <View style={styles.formBottons}>
                         <TouchableOpacity style={styles.buttonCadastro} onPress={() => EditarUser()}>
