@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, TextInput, SafeAreaView, ScrollView, Butt
 import CalendarioComponent from '../../../Componentes/calendario/calendarioComponent';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as Location from 'expo-location';
+import Geocoder from 'react-native-geocoding';
 
 import { useAuth } from '../../../context/AuthContext';
 import api from '../../../services/api';
@@ -13,25 +14,34 @@ export default function({ navigation, route }) {
     const { Token } = useAuth();
     const [horaAgendamento, setHoras] = useState('00:00');
     const [mostraSelecaoHorario, setSelecaoHorario] = useState(false);
-    const [location, setLocation] = useState(null);
+    const [endereco, setEndereco] = useState(null);
     const servicosSelecionado = route.params.servicosSelecionado;
+
+    Geocoder.init("xxxxxxxxxxxxxxxxxxxxxxxxx");
 
     const getLocate = async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status === 'granted') {
-        let location = await Location.getCurrentPositionAsync({});
-        console.log(location)
-        setLocation(location.coords);
-      }
+        if (status === 'granted') {
+            let location = await Location.getCurrentPositionAsync({});
+            let latitude = location.coords.latitude;
+            let longitude = location.coords.longitude;
+            Geocoder.from(latitude, longitude)
+                    .then(json => {
+                        console.log(json);
+                        var addressComponent = json.results[0].address_components;
+                        setEndereco(addressComponent)
+                        console.log(addressComponent);
+                    })
+        }
     }
 
     api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
-    const onChange = (event, selectedDate) => {
+    const selecionaHorario = (event, selectedDate) => {
         if (event.type === "set") {
-            let currentDate = selectedDate.toString();
-            currentDate = currentDate.slice(16, 21);
-            setHoras(currentDate);
+            let horario = selectedDate.toString();
+            horario = horario.slice(16, 21);
+            setHoras(horario);
         }
         setSelecaoHorario(!mostraSelecaoHorario);
     };
@@ -56,7 +66,7 @@ export default function({ navigation, route }) {
                             mode={'time'}
                             is24Hour={true}
                             display="spinner"
-                            onChange={onChange}
+                            onChange={selecionaHorario}
                         />
                     }
                 </View>
@@ -74,12 +84,10 @@ export default function({ navigation, route }) {
                 <View style={styles.formEndereco}>
                     <Text style={styles.textGeral}>Selecione o endereço para realização do serviço:</Text>
                     <View style={styles.formInputObservacao}>
-                        <Button title="Buscar localização"
-                            onPress={getLocate}
-                        />
+                        {endereco}
                     </View>
-                    <TouchableOpacity style={styles.textAdicionarEndereco}>
-                        <Text style={styles.textAdicionarEndereco} >Adicionar endereço</Text>
+                    <TouchableOpacity style={styles.textAdicionarEndereco} onPress={getLocate}>
+                        <Text style={styles.textAdicionarEndereco} >Buscar endereço</Text>
                     </TouchableOpacity>
                 </View>
                 <View>
