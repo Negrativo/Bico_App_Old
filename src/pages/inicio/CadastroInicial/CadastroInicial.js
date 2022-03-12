@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity, ImageBackground} from 'react-native';
 import { Formik } from 'formik';
 
-import Logo from '../../../../assets/ico.png';
+import Logo from '../../../../assets/adaptive-icon.png';
 import fundo from '../../../../assets/fundo_login.jpeg';
 
 import api from '../../../services/api';

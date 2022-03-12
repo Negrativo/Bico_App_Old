@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import { Video } from 'expo-av';
 
 import videoFundo from '../../../../assets/fundofinal.mp4';
-import ico from '../../../../assets/BICO-3.png';
+import ico from '../../../../assets/adaptive-icon.png';
 
 import { useAuth } from '../../../context/AuthContext';
 
