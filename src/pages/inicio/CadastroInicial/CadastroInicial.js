@@ -16,7 +16,6 @@ export default function({ navigation }) {
 
     return (
         <View source={fundo} style={styles.container}>
-    
             <Formik
                 initialValues={{ nome: '', email: '', senha: '', senha2: '', error: '' }}
                 validationSchema={ValidateCadastro}
@@ -37,12 +36,10 @@ export default function({ navigation }) {
             >
                 {(props) => (
                     <ImageBackground  source={fundo}  style={styles.image}>
-                        
                         <Image 
                             source={Logo}
                             style={styles.logo}
                         />  
-
                         <View style={styles.form} >
                             <Text style={styles.label}>NOME</Text>  
                             <TextInput 
@@ -58,8 +55,6 @@ export default function({ navigation }) {
                             />
                             { props.dirty && props.errors.nome && <Text style={styles.errors}>{props.errors.nome}</Text> }
                         </View>
-
-                        
                         <View style={styles.form} >
                             <Text style={styles.label}>E-MAIL</Text>
                             <TextInput 
@@ -77,8 +72,6 @@ export default function({ navigation }) {
                             /> 
                             { props.dirty && props.errors.email && <Text style={styles.errors}>{props.errors.email}</Text> }
                         </View>
-
-                        
                         <View style={styles.form} >
                             <Text style={styles.label}>SENHA</Text>
                             <TextInput 
@@ -96,8 +89,6 @@ export default function({ navigation }) {
                             />
                             { props.dirty && props.errors.senha && <Text style={styles.errors}>{props.errors.senha}</Text> }      
                         </View>
-
-                        
                         <View style={styles.form} >
                             <Text style={styles.label}>CONFIRMAR SENHA SENHA</Text>
                             <TextInput 
@@ -115,7 +106,6 @@ export default function({ navigation }) {
                             />    
                             { props.dirty && props.errors.senha2 && <Text style={styles.errors}>{props.errors.senha2}</Text> }        
                         </View>
-
                         { props.errors.error && <Text style={styles.errorCadastro}>{props.errors.error}</Text> }
                         <TouchableOpacity style={styles.button} type="submit" onPress={props.handleSubmit}>
                             <Text style={styles.cadastrar}>CADASTRAR</Text>

@@ -11,31 +11,50 @@ import api from '../../../services/api';
 import styles from './StylesAgendamentoServico';
 
 export default function({ navigation, route }) {
-    const { Token } = useAuth();
+    const { Token, User } = useAuth();
     const [horaAgendamento, setHoras] = useState('00:00');
     const [mostraSelecaoHorario, setSelecaoHorario] = useState(false);
     const [endereco, setEndereco] = useState(null);
+    const [latitude, setLatitude] = useState(null);
+    const [longitude, setLongitude] = useState(null);
     const servicosSelecionado = route.params.servicosSelecionado;
+    
+    api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
 
-    Geocoder.init("xxxxxxxxxxxxxxxxxxxxxxxxx");
+    //Geocoder.init("xxxxxxxxxxxxxxxxxxxxxxxxx");
 
     const getLocate = async () => {
         let { status } = await Location.requestForegroundPermissionsAsync();
         if (status === 'granted') {
             let location = await Location.getCurrentPositionAsync({});
-            let latitude = location.coords.latitude;
-            let longitude = location.coords.longitude;
-            Geocoder.from(latitude, longitude)
+            setLatitude(location.coords.latitude);
+            setLongitude(location.coords.longitude);
+            /*Geocoder.from(latitude, longitude)
                     .then(json => {
                         console.log(json);
                         var addressComponent = json.results[0].address_components;
                         setEndereco(addressComponent)
                         console.log(addressComponent);
-                    })
+                    })*/
         }
     }
 
-    api.defaults.headers.common['Authorization'] = `Basic ${Token}`;
+    const sendServico = async () => {
+        const body = {
+            latitude: latitude,
+            longitude: longitude,
+            userId: User._id,
+            servicoSelecionado: servicosSelecionado,
+            horasSelecionado: horaAgendamento
+        }
+        api.post(`/servicos/solicitar`, body)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 
     const selecionaHorario = (event, selectedDate) => {
         if (event.type === "set") {
@@ -91,7 +110,7 @@ export default function({ navigation, route }) {
                     </TouchableOpacity>
                 </View>
                 <View>
-                    <TouchableOpacity style={styles.buttonSolicitacao}>
+                    <TouchableOpacity style={styles.buttonSolicitacao}  onPress={sendServico}>
                         <Text style={styles.textFinalizacao}>SOLICITAR PROFISSIONAL</Text>
                     </TouchableOpacity> 
                 </View>   
